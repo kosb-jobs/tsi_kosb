@@ -36,5 +36,8 @@
 <script src="vendor/tinymce/js/tinymce/tinymce.min.js"></script>
 <script src="{{asset('js/servicios/publicacionesService.js')}}"></script>
 <script src="{{asset('js/servicios/postulacionesService.js')}}"></script>
+<script src="{{asset('js/servicios/zonasService.js')}}"></script>
+<script src="{{asset('js/servicios/rubrosService.js')}}"></script>
+<script src="{{asset('js/servicios/duracionesService.js')}}"></script>
 <script src="{{asset('js/post_en_pub.js')}}"></script>
 @endsection

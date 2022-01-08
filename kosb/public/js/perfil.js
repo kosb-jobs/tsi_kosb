@@ -33,6 +33,7 @@
   });
 
 //FUNCIONES PARA ELIMINAR Y LLAMADAS A CONTROLLER
+
 const eliminarPublicacionBTN = async function(){
     //trae la info del boton, llama a la funcion del service y elimina segun el id traido
     let cod_publicacion = this.idPub;
@@ -415,7 +416,7 @@ const cargarContPostPorPublicacion = async(publicacion)=>{
                         Postulación
                       </div>
                       <div class="col-12 col-md-4 col-lg-4">
-                        <button id="ver_perfil_postulante_${i}_${j}" name="${postul.id}" class="btn btn-primary me-5">Ver Perfil del usuario</button>
+                        <button id="ver_perfil_postulante_${i}_${j}" name="${postul.cod_usuario}" class="btn btn-primary me-5">Ver Perfil del usuario</button>
                       </div>
                     </div>
                     <div class="card-body">
@@ -960,7 +961,35 @@ document.addEventListener("DOMContentLoaded",async()=>{
             let post_ = await getPostulPorPublicacion(pub.id);
             console.log(pub);
             if (post_.length !=0) {
-                for(let j=0;j<post_.length;j++){
+                for(let j=0;j<post_.length;j++){ 
+                    //Aqui creo que va el boton ver perfil user
+                    document.querySelector(`#ver_perfil_postulante_${a}_${j}`).addEventListener("click", async function(){
+                        let id_postulante = this.name;
+                        console.log(id_postulante);
+                        let datos = await getDatosCompletosPorUser(id_postulante);
+                        console.log(datos);
+                        await Swal.fire({
+                            title: `Informacion del usuario: ${j}`,
+                            html: `<li><ion-icon name="person-circle-outline"></ion-icon>Nombre: ${datos.name} ${datos.apellido}</li>
+                            <li><ion-icon name="mail-outline"></ion-icon>Email: ${datos.email}</li>
+                            <li><ion-icon name="settings-outline"></ion-icon>Puntuacion Ofertante: ${datos.puntuacion_ofertante}</li>
+                            <li><ion-icon name="barbell-outline"></ion-icon>Trabajos Realizados: </li>}`,
+                            confirmButtonText: "Listo",
+                            width: 600,
+                            padding: '3em',
+                            color: '#716add',
+                            // background: '#fff url(/images/trees.png)',
+                            backdrop: `
+                                rgba(63, 191, 116, 0.3)
+                              
+                              left top
+                              no-repeat
+                            `
+                          })
+
+                    }
+                    );   
+                    //Fin boton ver perfil user                                    
                     if (post_[j].aceptacion == null) {
                         document.querySelector(`#aceptar_postulante_${a}_${j}`).addEventListener("click",async function(){
                             let id_postulacion = this.name;
@@ -1011,6 +1040,7 @@ document.addEventListener("DOMContentLoaded",async()=>{
                                 }
                             }
                         });
+                        
                     }
                     
                 }

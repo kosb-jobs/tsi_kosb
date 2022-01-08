@@ -7,7 +7,16 @@ use App\Models\User;
 use App\Models\Postulacion;
 use App\Models\Publicacion;
 use App\Models\Administrador;
+use App\Models\Ofertante;
+use App\Models\Trabajador;
 
+class Datos{
+    public $cod_usuario;
+    public $cod_trabajador;
+    public $cod_ofertante;
+
+    public function __construct($cod_ofertante, $cod_trabajador, $cod_usuario){}
+}
 
 class UsersController extends Controller
 {
@@ -19,6 +28,31 @@ class UsersController extends Controller
         $input = $request->all();
         $usuario = User::findOrFail($input["id"]);
         return $usuario;
+    }
+    public function getUserPorIdDatosTO(Request $request){
+        $input = $request->all();
+        
+        $usuario = User::findOrFail($input["id"]);
+        $trabajador = Trabajador::where('cod_usuario',$input["id"])->get()->first();
+        $ofertante = Ofertante::where('cod_usuario',$input["id"])->get()->first();
+        $datos_completos = (object)[
+            "cod_usuario"=>$usuario['id'],
+            "name" => $usuario['name'],
+            "apellido" => $usuario['apellido'],
+            "fecha_nac" => $usuario['fecha_nac'],
+            "email" => $usuario['email'],
+            "estado" => $usuario['estado'],
+            "cod_trabajador"=>$ofertante['id'],
+            "publicaciones_activas"=>$ofertante['publicaciones_activas'],
+            "ofertas_total_publ"=>$ofertante['ofertas_total_publ'],
+            "puntuacion_ofertante"=>$ofertante['puntuacion_ofertante'],
+            "cod_ofertante" => $trabajador['id'],
+            "postulaciones_activas" => $trabajador['postulaciones_activas'],
+            "postulaciones_realizadas_tot" => $trabajador['postulaciones_realizadas_tot '],
+            "puntuacion_trabajador" => $trabajador['puntuacion_trabajador']
+        ];
+        
+        return $datos_completos;
     }
     public function actualizarUsuario(Request $request){
         $input = $request->all();

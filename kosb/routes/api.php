@@ -59,6 +59,7 @@ Route::post("duraciones/create",[DuracionesController::class,"crearDuracion"]);
 
 // USERSCONTROLLERS
 Route::get("users/get/id",[UsersController::class,"getUsuarioPorId"]);
+Route::get("users/get/datos/completos",[UsersController::class,"getUserPorIdDatosTO"]);
 Route::get("users/get",[UsersController::class,"getUsuarios"]);
 Route::post("users/update",[UsersController::class,"actualizarUsuario"]);
 Route::post("users/delete",[UsersController::class,"eliminarUsuario"]);

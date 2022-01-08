@@ -11,6 +11,13 @@ const getUsuarioPorId = async (id)=>{
     return resp.data;
 };
 
+const getDatosCompletosPorUser = async (id)=>{
+    let resp;
+
+    resp = await axios.get(`api/users/get/datos/completos?id=${id}`);
+    return resp.data;
+};
+
 const usuarioActualizar = async(usuario)=>{
     try{
         let resp = await axios.post("api/users/update",usuario,{
