@@ -1,0 +1,162 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+.container_home{
+    width: 100%;
+    height: 100vh;    
+    background-image: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.1)),url("2da_imagen_fondo.jpeg");
+    background-position: center;
+    background-size: cover;
+    padding-left: 8%;
+    padding-right: 8%;
+    box-sizing: border-box;
+
+}
+
+.row {
+    display:flex;
+    height: 88%;
+    align-items: center;
+
+}
+
+.col{
+    flex-basis: 50%;
+    margin-left: 200px;
+}
+
+h1{
+    color: #fff;
+    font-size: 100px;
+
+}
+
+p{
+    color: #fff;
+    font-size: 60px;
+    line-height: 30px;
+}
+
+.boton-algo{
+    width: 180px;
+    color: #000;
+    font-size: 12px;
+    padding: 12px 0;
+    background-color: #fff;
+    border: 0;
+    border-radius: 20px;
+    outline: none;
+    margin-top: 30px;
+
+}
+
+/* .card {
+
+    width: 200px;
+    height: 230px;
+    display: inline-block;
+    border-radius: 10px;
+    padding: 10px 25px;
+    box-sizing: border-box;
+    cursor: pointer;
+    margin: 10px 15px;
+    background-color: #fff;
+    background-position: center;
+    background-size: cover;
+    
+
+
+
+
+} */
+
+
+.container_slider{
+    margin: 60px;
+    background-color: azure;
+    width: 550px;
+    height: 400px;
+    padding: 30px;
+
+}
+
+ul,li{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+ul.slider{
+    position: relative;
+    width: 550px;
+    height: 400px;
+}
+
+ul.slider li{
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    width: inherit;
+    height: inherit;
+    background-color: antiquewhite;
+    transition: opacity 0.5s;
+
+}
+
+ul.slider li img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+[id=slide1] { 
+    background-image: url("1ra_imagen_fondo.jpeg");
+
+ }
+
+ [id=slide2] { 
+    background-image: url("2da_imagen_fondo.jpeg");
+
+ }
+
+ [id=slide3] { 
+    background-image: url("3ra_imagen_fondo.jpeg");
+
+ }
+
+
+ ul.slider li:first-child{
+
+    opacity: 1;
+ }
+
+ ul.slider li:target{
+     opacity: 1;
+ }
+ .menu{
+     text-align: center;
+     margin: 10px;
+ }
+
+ .menu li{
+     display: inline-block;
+     text-align: center;
+ }
+
+ .menu li a{
+     display: inline-block;
+     color: white;
+     text-decoration: none;
+     background-color: grey;
+     padding: 10px;
+     width: 20px;
+     height: 20px;
+     font-size: 20px;
+     border-radius: 100%;
+ }
+

@@ -1,0 +1,693 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Ubuntu', sans-serif;
+}
+:root
+{
+    --blue: #287bbf;
+    --white: #fff;
+    --grey: #f5f5f5;
+    --balck1: #222;
+    --black2: #999;
+    --pink1: #393E46;
+    --pink2: #f2efea;
+    --pink3: #00ADB5;
+    --pink4: #FF6F61;
+
+
+/*color salmon: FF6F61*/
+/*color negro: 393E46*/
+/*color de fondo del nav: 00ADB5*/
+/*color letra verde-clara: AAD8D3*/
+/*color letra oscura turquesa-oscuro: 02475E*/
+
+}
+
+.desaparecer-elemento{
+    display: none;
+}
+
+.body{
+    min-height: 100vh;
+    overflow-x: hidden;    
+    
+}
+
+.container
+{
+
+    position: relative;
+    width: 100%;
+
+}
+
+.navigation
+{
+    position: fixed;
+    width: 300px;
+    height: 100%;
+    background: var(--pink3);  /* Color barrita lateral */
+    border-left: 10px solid var(--pink4);
+    transition: 0.5s;
+    overflow: hidden;   
+
+}
+
+.navigation.active /* Para el menu toggle y su script */ 
+{
+    width: 80px;
+}
+
+
+.navigation ul{ /* ul en barra lateral */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;  
+}
+
+.navigation ul li { /* li en barra lateral  */
+
+    position: relative;
+    width: 100%;
+    list-style: none;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    
+
+}
+
+.navigation ul li:hover,
+.navigation ul li.hovered /* hover rosado oscuro en navigation  */
+{
+    background: var(--pink1);
+}
+
+.navigation ul li:nth-child(1) /* Nombre inner li 1 */
+{
+    margin-bottom: 40px;
+    pointer-events: none; /* al apuntarlo no hace nada es solo estetico*/
+
+}
+
+.navigation ul li a
+{
+position: relative;
+display: block;
+width: 100%;
+display: flex;
+text-decoration: none;
+color: #02475E;   /* Letras Rojitas */
+
+}
+
+.navigation ul li:hover a ,
+.navigation ul li.hovered a  /* color de la letra en el hover*/
+{
+    color:var(--white);
+
+}
+
+.navigation ul li a .icon
+
+{
+    position: relative;
+    display: block;
+    min-width: 60px;
+    height: 60px;
+    line-height: 70px;
+    text-align: center;
+
+}
+
+.navigation ul li a .icon ion-icon
+{
+    font-size: 1.75em;
+}
+
+.navigation ul li a .title
+{
+    position: relative;
+    display: block;
+    padding: 0 10px;
+    height: 60px;
+    line-height: 60px;
+    text-align: start;
+    white-space: nowrap;
+
+}
+
+/* Curva afuera del menu */
+
+.navigation ul li:hover a::before,
+.navigation ul li.hovered a::before
+{
+    content: '';
+    position: absolute;
+    right: 0;
+    top: -50px;
+    width: 50px;
+    height: 50px;
+    background: transparent;
+    border-radius: 10%;
+    box-shadow: 35px 35px 0 10px var(--pink1) ;
+    pointer-events: none;  
+
+}
+
+.navigation ul li:hover a::after,
+.navigation ul li.hovered a::after
+{
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: -50px;
+    width: 50px;
+    height: 50px;
+    background: transparent;
+    border-radius: 10%;
+    box-shadow: 35px -35px 0 10px var(--pink1) ;
+    pointer-events: none;   
+
+}
+
+/* Main */
+
+.main{
+
+    position: absolute;
+    width: calc(100% - 300px);
+    left: 300px;
+    min-height: 100vh;
+    background: var(--pink1);
+    transition: 0.5s;
+
+}
+
+.main.active
+{
+    width: calc(100% - 80px);
+    left: 80px;
+
+}
+
+.topbar  /* Barrita de arriba que no he usado */
+{
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    
+}
+
+.toggle
+{
+    position: relative;
+    top: 0;
+    width: 60px;
+    height: 60px;    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5em;
+    cursor: pointer;
+    color:#00ADB5;
+}
+
+.cardBox
+{
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-gap: 30px;
+
+
+}
+
+.cardBox .card
+
+{
+    position: relative;
+    background-color: var(--pink4);
+    padding: 30px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+}
+
+.cardBox .card .numbers 
+{
+    position: relative;
+    font-weight: 500;
+    font-size: 2.5em;
+    color: #FEE3EC;
+
+}
+
+.cardBox .card .cardName    
+{
+    color: #FEE3EC ;
+    font-size: 1.1em;
+    margin-top: 5px;
+    text-shadow: 1px 1px #CE97B0;
+} 
+
+.cardBox .card .iconBx
+{
+    font-size: 3.5em ;
+    color: #FEE3EC;
+
+}
+
+.cardBox .card:hover
+{
+    background: var(--pink2);   /* Moradito */
+
+}
+.cardBox .card:hover .numbers,
+.cardBox .card:hover .cardName,
+.cardBox .card:hover .iconBx
+{
+    background: var(--pink2);
+    color: #02475E;
+
+}
+
+
+/* tabla de usuarios */
+
+.table_responsive
+{
+    margin-top: 30px;
+    margin-right: 20px;
+    margin-left: 20px;
+    max-width: 1180px;
+    border: 1px solid var(--white);
+    background-color: var(--pink3);
+    padding: 15px;
+    overflow: auto;   
+    border-radius: 5px; 
+
+}
+
+table{
+    width: 100%;
+    font-size: 13px;    
+    white-space: nowrap;
+    border-collapse: collapse;
+    
+    
+
+    
+
+}
+
+table>thead
+{
+
+    background-color: var(--pink4);   
+    
+    
+    
+    
+}
+
+table>thead th{ /* el th es el tamannio de del head */
+    padding: 10px;
+    color: #FEE3EC;
+     
+    
+
+}
+
+table th,
+table td{ /* el th es el tamannio de del body */
+    border: 1px solid var(--pink2);
+    padding: 10px 15px;
+    color: #02475E;
+    justify-content: center;
+    
+    
+}
+
+.btn_editar_datos
+{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+
+
+
+}
+
+.btn_editar_datos>a
+{
+    text-decoration: var(--blue);
+    background-color: #fff;
+    border: 1px solid var(--pink4);
+    display: inline-block;
+    padding: 7px 20px;
+    font-weight: bold;
+    border-radius: 13px;
+    transition: 0.3s ease-in-out;
+    color: black;
+}
+
+.btn_editar_datos>a:nth-child(1){
+
+    border-color: #00ADB5;
+
+}
+
+.btn_editar_datos>a:nth-child(2){
+    border-color: #9145B6;
+}
+
+.btn_editar_datos>a:nth-child(3){
+    border-color: var(--pink4);
+}
+
+
+ 
+.btn_editar_datos>a:hover{ /* hover del boton ver si es mejor un cambio de color */
+    box-shadow: 0 3px 8px #0003 ;
+}
+
+table>tbody>tr{
+    background-color: var(--white);
+    transition: 0.3s ease-in-out;
+
+}
+
+table>tbody>tr:nth-child(even){
+    background-color: rgb(238,238,238);
+}
+
+.tr{
+    padding: 10px;
+    margin: auto;
+
+}
+
+.input_css{
+    size: 100%;
+    padding: 10px;
+}
+
+ /* Aqui iran css de hidden */
+
+ 
+ /* .hide-me-zonas
+ {
+     display: none;
+
+ }
+
+ .hide-me-duracion
+ {
+     display: none;
+
+ }
+
+ .hide-me-rubro
+ {
+     display: none;
+
+ } */
+
+  /* CSS DE CREACION */
+
+
+  .hide-me-zonas-edicion{
+      display: none;
+  }
+
+  .hide-me-rubros-edicion{
+    display: none;
+}
+
+ .edicion-zona
+ {
+    width: 600px;
+    background-color: #FF6F61;
+    margin: auto;
+    color: #FEE3EC;
+    padding: 10px 0px 10px 0px;
+    text-align: center;
+    border-radius: 15px 15px 0px 0px;
+ }
+
+ .main_user_admin
+ {
+     background-color: #f2efea ;
+     width: 600px;
+     margin: auto;
+
+ }
+
+ form{
+     padding: 10px;
+ }
+
+ .zona{
+     
+     height: 70px;
+     width:400px;
+     color: #02475E;
+     font-weight: 400;
+
+
+
+ }
+
+
+/* crear */
+
+.contorno{
+    background-color: #02475E;
+    padding: 10px 0px 10px 0px;
+    margin: auto;
+    margin-top: 10px;
+    border: 1px solid var(--white);
+    overflow: auto;
+    max-width: 650px;
+    border-radius: 10px 10px 10px 10px;
+    ;
+
+}
+
+.bloque
+{
+    width: 600px;
+    background-color: #00ADB5;
+    margin: auto;
+    color: #02475E;   
+    font-weight: 500; 
+    padding: 10px 0px 10px 0px;
+    text-align: center;
+    border-radius: 10px 10px 10px 10px;
+
+}
+.main_crear
+{
+    background-color: #f2efea;
+    width: 600px;
+    margin: auto;
+
+
+}
+.form_crear{
+    padding: 30px;
+}
+
+.input{
+    
+    height: 50px;
+    width:400px;
+    color: #02475E;
+    font-weight: 500;
+
+
+
+}
+
+.label_crear {
+    
+    
+    color: #02475E;
+    font-weight: 600;
+
+
+
+}
+
+.input_crear{
+    margin-left: 30px;
+    height: 35px;
+    width:200px;
+    color: #02475E;
+    font-weight: 500;
+
+}
+
+/* SUSPENSION TABLA HIDE*/ 
+
+.hide-me-suspension{
+    display: none;
+
+}
+
+.contorno_suspension{
+    background-color: #00ADB5;
+    padding: 10px 0px 10px 0px;
+    margin: auto;
+    margin-top: 10px;
+    overflow: auto;
+    max-width: 775px;
+    border-radius: 10px 10px 10px 10px;
+    border: 1px solid white;
+    background-color: #00ADB5;
+    padding: 15px;
+    overflow: auto;
+
+}
+.suspension
+{
+    width: 700px;
+    height: auto;
+    background-color: #FF6F61;
+    margin: 20px 20px 20px;
+    color: #f2efea;  
+    text-shadow: 2px 2px #B97A95;      
+    padding: 10px 10px 10px 10px;
+    text-align: center;
+    border-radius: 10px 10px 10px 10px;
+    border: 1px solid #852747;
+
+}
+.main_crear_suspension
+{
+    background-color: #f2efea;
+    height: auto;
+    width: 100%;
+    margin: auto;
+    text-shadow: none;
+    border: 1px solid #852747;
+    border-radius: 10px 10px 10px 10px;
+
+
+}
+.form_suspension{
+    padding: 30px;
+    height: auto;
+}
+
+.input_suspension{
+    
+    height: 50px;
+    width:400px;
+    color: #02475E;
+    font-weight: 500;
+    margin: auto;
+    height: auto;
+
+
+
+}
+
+.label_fecha{
+    padding: 10px 10px 10px 10px;
+    
+
+}
+
+
+
+.fecha_inicio
+{
+    margin: 20px;
+    height: 35px;
+    width:200px;
+    color: #02475E;
+    font-weight: 500;
+    padding: 10px 10px 10px 10px;
+
+}
+
+textarea{
+    padding: 10px 10px 10px 10px;
+    margin-bottom: 10px;
+    margin-top: 20px;
+
+}
+
+input[class="fecha_inicio"]{
+    border-radius:10px;
+  }
+
+
+
+/* -- Respuestas Reclamos -- */ 
+
+.hide-me-reclamos{
+    display: none;
+
+}
+
+.contorno_reclamo{
+    background-color: #00ADB5;
+    padding: 10px 0px 10px 0px;
+    margin: auto;
+    margin-top: 10px;
+    overflow: auto;
+    max-width: 775px;
+    border-radius: 10px 10px 10px 10px;
+    border: 1px solid white;
+    background-color: #00ADB5;
+    padding: 15px;
+    overflow: auto;
+
+}
+
+.reclamo
+{
+    width: 700px;
+    height: auto;
+    background-color: #FF6F61;
+    margin: 20px 20px 20px;
+    color: #f2efea;  
+    text-shadow: 2px 2px #B97A95;      
+    padding: 10px 10px 10px 10px;
+    text-align: center;
+    border-radius: 10px 10px 10px 10px;
+    border: 1px solid #852747;
+
+}
+
+.main_responder_reclamo
+{
+    background-color: #f2efea;
+    height: auto;
+    width: 100%;
+    margin: auto;
+    text-shadow: none;
+    border: 1px solid #852747;
+    border-radius: 10px 10px 10px 10px;
+
+
+}
+
+.form_reclamo{
+    padding: 30px;
+    height: auto;
+}
