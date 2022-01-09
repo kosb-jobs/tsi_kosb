@@ -406,7 +406,7 @@ const cargarContPostPorPublicacion = async(publicacion)=>{
                 let user = await getUsuarioPorId(postul.cod_usuario);
                 let botones = ``;
                 if(postul.aceptacion == null){
-                    botones = `<button id="aceptar_postulante_${i}_${j}" name="${postul.id}" class="btn me-5">Aceptar</button><button id="rechazar_postulante_${i}_${j}" name="${postul.id}" class="btn btn-danger">Rechazar</button>`;
+                    botones = `<button id="aceptar_postulante_${p.id}_${postul.id}" name="${postul.id}" class="btn me-5">Aceptar</button><button id="rechazar_postulante_${p.id}_${postul.id}" name="${postul.id}" class="btn btn-danger">Rechazar</button>`;
                 }else{
                     botones=`<p>Ya respondido <code>${aceptacion}</code></p>`
                 }
@@ -416,8 +416,8 @@ const cargarContPostPorPublicacion = async(publicacion)=>{
                       <div class="col-12 col-md-8 col-lg-8">
                         Postulación
                       </div>
-                      <div class="col-12 col-md-4 col-lg-4">
-                        <button id="ver_perfil_postulante_${i}_${j}" name="${postul.cod_usuario}" class="btn btn-primary badge me-5 ver">Ver Perfil del usuario</button>
+                      <div class="col-12 col-md col-lg text-end">
+                        <button id="ver_perfil_postulante_${p.id}_${postul.id}" name="${postul.cod_usuario}" class="btn btn-primary badge">Ver Perfil del usuario</button>
                       </div>
                     </div>
                     <div class="card-body">
@@ -430,7 +430,7 @@ const cargarContPostPorPublicacion = async(publicacion)=>{
             contenido_dos += `
             <div class="card mb-3 text-center">
                 <div class="card-body">
-                    <button class="btn" id="final_etapa_postul_${i}">Finalizar Etapa de Postulación</button>
+                    <button class="btn" id="final_etapa_postul_${p.id}" name="${p.id}">Finalizar Etapa de Postulación</button>
                 </div>
             </div>
             `;
@@ -970,11 +970,11 @@ document.addEventListener("DOMContentLoaded",async()=>{
         let a = 0;
         publicaciones.forEach( async pub => {
             let post_ = await getPostulPorPublicacion(pub.id);
-            console.log(pub);
             if (post_.length !=0) {
+                
                 for(let j=0;j<post_.length;j++){ 
                     //Aqui creo que va el boton ver perfil user
-                    document.querySelector(`#ver_perfil_postulante_${a}_${j}`).addEventListener("click", async function(){
+                    document.querySelector(`#ver_perfil_postulante_${pub.id}_${post_[j].id}`).addEventListener("click", async function(){
                         let id_postulante = this.name;
                         console.log(id_postulante);
                         let datos = await getDatosCompletosPorUser(id_postulante);
@@ -998,7 +998,7 @@ document.addEventListener("DOMContentLoaded",async()=>{
                                 </tr>
 
                                 <tr>
-                                    <td><a style="font-size: 1.5em; padding-right: 2px ;"><b><ion-icon name="settings-outline"></ion-icon></b></a></td>
+                                    <td><a style="font-size: 1.5em; padding-right: 2px ;"><ion-icon name="star-half-outline"></ion-icon></b></a></td>
                                 </tr>
                                 <tr>
                                     <td><a><b>Puntuacion Total Trabajador:</b> ${datos.puntuacion_trabajador}<a></td>
@@ -1008,7 +1008,7 @@ document.addEventListener("DOMContentLoaded",async()=>{
                                     <td><a style="font-size: 1.5em; padding-right: 2px ;"><b><ion-icon name="barbell-outline"></ion-icon></b></a></td>
                                 </tr>
                                 <tr>
-                                    <td><a><b>Postulaciones Totales:</b> ${datos.postulaciones_realizadas_totales}<a></td>
+                                    <td><a><b>Postulaciones Totales:</b> ${datos.postulaciones_realizadas_tot}<a></td>
                                 </tr>
                             
                             
@@ -1028,10 +1028,31 @@ document.addEventListener("DOMContentLoaded",async()=>{
                           })
 
                     }
-                    );   
+                    );
                     //Fin boton ver perfil user                                    
                     if (post_[j].aceptacion == null) {
-                        document.querySelector(`#aceptar_postulante_${a}_${j}`).addEventListener("click",async function(){
+                        document.querySelector(`#final_etapa_postul_${pub.id}`).addEventListener("click", async function(){
+                            console.log('Estoy dentro ou yes');//aun no terminado
+                            let publicacion = {};
+                            publicacion.id = this.name;
+                            let respuesta = await cambiarEstadoPublic(publicacion);
+                            console.log(respuesta);
+                            if (respuesta == 'No Puedes cambiar de proceso si no hay postulaciones') {
+                                await Swal.fire({
+                                    title: "Cambio de estado fallido",
+                                    icon: "warning",
+                                    text: 'No se puede finalizar el proceso de postulación',
+                                });
+                            }else{
+                                await Swal.fire({
+                                    title: "Proceso Finalizado",
+                                    icon: "info",
+                                    text: 'Proceso de postulación',
+                                });
+                            }
+                            
+                        });
+                        document.querySelector(`#aceptar_postulante_${pub.id}_${post_[j].id}`).addEventListener("click",async function(){
                             let id_postulacion = this.name;
                             let resp = await Swal.fire({title:"¿Seguro que desea aceptar la postulacion con código "+id_postulacion+"?", icon:"question", showCancelButton:true});
                             if(resp.isConfirmed){
@@ -1055,7 +1076,7 @@ document.addEventListener("DOMContentLoaded",async()=>{
                                 }
                             }
                         });
-                        document.querySelector(`#rechazar_postulante_${a}_${j}`).addEventListener("click",async function(){
+                        document.querySelector(`#rechazar_postulante_${pub.id}_${post_[j].id}`).addEventListener("click",async function(){
                             let id_postulacion = this.name;
                             let resp = await Swal.fire({title:"¿Seguro que desea rechazar la postulacion con código "+id_postulacion+"?", icon:"question", showCancelButton:true});
                             

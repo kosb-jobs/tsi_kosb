@@ -49,6 +49,19 @@ const publicacionActualizar = async(publicacion)=>{
     }
 }
 
+const cambiarEstadoPublic = async(publicacion)=>{
+    try{
+        let resp = await axios.post("api/publicaciones/estado",publicacion,{
+            headers: {
+                'Content-Type':'application/json'
+            }
+        });
+        return resp.data;
+    }catch(e){
+        return false;
+    }
+}
+
 const crearPublicacion = async(publicacion)=>{
     let resp = await axios.post("api/publicaciones/create", publicacion, {
         headers: {

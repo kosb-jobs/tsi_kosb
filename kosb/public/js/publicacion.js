@@ -157,6 +157,62 @@ const cargarFechaActual = ()=>{
 }
 
 // ID BTN Y ELEMENTOS
+
+document.querySelector("#ver_ofertante").addEventListener("click", async()=>{
+  let id_usuario = document.querySelector("#postular-btn").name;
+  let id_publicacion = document.querySelector("#id_publicacion").name;
+  let aceptacion = null;
+  let fecha_postulacion = cargarFechaActual();
+  await Swal.fire({
+    title: `Informacion del Ofertante`,
+    html: ` 
+    <table>
+        <tr>
+            <td><a style="font-size: 1.5em; padding-right: 2px ;"><b><ion-icon name="person-circle-outline"></ion-icon></b></a></td>
+        </tr>
+        <tr>
+            <td><a><b>Nombre:</b>Nombre</a></td>
+        </tr>
+        
+        <tr>
+            <td><a style="font-size: 1.5em; padding-right: 2px ;"><b><ion-icon name="mail-outline"></ion-icon></b></a></td>
+        </tr>
+        <tr>
+            <td><a><b>Email:</b> email@gmail.com </a></td>
+        </tr>
+
+        <tr>
+            <td><a style="font-size: 1.5em; padding-right: 2px ;"><ion-icon name="star-half-outline"></ion-icon></b></a></td>
+        </tr>
+        <tr>
+            <td><a><b>Puntuacion Total Trabajador:</b> Puntos</a></td>
+        </tr>
+
+        <tr>
+            <td><a style="font-size: 1.5em; padding-right: 2px ;"><b><ion-icon name="barbell-outline"></ion-icon></b></a></td>
+        </tr>
+        <tr>
+            <td><a><b>Postulaciones Totales:</b> Puntos </a></td>
+        </tr>
+    
+    
+    </table>
+
+    `,
+    confirmButtonText: "Listo",
+    width: 600,
+    padding: '3em',
+    color: '#5089C3',
+    
+    backdrop: `
+    rgba(0,0,123,0.4)                            
+    left top
+    no-repeat
+    `
+  })
+  
+});
+
 document.querySelector("#postular-btn").addEventListener("click", async()=>{
   let id_usuario = document.querySelector("#postular-btn").name;
   if (!(id_usuario == "no-logueado")){

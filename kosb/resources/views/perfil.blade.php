@@ -13,10 +13,11 @@
                         <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
                             <a class="nav-link active" id="dashboard-nav" data-toggle="pill" href="#dashboard-tab" role="tab"><ion-icon name="heart-half-outline"></ion-icon>Panel De Control</a>
                             <a class="nav-link" id="orders-nav" data-toggle="pill" href="#orders-tab" role="tab"><ion-icon name="save-outline"></ion-icon>Mis Publicaciones</a>
+                            <a class="nav-link" id="orders-nav" data-toggle="pill" href="#mi-puntuacion" role="tab"><ion-icon name="bar-chart"></ion-icon>Mi Puntuación</a>
                             <a class="nav-link" id="publicaciones_post" data-toggle="pill" href="#postulaciones-mis-publicaciones" role="tab"><ion-icon name="bookmarks"></ion-icon>Postulaciones a mis Publicaciones</a>
-                            <a class="nav-link" href="{{route('buscar_trabajo')}}" role="tab"><ion-icon name="search-outline"></ion-icon>Busqueda de Publicaciones</a>
+                            <a class="nav-link" href="{{route('buscar_trabajo')}}" role="tab"><ion-icon name="search-outline"></ion-icon>Búsqueda de Publicaciones</a>
                             <a class="nav-link" id="address-nav" data-toggle="pill" href="#address-tab" role="tab"><ion-icon name="telescope-outline"></ion-icon>Mis Postulaciones</a>
-                            <a class="nav-link" id="account-nav" data-toggle="pill" href="#account-tab" role="tab"><ion-icon name="bar-chart"></ion-icon>Detalles De Cuenta</a>
+                            <a class="nav-link" id="account-nav" data-toggle="pill" href="#account-tab" role="tab"><ion-icon name="settings-outline"></ion-icon>Detalles De Cuenta</a>
                             <a class="nav-link" id="account-nav" data-toggle="pill" href="#reclamos-tab" role="tab"><ion-icon name="alert"></ion-icon>Mis Reclamo</a>
                             <a class="nav-link" id="admin-nav" href="#"><ion-icon name="person"></ion-icon>Administrador</a>
                             {{-- <a class="nav-link" :href="route('logout')" onclick="event.preventDefault();this.closest('form').submit();">
@@ -37,6 +38,12 @@
                                 <h4>Panel</h4>
                                 <p>
                                     Bienvenidos a Nuestra Pagina "Keep Oneself Busy" la cual ha sido desarrollada con el fin de ayudarle a encontrar trabajos esporadicos, corto plazo y largo plazo.
+                                </p>
+                            </div>
+                            <div class="tab-pane fade show" id="mi-puntuacion" role="tabpanel" aria-labelledby="dashboard-nav">
+                                <h4>Mi puntuación</h4>
+                                <p>
+                                    Acá se podrá ver la puntuación total del usuario, tanto en calidad de trabajador como ofertante.
                                 </p>
                             </div>
                             <div class="tab-pane fade show" id="reclamos-tab" role="tabpanel" aria-labelledby="dashboard-nav">

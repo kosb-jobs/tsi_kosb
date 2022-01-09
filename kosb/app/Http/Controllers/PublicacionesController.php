@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Publicacion;
 use App\Models\Ofertante;
+use App\Models\Postulacion;
 
 class PublicacionesController extends Controller
 {
@@ -85,5 +86,25 @@ class PublicacionesController extends Controller
         $publicacion->cod_usuario = $input["cod_usuario"];
         $publicacion->save();
         return $publicacion; 
+    }
+
+    public function cambiarEstadoPub(Request $request){
+        $input = $request->all();
+        $publicacion = Publicacion::findOrFail($input["id"]);
+        $postulaciones = Postulacion::where('cod_publicacion',$input["id"])->where('aceptacion',1)->get();
+        $mensaje;
+        if(count($postulaciones) > 0){
+            if ($publicacion->estado == null) {
+                $publicacion->estado = 'FPP';//fin proceso postulacion
+                $mensaje =  'Finalizado proceso de postulación';
+            } else {
+                $publicacion->estado = 'FPT'; //fin proceso trabajo
+                $mensaje = 'Finalizado proceso de Trabajo';
+            }
+        }else {
+            $mensaje = 'No Puedes cambiar de proceso si no hay postulaciones';
+        }
+        $publicacion->save();
+        return $mensaje; 
     }
 }

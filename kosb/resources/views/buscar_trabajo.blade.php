@@ -64,6 +64,10 @@
 		<div id="container-publicacion" class="d-none mb-5">
 			<div class="col-12 col-md col-lg">
 				<div class="card shadow-lg mt-2">
+				<!-- Boton Ver Ofertante -->
+					<div class="ver_ofertante">
+						<button type="button" id="ver_ofertante" class="btn btn-outline-secondary float-right" style="padding: 5px; margin: 10px;">Ver Ofertante</button>
+					</div>
 				  <div class="card-body" style="height: 500px">
 					<div class="contenedor" style="max-height: 460px; width: auto;">
 					  <div class="mt-2">
