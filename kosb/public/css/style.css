@@ -164,16 +164,21 @@ h2 {
 .btn-primary {
     color: #fff;
     background-color: #0d6efd;
-    border-color: 1px solid#0d6efd;
-}
-.btn-primary:hover {
+    border-color: #0d6efd;
+  }
+  .btn-primary:hover {
     color: #fff;
     background-color: #0b5ed7;
     border-color: #0a58ca;
-    border: 1px solid #0a58ca;
-}
-.btn-primary:active,
-
+  }
+  .btn-primary:active,
+  .btn-check:focus + .btn-primary, .btn-primary:focus {
+    color: #fff;
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+    box-shadow: 0 0 0 0.25rem rgba(49, 132, 253, 0.5);
+  }
+  
 
 .btn-info {
     color: #f2efea;
@@ -1798,4 +1803,29 @@ h2 {
 .footer .social a:hover {
     color: #FF6F61;
     border-color: #FF6F61;
+}
+
+
+/**********************************/
+/********** TABLAS ************/
+/**********************************/
+
+table{
+    width: 100%;
+    font-size: 13px;    
+    white-space: nowrap;
+    border-collapse: collapse;
+    
+
+}
+
+
+
+
+table td{ /* el th es el tamannio de del body */
+    border: 1px solid #f2efea;
+    padding: 10px 15px;
+    color: #02475E;
+    justify-content: center;
+    
 }

@@ -17,18 +17,26 @@ const cargar_publicacion = async function(){
     </div>
 
     
-<div class="card text-center">
+<div class="card">
     <div class="card-header">
         <code>Código de la publicación: ${pub.id}</code>
     </div>
     <div class="card-body">
-        <h5 class="card-title">${pub.titulo_publicacion}</h5>
-        <span class="text-end">Cantidad de trabajadores: ${cant_trab}</span>
-        <span class="text-end">Zonas: ${pub.cod_zona}</span>
-        <span class="text-end">Rubro: ${pub.cod_rubro}</span>
-        <span class="text-end">Duración: ${pub.cod_duracion}</span>
-        <p class="card-text">${pub.descripcion}</p>
-        
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-6">
+                <h5 class="card-title mb-4">${pub.titulo_publicacion}</h5>
+                <p class="">Cantidad de trabajadores: ${cant_trab}</p>
+                <p class="">Fecha inicio: ${pub.fecha_ini}</p>
+                <p class="">Fecha inicio: ${pub.fecha_fin}</p>
+            </div>
+            <div class="col-12 col-md col-lg">
+                <p>Zonas: ${pub.cod_zona}</p>
+                <p>Rubro: ${pub.cod_rubro}</p>
+                <p>Duración: ${pub.cod_duracion}</p>
+                <p class="">Tipo de Oferta: ${pub.tipo_oferta}</p>
+            </div>
+            <p style="color: black" class="ms-2">Descripción ${pub.descripcion}</p>
+        </div>
     </div>
 </div>
 `;

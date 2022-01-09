@@ -392,6 +392,7 @@ const cargarContPostPorPublicacion = async(publicacion)=>{
             `<strong>No hay Postulaciones</strong></br>
             <code>Esta publicacion no tiene postulaciones</code>`;
         }else{
+            
             for (let j = 0; j < postulaciones.length; j++) {
                 let postul = postulaciones[j];
                 let aceptacion = "";
@@ -405,18 +406,18 @@ const cargarContPostPorPublicacion = async(publicacion)=>{
                 let user = await getUsuarioPorId(postul.cod_usuario);
                 let botones = ``;
                 if(postul.aceptacion == null){
-                    botones = `<button id="aceptar_postulante_${i}_${j}" name="${postul.id}" class="btn btn-info me-5">Aceptar</button><button id="rechazar_postulante_${i}_${j}" name="${postul.id}" class="btn btn-danger">Rechazar</button>`;
+                    botones = `<button id="aceptar_postulante_${i}_${j}" name="${postul.id}" class="btn me-5">Aceptar</button><button id="rechazar_postulante_${i}_${j}" name="${postul.id}" class="btn btn-danger">Rechazar</button>`;
                 }else{
                     botones=`<p>Ya respondido <code>${aceptacion}</code></p>`
                 }
                 contenido_dos += 
-                    `<div class="card">
+                    `<div class="card mb-3">
                     <div class="card-header row">
                       <div class="col-12 col-md-8 col-lg-8">
                         Postulación
                       </div>
                       <div class="col-12 col-md-4 col-lg-4">
-                        <button id="ver_perfil_postulante_${i}_${j}" name="${postul.cod_usuario}" class="btn btn-primary me-5">Ver Perfil del usuario</button>
+                        <button id="ver_perfil_postulante_${i}_${j}" name="${postul.cod_usuario}" class="btn btn-primary badge me-5 ver">Ver Perfil del usuario</button>
                       </div>
                     </div>
                     <div class="card-body">
@@ -426,6 +427,13 @@ const cargarContPostPorPublicacion = async(publicacion)=>{
                     </div>
                   </div>`;
             }
+            contenido_dos += `
+            <div class="card mb-3 text-center">
+                <div class="card-body">
+                    <button class="btn" id="final_etapa_postul_${i}">Finalizar Etapa de Postulación</button>
+                </div>
+            </div>
+            `;
         }
         
         let contenido = `
@@ -900,6 +908,9 @@ document.querySelector('#check-for-delete').addEventListener('click',()=>{
     }
 });
 
+
+//Esto es caca hay que sacarlo 
+
 document.querySelector('#elim-cuenta-btn').addEventListener('click',async()=>{
     let id_usuario = document.querySelector('#id_usuario').name;
     let resp = await Swal.fire({title:"¿Seguro que quiere crear un reclamo?", icon:"question", showCancelButton:true});
@@ -969,21 +980,50 @@ document.addEventListener("DOMContentLoaded",async()=>{
                         let datos = await getDatosCompletosPorUser(id_postulante);
                         console.log(datos);
                         await Swal.fire({
-                            title: `Informacion del usuario: ${j}`,
-                            html: `<li><ion-icon name="person-circle-outline"></ion-icon>Nombre: ${datos.name} ${datos.apellido}</li>
-                            <li><ion-icon name="mail-outline"></ion-icon>Email: ${datos.email}</li>
-                            <li><ion-icon name="settings-outline"></ion-icon>Puntuacion Ofertante: ${datos.puntuacion_ofertante}</li>
-                            <li><ion-icon name="barbell-outline"></ion-icon>Trabajos Realizados: </li>}`,
+                            title: `Informacion del usuario`,
+                            html: ` 
+                            <table>
+                                <tr>
+                                    <td><a style="font-size: 1.5em; padding-right: 2px ;"><b><ion-icon name="person-circle-outline"></ion-icon></b></a></td>
+                                </tr>
+                                <tr>
+                                    <td><a><b>Nombre:</b> ${datos.name} ${datos.apellido}<a></td>
+                                </tr>
+                                
+                                <tr>
+                                    <td><a style="font-size: 1.5em; padding-right: 2px ;"><b><ion-icon name="mail-outline"></ion-icon></b></a></td>
+                                </tr>
+                                <tr>
+                                    <td><a><b>Email:</b> ${datos.email} <a></td>
+                                </tr>
+
+                                <tr>
+                                    <td><a style="font-size: 1.5em; padding-right: 2px ;"><b><ion-icon name="settings-outline"></ion-icon></b></a></td>
+                                </tr>
+                                <tr>
+                                    <td><a><b>Puntuacion Total Trabajador:</b> ${datos.puntuacion_trabajador}<a></td>
+                                </tr>
+
+                                <tr>
+                                    <td><a style="font-size: 1.5em; padding-right: 2px ;"><b><ion-icon name="barbell-outline"></ion-icon></b></a></td>
+                                </tr>
+                                <tr>
+                                    <td><a><b>Postulaciones Totales:</b> ${datos.postulaciones_realizadas_totales}<a></td>
+                                </tr>
+                            
+                            
+                            </table>
+
+                            `,
                             confirmButtonText: "Listo",
                             width: 600,
                             padding: '3em',
-                            color: '#716add',
-                            // background: '#fff url(/images/trees.png)',
+                            color: '#5089C3',
+                            
                             backdrop: `
-                                rgba(63, 191, 116, 0.3)
-                              
-                              left top
-                              no-repeat
+                            rgba(0,0,123,0.4)                            
+                            left top
+                            no-repeat
                             `
                           })
 

@@ -66,7 +66,27 @@
 a.disable-links {
   pointer-events: none;
 }
+/*copia de css a boostrap*/
+.badge {
+  display: inline-block;
+  padding: 0.35em 0.65em;
+  font-size: 0.75em;
+  font-weight: 500;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25rem;
+}
+.badge:empty {
+  display: none;
+}
 
+.btn .badge {
+  position: relative;
+  top: -1px;
+}
 
 /* contenedor edicion de la barra de scroll */
 .contenedor {

@@ -40,8 +40,8 @@
                                 </p>
                             </div>
                             <div class="tab-pane fade show" id="reclamos-tab" role="tabpanel" aria-labelledby="dashboard-nav">
-                                <button class="btn btn-dark mb-3 d-none" id="btn-back-reclamos"><ion-icon size="small" name="arrow-undo-outline"></ion-icon></button>
-
+                                <button class="btn btn-dark mb-3 d-none" id="btn-back-reclamos"><i class="fas fa-long-arrow-alt-left" style="size: 10x"></i></button>
+                                {{--<ion-icon size="small" name="arrow-undo-outline"></ion-icon>--}}
                                 <div class="row mb-3">
                                     <div class="col-12 col-md-6 col-lg-6">
                                         <h4>Mis reclamos</h4>

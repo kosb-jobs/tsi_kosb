@@ -24,6 +24,7 @@ class Publicaciones extends Migration
             $table->date('fecha_publicada');       
             $table->string('descripcion');
             $table->string('tipo_oferta');
+            $table->string('estado')->nullable();
             $table->softDeletes();
             $table->unsignedBigInteger('cod_usuario'); //fk
             //Claves Foraneas
