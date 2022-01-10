@@ -161,6 +161,9 @@ const cargarFechaActual = ()=>{
 document.querySelector("#ver_ofertante").addEventListener("click", async()=>{
   let id_usuario = document.querySelector("#postular-btn").name;
   let id_publicacion = document.querySelector("#id_publicacion").name;
+  let publicacion = await filtroPublicacionId(id_publicacion);
+  let user_ofertante = id_publicacion.cod_usuario; 
+  let datos = await getUserPorIdDatosTO(user_ofertante);
   let aceptacion = null;
   let fecha_postulacion = cargarFechaActual();
   await Swal.fire({
@@ -171,28 +174,28 @@ document.querySelector("#ver_ofertante").addEventListener("click", async()=>{
             <td><a style="font-size: 1.5em; padding-right: 2px ;"><b><ion-icon name="person-circle-outline"></ion-icon></b></a></td>
         </tr>
         <tr>
-            <td><a><b>Nombre:</b>Nombre</a></td>
+            <td><a><b>Nombre:</b>${datos.name} ${datos.apellido}</a></td>
         </tr>
         
         <tr>
             <td><a style="font-size: 1.5em; padding-right: 2px ;"><b><ion-icon name="mail-outline"></ion-icon></b></a></td>
         </tr>
         <tr>
-            <td><a><b>Email:</b> email@gmail.com </a></td>
+            <td><a><b>Email:</b> ${datos.email} </a></td>
         </tr>
 
         <tr>
             <td><a style="font-size: 1.5em; padding-right: 2px ;"><ion-icon name="star-half-outline"></ion-icon></b></a></td>
         </tr>
         <tr>
-            <td><a><b>Puntuacion Total Trabajador:</b> Puntos</a></td>
+            <td><a><b>Puntuacion Total Ofertante:</b> ${datos.puntuacion_ofertante}</a></td>
         </tr>
 
         <tr>
             <td><a style="font-size: 1.5em; padding-right: 2px ;"><b><ion-icon name="barbell-outline"></ion-icon></b></a></td>
         </tr>
         <tr>
-            <td><a><b>Postulaciones Totales:</b> Puntos </a></td>
+            <td><a><b>Publicaciones Totales:</b> ${datos.ofertas_total_publ} </a></td>
         </tr>
     
     
@@ -302,6 +305,28 @@ cargarContenedorSinPub = ()=>{
     contenedor_pub.appendChild(card);
 
 }
+document.querySelector('#search-btn').addEventListener('click', async()=>{
+  let texto_busq = document.querySelector('#search-txt').value.trim();
+  let publicaciones = await getPublicacionSearch(texto_busq);
+  let contenido_pub = document.querySelector('#container-publicacion');
+  let contenedor_vista = document.querySelector('#contenedor-vista');
+  if(!contenido_pub.classList.contains('d-none')){
+    contenido_pub.classList.add('d-none');
+    contenedor_vista.classList.remove('d-none');
+  }
+  
+  if (publicaciones.length == 0) {
+    cargarContenedorSinPub();
+  } else {
+    let zonas = await getZonas();
+    let rubros = await getRubros();
+    let duraciones = await getDuraciones();
+    publicaciones = cambio_de_variables(publicaciones,zonas,rubros,duraciones);
+    cargarContenedor(publicaciones);
+  }
+  console.log();
+});
+
 
 document.querySelector("#ingresar-reclamo-btn").addEventListener('click', async()=>{
   let tit_reclamo = document.querySelector("#titulo-reclamo").value;

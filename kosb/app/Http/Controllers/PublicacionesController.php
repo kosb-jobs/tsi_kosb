@@ -46,6 +46,13 @@ class PublicacionesController extends Controller
         return $publicacion;
     }
 
+    public function filtroPublicacionText(Request $request){
+        $input = $request->all();
+        $filtro = $input["filtro"];
+        $publicaciones = Publicacion::where("titulo_publicacion","LIKE","%".$filtro."%")->orWhere("descripcion","LIKE","%".$filtro."%")->get();
+        return $publicaciones;
+    }
+
     public function filtroPublicacionTipo(Request $request){
         $input = $request->all();
         $filtro = $input["tipo"];
@@ -94,13 +101,14 @@ class PublicacionesController extends Controller
         $postulaciones = Postulacion::where('cod_publicacion',$input["id"])->where('aceptacion',1)->get();
         $mensaje;
         if(count($postulaciones) > 0){
-            if ($publicacion->estado == null) {
-                $publicacion->estado = 'FPP';//fin proceso postulacion
-                $mensaje =  'Finalizado proceso de postulación';
-            } else {
-                $publicacion->estado = 'FPT'; //fin proceso trabajo
-                $mensaje = 'Finalizado proceso de Trabajo';
+            if ($input["estado"] == 'FPP') {
+                $publicacion->estado = $input['estado'];
+                $mensaje =  'Proceso de postulación finalizado correctamente';
+            }else{
+                $publicacion->estado = $input['estado'];
+                $mensaje = 'Proceso de trabajo finalizado con exito';
             }
+
         }else {
             $mensaje = 'No Puedes cambiar de proceso si no hay postulaciones';
         }

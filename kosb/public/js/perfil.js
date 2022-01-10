@@ -1029,12 +1029,14 @@ document.addEventListener("DOMContentLoaded",async()=>{
 
                     }
                     );
-                    //Fin boton ver perfil user                                    
-                    if (post_[j].aceptacion == null) {
-                        document.querySelector(`#final_etapa_postul_${pub.id}`).addEventListener("click", async function(){
-                            console.log('Estoy dentro ou yes');//aun no terminado
-                            let publicacion = {};
-                            publicacion.id = this.name;
+                    
+                    document.querySelector(`#final_etapa_postul_${pub.id}`).addEventListener("click", async function(){
+                        console.log('Estoy dentro ou yes');//aun no terminado
+                        let publicacion = {};
+                        publicacion.id = this.name;
+                        publicacion.estado = 'FPP';
+                        let resp = await Swal.fire({title:"¿Seguro que desea finalizar la etapa de postulación de la publicacion con código "+this.name+"?", icon:"question", showCancelButton:true});
+                        if (resp.isConfirmed) {
                             let respuesta = await cambiarEstadoPublic(publicacion);
                             console.log(respuesta);
                             if (respuesta == 'No Puedes cambiar de proceso si no hay postulaciones') {
@@ -1050,8 +1052,13 @@ document.addEventListener("DOMContentLoaded",async()=>{
                                     text: 'Proceso de postulación',
                                 });
                             }
-                            
-                        });
+                        }
+                        
+                        
+                    });
+                    //Fin boton ver perfil user                                    
+                    if (post_[j].aceptacion == null) {
+                        
                         document.querySelector(`#aceptar_postulante_${pub.id}_${post_[j].id}`).addEventListener("click",async function(){
                             let id_postulacion = this.name;
                             let resp = await Swal.fire({title:"¿Seguro que desea aceptar la postulacion con código "+id_postulacion+"?", icon:"question", showCancelButton:true});

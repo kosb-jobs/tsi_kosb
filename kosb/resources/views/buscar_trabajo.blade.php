@@ -14,8 +14,8 @@
 			</div>
 			<div class="col-md-6">
 				<div class="search">
-					<input type="text" placeholder="Buscar">
-					<button><i class="fa fa-search"></i></button>
+					<input type="text" id="search-txt" placeholder="Buscar">
+					<button id="search-btn"><i class="fa fa-search"></i></button>
 				</div>
 			</div>
 			<div class="col-md-3">

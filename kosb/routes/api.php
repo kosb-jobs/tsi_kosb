@@ -96,6 +96,7 @@ Route::post("publicaciones/delete",[PublicacionesController::class,"eliminarPubl
 Route::post("publicaciones/update",[PublicacionesController::class,"actualizarPublicacion"]);
 Route::post("publicaciones/estado",[PublicacionesController::class,"cambiarEstadoPub"]);
 Route::get("publicaciones/get",[PublicacionesController::class,"getPublicaciones"]);
+Route::get("publicaciones/get/text",[PublicacionesController::class,"filtroPublicacionText"]);
 Route::get("publicaciones/get/id",[PublicacionesController::class,"filtroPublicacionId"]);
 Route::get("publicaciones/get/user",[PublicacionesController::class,"filtroPublicacionUser"]);
 Route::get("publicaciones/get/tipo",[PublicacionesController::class,"filtroPublicacionTipo"]);

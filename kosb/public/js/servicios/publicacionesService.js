@@ -23,6 +23,12 @@ const getPublicacionCodigo = async (filtro)=>{
     return resp.data;
 };
 
+const getPublicacionSearch = async (filtro)=>{
+    let resp;
+    resp = await axios.get(`api/publicaciones/get/text?filtro=${filtro}`);
+    return resp.data;
+};
+
 const eliminarPublicacion = async(id)=>{
     try{
         let resp = await axios.post("api/publicaciones/delete",{id},{
