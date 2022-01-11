@@ -77,6 +77,10 @@ const ver_pub = async function(){
   duracion_txt.innerText = texto_duracion;
   let input_fixed = document.querySelector("#id_publicacion");
   input_fixed.name = publicacion.id;
+  //boton ver ofertantnte
+  let ver_ofertante = document.querySelector("#ver_ofertante");
+  ver_ofertante.name=publicacion.cod_usuario;
+
 }
 
 
@@ -160,10 +164,10 @@ const cargarFechaActual = ()=>{
 
 document.querySelector("#ver_ofertante").addEventListener("click", async()=>{
   let id_usuario = document.querySelector("#postular-btn").name;
-  let id_publicacion = document.querySelector("#id_publicacion").name;
-  let publicacion = await filtroPublicacionId(id_publicacion);
-  let user_ofertante = id_publicacion.cod_usuario; 
-  let datos = await getUserPorIdDatosTO(user_ofertante);
+  let id_publicacion = document.querySelector("#id_publicacion").name; 
+  let user_ofertante = document.querySelector("#ver_ofertante").name;
+  console.log(user_ofertante);
+  let datos = await getDatosCompletosPorUser(user_ofertante);
   let aceptacion = null;
   let fecha_postulacion = cargarFechaActual();
   await Swal.fire({
