@@ -172,7 +172,7 @@
                             </div>
                             <div class="tab-pane fade" id="address-tab" role="tabpanel" aria-labelledby="address-nav">
                                 <h4>Mis Postulaciones</h4>
-                                <div class="table-responsive contenedor" style="border: solid #cecece .1px;border-radius: 2px; max-height: 250px; width: auto;background: #fff;">
+                                <div class="table-responsive contenedor" style="border: solid #cecece .1px;border-radius: 2px; max-height: 400px; width: auto;background: #fff;">
                                     <table class="table table-bordered">
                                         <thead class="thead-dark">
                                             <tr>
