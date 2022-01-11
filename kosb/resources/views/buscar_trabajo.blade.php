@@ -195,6 +195,7 @@
 <script src="{{asset('js/servicios/rubrosService.js')}}"></script>
 <script src="{{asset('js/servicios/duracionesService.js')}}"></script>
 <script src="{{asset('js/servicios/reclamosService.js')}}"></script>
+<script src="{{asset('js/servicios/usuariosService.js')}}"></script>
 <script src="{{asset('js/publicacion.js')}}"></script>
 
 

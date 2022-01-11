@@ -77,3 +77,12 @@ const crearPublicacion = async(publicacion)=>{
     return resp.data;
 };
 
+const filtroPublicacionId = async(publicacion)=>{
+    let resp = await axios.post("publicaciones/get/id", publicacion, {
+        headers: {
+            'Content-Type':'application/json'
+        }
+    });
+    return resp.data;
+};
+
