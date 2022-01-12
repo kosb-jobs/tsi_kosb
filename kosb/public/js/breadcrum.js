@@ -2,7 +2,7 @@
 const cargarBreadCrum = function(){
 let selector = document.querySelector("#bc_id_active");
 var URLactual = window.location.pathname;
-let nueva_url = URLactual.slice(22);
+let nueva_url = URLactual.slice(13);
 
  
 
