@@ -188,6 +188,7 @@
 
 
 @section("javascript")
+
 <script src="vendor/tinymce/js/tinymce/tinymce.min.js"></script>
 <script src="{{asset('js/servicios/publicacionesService.js')}}"></script>
 <script src="{{asset('js/servicios/postulacionesService.js')}}"></script>

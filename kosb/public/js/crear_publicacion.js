@@ -84,47 +84,47 @@ document.querySelector("#btn-vista-previa").addEventListener("click", async()=>{
 
   errores = [];
   if (fecha_ini <= fecha_publicada){
-    errores.push("Fecha de inicio mal ingresada, debe ser un dia en el futuro");
+    errores.push("Fecha de Inicio Mal Ingresada, Debe Ser Un Día En El Futuro");
   }
   if(dias_totales<0){
-    errores.push("La fecha de fin no puede ser anterior a la fecha en que comienze el trabajo");
+    errores.push("La Fecha De Fin No Puede Ser Anterior A La Fecha En Que Comience El Trabajo");
   }
   if(titulo_publicacion == ""){
-    errores.push("Fiene que ingresar un título, ingrese nuevamente");
+    errores.push("Tiene Que Ingresar Un Título, Ingrese Nuevamente");
   }
 
   if(rubro.value == 0){
-    errores.push("Tiene que seleccionar un rubro");
+    errores.push("Tiene Que Seleccionar Un Rubro");
   }
   if(duracion.value == 0){
-    errores.push("Tiene que seleccionar una duración");
+    errores.push("Tiene Que Seleccionar Una Duración");
   }
   if(zona.value == 0){
-    errores.push("Tiene que seleccionar una zona");
+    errores.push("Tiene Que Seleccionar Una Zona");
   }
 
   if(fecha_ini == ""){
-    errores.push("Ingrese una fecha de inicio");
+    errores.push("Ingrese Una Fecha De Inicio");
   }
   if(fecha_fin == 0){
-    errores.push("Ingrese una fecha estimada de fin de trabajo");
+    errores.push("Ingrese Una Fecha Estimada De Fin De Trabajo");
   }
 
   if(descripcion == 0){
-    errores.push("Tiene que ingresar una descripción");
+    errores.push("Tiene Que Ingresar Una Descripción");
   }
 
   if(errores.length != 0){
     Swal.fire({
-      title: "Errores de validación",
+      title: "Errores De Validación",
       icon: "error",
       html:errores.join("<br />")
     });
   }else{
     Swal.fire({
-      title: "Ingreso correcto",
+      title: "Ingreso Correcto",
       icon: "success",
-      text: "Vea la vista previa de su trabajo por publicar"
+      text: "Vista Previa Lista"
     });
 
 
@@ -185,11 +185,11 @@ document.querySelector("#btn-vista-previa").addEventListener("click", async()=>{
       await Swal.fire({
         title: "Creación de publicación correcta",
         icon: "success",
-        text: "Trabajo creado exitosamente."
+        text: "Trabajo Creado Exitosamente."
       });
       botonGuardar.disabled = true;
-
-      window.location.href = "/kosb/public/crear_publicacion";
+      location.reload();
+      
     });
   }
 });

@@ -148,7 +148,14 @@
             </div>
             
           </nav>
-
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a  href="{{route('welcome')}}">Home</a></li>              
+              <li class="breadcrumb-item active" aria-current="page" id="bc_id_active"></li>
+              <li class="breadcrumb-item active" aria-current="page" id="bc_perfil"></li>
+              
+            </ol>
+          </nav>
 
 
 
@@ -230,6 +237,7 @@
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{asset('js/breadcrum.js')}}"></script>
     @yield("javascript")
 
     </body>
