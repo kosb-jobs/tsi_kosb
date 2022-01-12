@@ -1828,3 +1828,32 @@ table td{ /* el th es el tamannio de del body */
     justify-content: center;
     
 }
+
+.breadcrumb{
+    background-color: #fff;       
+    height: 40px;
+    width: 500px;
+    border: 2px solid #FF6F61;
+    margin-left: 10px;
+    margin-top: 10px;
+    
+    /*justify-content:center;*/
+    
+    
+}
+
+.breadcrumb:hover{
+    background-color: #FFCCD2;
+    font-weight: 700;
+}
+
+.breadcrumb-item{
+    text-transform: capitalize;
+    text-align: center;
+}
+
+.breadcrumb-item .active{
+    text-transform: capitalize;
+    text-align: center;
+
+}
