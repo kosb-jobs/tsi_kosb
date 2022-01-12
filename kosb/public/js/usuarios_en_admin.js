@@ -7,7 +7,7 @@ const BtnEliminarAdmin = async function(){
     let id_admin = this.idAdmin;
     let input_admin = document.querySelector("#cod_admin_log").name;    
     
-    let resp = await Swal.fire({title:"¿Estas seguro de eliminar?", html:`<div class="row">El usuario a borrar tiene código administrador ${id_admin}, y codigo usuario ${id_usuario} .</div> <div class="row">Recuerde que esta operacion es irreversible</row>`, icon:"question", showCancelButton:true});
+    let resp = await Swal.fire({title:"¿Estás seguro de eliminar?", html:`<div class="row">El usuario a borrar tiene código administrador ${id_admin}, y código de usuario ${id_usuario} .</div> <div class="row">Recuerde que esta operación es irreversible</row>`, icon:"question", showCancelButton:true});
     if(resp.isConfirmed){
         if (await eliminarAdministrador(id_admin) != false){
 
@@ -76,7 +76,7 @@ const eliminarUsuarioBTN = async function(){
     let correo_usuario = this.correoUser;
     let nom_usuario = this.nameUser;
     let usuario_logeado = document.querySelector('#cod_admin_log').name;
-    let resp = await Swal.fire({title:"¿Estas seguro de eliminar?", html:`<div class="row">El usuario a borrar tiene código ${id_usuario}, nombre ${nom_usuario} y correo ${correo_usuario}.</div> <div class="row">Recuerde que esta operacion es irreversible</row>`, icon:"question", showCancelButton:true});
+    let resp = await Swal.fire({title:"¿Estás seguro de eliminar?", html:`<div class="row">El usuario a borrar tiene código ${id_usuario}, nombre ${nom_usuario} y correo ${correo_usuario}.</div> <div class="row">Recuerde que esta operación es irreversible</row>`, icon:"question", showCancelButton:true});
     if(resp.isConfirmed){
         let respuesta = await eliminarUsuario(id_usuario);
         console.log(respuesta);
@@ -194,7 +194,7 @@ const adminUsuarioBTN = async function() {
     admin.cod_usuario=id_usuario;
     admin.tipo_admin=tipo_admin;
 
-    let resp = await Swal.fire({title:"¿Desea Hacer este Usuario Administrador?", text:"Se le otorgaran privilegios de administrador", icon:"question", showCancelButton:true});
+    let resp = await Swal.fire({title:"¿Desea Hacer este Usuario Administrador?", text:"Se le otorgarán privilegios de administrador", icon:"question", showCancelButton:true});
     if(resp.isConfirmed){
         if (await crearAdmin(admin) != false){
             Swal.fire("Usuario activado","El usuario ha obtenido privilegios de Administrador", "info");

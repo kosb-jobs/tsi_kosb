@@ -115,7 +115,7 @@ document.getElementById("Btn_Duracion").addEventListener("click", async function
             
         }else{
             if (await crearDuracion(duracion) != false){
-                await Swal.fire("Duracion Creada","Duracion Creada Exitosamente", "info");
+                await Swal.fire("Duración Creada","Duración Creada Exitosamente", "info");
                 location.reload();
 
 
@@ -127,7 +127,7 @@ document.getElementById("Btn_Duracion").addEventListener("click", async function
         }
         
     }else{
-        await Swal.fire("Cancelado","Cancelacion de petición", "info");
+        await Swal.fire("Cancelado","Cancelación de petición", "info");
         location.reload();
     }
 });

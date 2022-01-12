@@ -17,7 +17,7 @@
 
       <div class="card-body" id="fondo-menu">
         <div class="mb-3">
-          <label for="nom-publicacion" class="form-label">Título De La Publicacion</label>
+          <label for="nom-publicacion" class="form-label">Título De La Publicación</label>
           <input type="text" class="form-control" id="nom-publicacion">
         </div>
 
@@ -49,7 +49,7 @@
           <input  type="date" class="form-control flatpickr flatpickr-input" readonly="readonly" id="fecha-fin-trabajo" >
         </div>
         <div class="mb-3">
-            <label for="" class="form-label">Descripcion</label>
+            <label for="" class="form-label">Descripción</label>
             <textarea  id="descripcion-txt" class=""></textarea>
         </div>
       </div>

@@ -14,8 +14,8 @@
                 <div class="main_responder_reclamo">
                     <form class=form_reclamo>
                         <div class="input_suspension">                                
-                            <label class="label_fecha">Descripcion</label>
-                            <textarea name="" class="form-control" rows="3" cols="50" id="input_descrip_rec">Descripcion</textarea>
+                            <label class="label_fecha">Descripción</label>
+                            <textarea name="" class="form-control" rows="3" cols="50" id="input_descrip_rec">Descripción</textarea>
                         </div>            
                         <td>
                             <span class="btn_editar_datos">
@@ -41,10 +41,10 @@
         <thead>
             <tr>
                 <td>ID Reclamo</td>
-                <td>Titulo</td>
+                <td>Título</td>
                 <td>Usuario</td>
                 <td>Tipo de Reclamo</td>
-                <td>Descripcion del Reclamo</td>                
+                <td>Descripción del Reclamo</td>                
                 <td>Acciones</td>
                             
             </tr>
@@ -63,10 +63,10 @@
         <thead>
             <tr></tr>
                 <td>ID Reclamo</td>
-                <td>Titulo</td>
+                <td>Título</td>
                 <td>Usuario</td>
                 <td>Tipo de Reclamo</td>
-                <td>Descripcion del Reclamo</td>
+                <td>Descripción del Reclamo</td>
                 <td>Respuesta</td>
                 
                             

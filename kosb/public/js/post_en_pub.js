@@ -27,7 +27,7 @@ const cargar_publicacion = async function(){
                 <h5 class="card-title mb-4">${pub.titulo_publicacion}</h5>
                 <p class="">Cantidad de trabajadores: ${cant_trab}</p>
                 <p class="">Fecha inicio: ${pub.fecha_ini}</p>
-                <p class="">Fecha inicio: ${pub.fecha_fin}</p>
+                <p class="">Fecha fin: ${pub.fecha_fin}</p>
             </div>
             <div class="col-12 col-md col-lg">
                 <p>Zonas: ${pub.cod_zona}</p>

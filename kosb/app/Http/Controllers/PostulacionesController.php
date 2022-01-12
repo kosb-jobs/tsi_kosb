@@ -62,12 +62,6 @@ class PostulacionesController extends Controller
         $input = $request->all();
         $cod = $input["cod_publicacion"];
         $postulaciones = Postulacion::where("cod_publicacion",$cod)->where('aceptacion',1)->get();
-        // $post = array();
-        // for ($i=0; $i < $postulaciones.length; $i++) { 
-        //     if ($postulaciones[$i]["aceptacion"] == 1) {
-        //         $post.array_push($postulaciones[$i]);
-        //     }
-        // }
         return $postulaciones;
     }
 
@@ -88,8 +82,13 @@ class PostulacionesController extends Controller
 
     public function eliminarPostulacion(Request $request){
         $input = $request->all();
-        $reclamo = Postulacion::where("id",$input["id"])->delete();
-        //$reclamo->delete();
-        return "ok";
+        $postulacion = Postulacion::where("id",$input["id"])->get()->first();
+        if ($postulacion->aceptacion == 1){
+            return "La eliminación no puede realizarse una vez que la postulación fue aceptada";
+        }else{
+            $postulacion->delete();
+            return "ok";
+        }
+        
     }
 }

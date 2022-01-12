@@ -64,16 +64,21 @@ class PublicacionesController extends Controller
         $input = $request->all();
         $cod_publicacion = $input["id"];
 
-
+        $postulaciones = Postulacion::where("cod_publicacion",$cod_publicacion)->get();
         $publicacion = Publicacion::where("id",$cod_publicacion)->get()->first();
+        if (count($postulaciones) == 0 and $publicacion->estado != 'FPP'){
+            $ofertante_ = Ofertante::where("cod_usuario",$publicacion->cod_usuario)->get()->first();
+            $ofertante_->publicaciones_activas = $ofertante_->publicaciones_activas - 1;
+            $ofertante_->save();
 
-        $ofertante_ = Ofertante::where("cod_usuario",$publicacion->cod_usuario)->get()->first();
-        $ofertante_->publicaciones_activas = $ofertante_->publicaciones_activas - 1;
-        $ofertante_->save();
-
-
-        $publicacion->delete();
-        return "ok";
+            $publicacion->delete();
+            return "ok";
+        }elseif ($publicacion->estado == 'FPP') {
+            return "La publicación no se puede eliminar si está en estado de trabajo o en proceso de finalización";
+        } elseif( count($postulaciones) >= 1){
+            $cantidad = count($postulaciones);
+            return "La publicación no puede ser eliminada porque tiene $cantidad postulacion(es)";
+        }
         
     }
 

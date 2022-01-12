@@ -63,7 +63,7 @@
     <table>
         <thead>
             <tr>
-                <th>Codigo Usuario</th>
+                <th>Código Usuario</th>
                 <th>ID Administrador</th>
                 <th>Tipo Administrador</th>
                 <th>Acciones</th>

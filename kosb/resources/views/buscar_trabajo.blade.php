@@ -168,7 +168,7 @@
 					</select>
 				  </div>
 				  <div class="mb-3">
-					  <label for="" class="form-label">Descripcion</label>
+					  <label for="" class="form-label">Descripción</label>
 					  <textarea  id="descripcion-txt" class=""></textarea>
 				  </div>
 			</div>

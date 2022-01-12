@@ -36,7 +36,7 @@ const guardarZ = async function(){
     zona.nom_zona = input_zona.value;
     zona.fecha_edicion = cargarFechaActual();
     zona.cod_admin = input_admin;
-    let resp = await Swal.fire({title:"¿Estas seguro de Editar?", text:"Esta operacion se vera reflejada al aceptar", icon:"info", showCancelButton:true});
+    let resp = await Swal.fire({title:"¿Estás seguro de Editar?", text:"Esta operación se verá reflejada al aceptar", icon:"info", showCancelButton:true});
     if(resp.isConfirmed){
         console.log(zona);
         if (await zonaActualizar(zona) != false){
@@ -56,7 +56,7 @@ const guardarZ = async function(){
             location.reload();
         }
     }else{
-        await Swal.fire("Cancelado","Cancelacion de petición", "info");
+        await Swal.fire("Cancelado","Cancelación de petición", "info");
         location.reload();
     }
     
@@ -98,7 +98,7 @@ const editarZ = async function(){
 
 const eliminarZ = async function(){
     let id_zona = this.idZona;
-    let resp = await Swal.fire({title:"¿Estas seguro de eliminar?", text:"Esta operacion es irreversible", icon:"error", showCancelButton:true});
+    let resp = await Swal.fire({title:"¿Estás seguro de eliminar?", text:"Esta operación es irreversible", icon:"error", showCancelButton:true});
     if(resp.isConfirmed){        
         if (await eliminarZona(id_zona) != false){
 
@@ -110,7 +110,7 @@ const eliminarZ = async function(){
             location.reload();
         }
     }else{
-        Swal.fire("Cancelado","Cancelacion de petición", "info");
+        Swal.fire("Cancelado","Cancelación de petición", "info");
         location.reload();
     }
 }
@@ -193,7 +193,7 @@ const guardarR = async function(){
     rubro.nom_rubro = input_rubro.value;
     rubro.fecha_edicion = cargarFechaActual();
     rubro.cod_admin = input_admin;
-    let resp = await Swal.fire({title:"¿Estas seguro de Editar?", text:"Esta operacion se vera reflejada al aceptar", icon:"info", showCancelButton:true});
+    let resp = await Swal.fire({title:"¿Estás seguro de Editar?", text:"Esta operación se verá reflejada al aceptar", icon:"info", showCancelButton:true});
     if(resp.isConfirmed){
         console.log(rubro);
         if (await rubroActualizar(rubro) != false){
@@ -206,7 +206,7 @@ const guardarR = async function(){
             location.reload();
         }
     }else{
-        await Swal.fire("Cancelado","Cancelacion de petición", "info");
+        await Swal.fire("Cancelado","Cancelación de petición", "info");
         location.reload();
     }
 }
@@ -243,7 +243,7 @@ const editarR = async function(){
 
 const eliminarR = async function(){
     let id_rubro = this.idRubro;
-    let resp = await Swal.fire({title:"¿Estas seguro de eliminar?", text:"Esta operacion es irreversible", icon:"error", showCancelButton:true});
+    let resp = await Swal.fire({title:"¿Estás seguro de eliminar?", text:"Esta operación es irreversible", icon:"error", showCancelButton:true});
     if(resp.isConfirmed){        
         if (await eliminarRubro(id_rubro) != false){
   
@@ -255,7 +255,7 @@ const eliminarR = async function(){
             location.reload();
         }
     }else{
-        Swal.fire("Cancelado","Cancelacion de petición", "info");
+        Swal.fire("Cancelado","Cancelación de petición", "info");
         location.reload();
     }
 }
@@ -325,7 +325,7 @@ const guardarD = async function () {
     duracion.titulo_duracion = input_duracion.value;
     duracion.fecha_edicion = cargarFechaActual();
     duracion.cod_admin = input_admin;
-    let resp = await Swal.fire({title:"¿Estas seguro de Editar?", text:"Esta operacion se vera reflejada al aceptar", icon:"info", showCancelButton:true});
+    let resp = await Swal.fire({title:"¿Estás seguro de Editar?", text:"Esta operación se verá reflejada al aceptar", icon:"info", showCancelButton:true});
     if(resp.isConfirmed){
         console.log(duracion)
         if (await duracionActualizar(duracion) != false){
@@ -338,7 +338,7 @@ const guardarD = async function () {
             location.reload();
         }
     }else{
-        await Swal.fire("Cancelado","Cancelacion de petición", "info");
+        await Swal.fire("Cancelado","Cancelación de petición", "info");
         location.reload();
     }
 
@@ -372,7 +372,7 @@ const editarD = async function(){
 
 const eliminarD = async function(){
     let id_duracion = this.idDuracion;
-    let resp = await Swal.fire({title:"¿Estas seguro de eliminar?", text:"Esta operacion es irreversible", icon:"error", showCancelButton:true});
+    let resp = await Swal.fire({title:"¿Estás seguro de eliminar?", text:"Esta operación es irreversible", icon:"error", showCancelButton:true});
     if(resp.isConfirmed){        
         if (await eliminarDuracion(id_duracion) != false){
             // let id = document.querySelector("#id_usuario");
@@ -383,7 +383,7 @@ const eliminarD = async function(){
             // }else{
             //     cargarDiv();
             // }
-            Swal.fire("Duracion eliminada","Duracion eliminada exitosamente", "info");
+            Swal.fire("Duración eliminada","Duración eliminada exitosamente", "info");
             location.reload();
             
         }else{
@@ -391,7 +391,7 @@ const eliminarD = async function(){
             location.reload();
         }
     }else{
-        Swal.fire("Cancelado","Cancelacion de petición", "info");
+        Swal.fire("Cancelado","Cancelación de petición", "info");
         location.reload();
     }
 }

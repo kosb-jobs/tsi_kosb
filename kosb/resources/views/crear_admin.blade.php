@@ -10,7 +10,7 @@
 
 <div class=contorno>
     <div class="bloque" id="bloque">
-            <h1>Zona de Creacion</h1>
+            <h1>Zona de Creación</h1>
             <div class=main_crear>
                 <form class=form_crear>
                     <div class="input">                                    
@@ -22,7 +22,7 @@
                         <span class="btn_editar_datos">
                             <a href="#" id="Btn_Zona">Zona</a> 
                             <a href="#" id="Btn_Rubro">Rubro</a>
-                            <a href="#" id="Btn_Duracion">Duracion</a>
+                            <a href="#" id="Btn_Duracion">Duración</a>
                         </span>
                     </td>
                 </form>

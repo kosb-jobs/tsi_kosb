@@ -8,7 +8,7 @@
 <div class="hide-me-zonas-edicion" id="hide-me-zonas-edicion">
     <div class="edicion-zona" id="edicion-zona"> 
 
-            <h1>Edicion De Valores</h1>
+            <h1>Edición De Valores</h1>
             <div class=main_user_admin>
                 <form >
                     <div class="zona">                                        
@@ -46,8 +46,8 @@
             <tr>
                 <th>ID</th>
                 <th>Nombre De La Zona</th>
-                <th>Codigo Administrador Editor</th>
-                <th>Fecha Edicion</th>   
+                <th>Código Administrador Editor</th>
+                <th>Fecha Edición</th>   
                 <th>Acciones</th>
                 
             </tr>
@@ -70,8 +70,8 @@
             <tr>
                 <th>ID</th>
                 <th>Nombre Del Rubro</th>
-                <th>Codigo Administrador Editor</th>
-                <th>Fecha Edicion</th>   
+                <th>Código Administrador Editor</th>
+                <th>Fecha Edición</th>   
                 <th>Acciones</th>
                 
             </tr>
@@ -94,9 +94,9 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Titulo Duracion</th>
-                <th>Codigo Administrador Editor</th>
-                <th>Fecha Edicion</th>   
+                <th>Título Duración</th>
+                <th>Código Administrador Editor</th>
+                <th>Fecha Edición</th>   
                 <th>Acciones</th>
                 
             </tr>

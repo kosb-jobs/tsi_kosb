@@ -98,7 +98,7 @@
                                         <thead class="thead-dark">
                                             <tr>
                                                 <th>Zona</th>
-                                                <th>Titulo</th>
+                                                <th>Título</th>
                                                 <th>Fecha inicio</th>                                                
                                                 <th>Rubro</th>
                                                 <th>Acciones</th>
@@ -178,7 +178,7 @@
                                             <tr>
                                                 <th>Código de publicación</th>
                                                 <th>Respuesta</th>
-                                                <th>Fecha postulacion</th>                                                
+                                                <th>Fecha postulación</th>                                                
                                                 <th>Acciones</th>
                                             </tr>
                                         </thead>

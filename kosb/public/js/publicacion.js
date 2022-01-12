@@ -192,7 +192,7 @@ document.querySelector("#ver_ofertante").addEventListener("click", async()=>{
             <td><a style="font-size: 1.5em; padding-right: 2px ;"><ion-icon name="star-half-outline"></ion-icon></b></a></td>
         </tr>
         <tr>
-            <td><a><b>Puntuacion Total Ofertante:</b> ${datos.puntuacion_ofertante}</a></td>
+            <td><a><b>Puntuación Total Ofertante:</b> ${datos.puntuacion_ofertante}</a></td>
         </tr>
 
         <tr>
@@ -237,7 +237,7 @@ document.querySelector("#postular-btn").addEventListener("click", async()=>{
       if (respuesta == "El usuario es creador de la publicación") {
         Swal.fire({title:"Error",text: "El usuario es dueño de la publicación", icon:"error"});
       }else if (respuesta != false) {
-        Swal.fire({title:"Postulación correctamente realizada", icon:"success"});
+        await Swal.fire({title:"Postulación correctamente realizada", icon:"success"});
         window.location.href = "/kosb/public/buscar_trabajo";
       }else{
         Swal.fire({title:"No se ha realizado la solicitud",text:"Ya existía una postulación a esta publicación de parte de este usuario", icon:"error"});
@@ -273,7 +273,7 @@ document.querySelector('#select-tipo-reclamo').addEventListener("change",()=>{
  let descripcion_text = tinymce.get("descripcion-txt");
  
  if (select_tipo_R.value == "P") {
-  constante = "Me gustaría reclamar por la publicación con código "+ btn_rec_usuario.idPub +" y con codigo de usuario "+ btn_rec_usuario.idUser + ", ya que...";
+  constante = "Me gustaría reclamar por la publicación con código "+ btn_rec_usuario.idPub +" y con código de usuario "+ btn_rec_usuario.idUser + ", ya que...";
   descripcion_text.setContent(constante);
  }else if(select_tipo_R.value == "U"){
   constante = "Me gustaría reclamar por el usuario con código "+ btn_rec_usuario.idUser + ", ya que...";
@@ -347,7 +347,7 @@ document.querySelector("#ingresar-reclamo-btn").addEventListener('click', async(
   }
   if (errores.length != 0) {
     Swal.fire({
-      title: "Errores de validacion",
+      title: "Errores de validación",
       icon: "error",
       html:errores.join("<br />")
     });
@@ -365,7 +365,7 @@ document.querySelector("#ingresar-reclamo-btn").addEventListener('click', async(
         Swal.fire({
           title: "Reclamo creado",
           icon: "success",
-          text: "El reclamo " + tit_reclamo + " ha sido creada con exito",
+          text: "El reclamo " + tit_reclamo + " ha sido creada con éxito",
         });
       } else {
         Swal.fire({
@@ -381,7 +381,7 @@ document.querySelector("#ingresar-reclamo-btn").addEventListener('click', async(
       });
       location.reload();
     }else{
-        Swal.fire("Cancelado","Cancelacion de petición", "info");
+        Swal.fire("Cancelado","Cancelación de petición", "info");
     }
     
   }

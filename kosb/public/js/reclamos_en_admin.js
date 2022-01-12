@@ -33,7 +33,7 @@ const ResponderReclamo = async function(){
     respuesta.contenido_respuesta = respuesta_txt;
     respuesta.cod_admin = input_admin;    
 
-    let resp = await Swal.fire({title:"¿Estas seguro de Editar?", text:"Esta operacion se vera reflejada al aceptar", icon:"info", showCancelButton:true});
+    let resp = await Swal.fire({title:"¿Estás seguro de Editar?", text:"Esta operación se verá reflejada al aceptar", icon:"info", showCancelButton:true});
     if(resp.isConfirmed){
         
         if (await reclamoActualizar(respuesta) != false){
@@ -46,7 +46,7 @@ const ResponderReclamo = async function(){
             location.reload();
         }
     }else{
-        await Swal.fire("Cancelado","Cancelacion de petición", "info");
+        await Swal.fire("Cancelado","Cancelación de petición", "info");
         location.reload();
     }
     
@@ -186,7 +186,7 @@ const cargarTablaReclamosAccioneless = async function(){
         }if(u.tipo_reclamo ="S"){
             td_tipo.textContent = "Sugerencia";
         }if(u.tipo_reclamo ="P"){
-            td_tipo.textContent = "Denuncia Publicacion";
+            td_tipo.textContent = "Denuncia Publicación";
         }if(u.tipo_reclamo ="U"){
             td_tipo.textContent = "Denuncia Usuario";
         }else{

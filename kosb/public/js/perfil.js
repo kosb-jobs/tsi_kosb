@@ -37,26 +37,18 @@
 const eliminarPublicacionBTN = async function(){
     //trae la info del boton, llama a la funcion del service y elimina segun el id traido
     let cod_publicacion = this.idPub;
-    let resp = await Swal.fire({title:"¿Estas seguro de eliminar?", text:"Esta operacion es irreversible", icon:"question", showCancelButton:true});
+    let resp = await Swal.fire({title:"¿Estás seguro de eliminar?", text:"Esta operación es irreversible", icon:"question", showCancelButton:true});
     if(resp.isConfirmed){
-        
-        if (await eliminarPublicacion(cod_publicacion) != false){
-            // let id = document.querySelector("#id_usuario");
-            // let publicaciones = await getPublicacionCodigo(id.name);
+        let respu = await eliminarPublicacion(cod_publicacion);
+        if ( respu!= false){
             
-            // if(publicaciones.length !=0){
-            //     cargarTabla(publicaciones);
-            // }else{
-            //     cargarDiv();
-            // }
-            
-            await Swal.fire("Publicación de trabajo eliminada","Publicación eliminada exitosamente", "info");
+            await Swal.fire("Respuesta a eliminación",respu, "info");
             window.location.href = "/kosb/public/perfil";
         }else{
             Swal.fire("UPS!, Error", "No se pudo atender la solicitud", "error");
         }
     }else{
-        Swal.fire("Cancelado","Cancelacion de petición", "info");
+        Swal.fire("Cancelado","Cancelación de petición", "info");
     }
 }
 
@@ -77,10 +69,7 @@ const actualizarAccion = async function(){
     let fecha_fin_input = document.querySelector("#fecha-fin-date");
     fecha_fin_input.disabled =false;
     let descripcion_text = tinymce.get("descripcion-txt-porfiao");
-    //descripcion_text.activeEditor.setMode('readonly');
-    //tinyMCE.get('descripcion-txt-porfiao').getBody().readonly = false;
     descripcion_text.mode.set('design');
-    //descripcion_text.getBody().setAttribute('contenteditable', false);//.setAttribute('disabled',false);
     
     let fecha = document.querySelector("#fecha-date");
     fecha.disabled = false;
@@ -121,25 +110,28 @@ const actualizarAccion = async function(){
 
 const eliminarPostulacionBTN = async function(){
     let id = this.idPost;
-    let resp = await Swal.fire({title:"¿Estas seguro de eliminar?", text:"Esta operacion es irreversible", icon:"warning", showCancelButton:true});
+    let resp = await Swal.fire({title:"¿Estás seguro de eliminar?", text:"Esta operación es irreversible", icon:"warning", showCancelButton:true});
     if(resp.isConfirmed){
-        
-        if (await eliminarPostulacion(id) != false){
-            let id_usuario = document.querySelector("#id_usuario");
-            let postulaciones = await eliminarPostulacion(id);
+        let respu = await eliminarPostulacion(id);
+        if (respu != false && respu != "La eliminación no puede realizarse una vez que la postulación fue aceptada"){
+            let id_usuario = document.querySelector("#id_usuario").name;
+            let postulaciones = await getPostulacionesUser(id_usuario);
+            
             //actualizarPostTotales(id_usuario.name);
-            console.log(postulaciones);
+            console.log(id_usuario);
             if(postulaciones.length !=0){
                 cargarTablaPostulaciones(postulaciones);
             }else{
                 cargarDivPostulacion();
             }
             Swal.fire("Postulación eliminada","Postulación eliminada exitosamente", "info");
-        }else{
+        }else if(respu == false){
             Swal.fire("UPS!, Error", "No se pudo atender la solicitud", "error");
+        }else if(respu == "La eliminación no puede realizarse una vez que la postulación fue aceptada"){
+            Swal.fire("No eliminada", respu, "warning");
         }
     }else{
-        Swal.fire("Cancelado","Cancelacion de petición", "info");
+        Swal.fire("Cancelado","Cancelación de petición", "info");
     }
 }
 
@@ -183,7 +175,7 @@ const verPublicacion = async function(){
             </div>
             <div class="row">
                 <div class="col-12 col-md-6 col-lg-3 text-end">
-                    <label for="" class="mb-3">Duracion</label>
+                    <label for="" class="mb-3">Duración</label>
                 </div>
                 <div class="col-12 col-md col-lg text-start">
                     <label for="" class="mb-3">${publicacion.cod_duracion}</label>
@@ -256,30 +248,38 @@ const limpiarUpdate = ()=>{
     //limpia la zona de los inputs del update...
     let btn = document.querySelector("#guardar-cambios-btn");
     btn.disabled = true;
+    //titulo
     let titulo = document.querySelector("#titulo-txt");
     titulo.value = "";
     titulo.disabled =true;
-    
+    //fecha_inicio
     let fecha = document.querySelector("#fecha-date");
     fecha.value = cargarFechaActual();
     fecha.disabled = true;
-    let fecha_fin = document.querySelector("#fecha-fin-date");
-    fecha_fin.value = 0;
-    fecha_fin.disabled = true;
+    //rubro
     let s_rubros = document.querySelector("#rubros-select");
     s_rubros.value = s_rubros.firstChild.value;
     s_rubros.disabled = true;
+    //zonas
     let s_zonas = document.querySelector("#zonas-select");
     s_zonas.value = s_zonas.firstChild.value;
     s_zonas.disabled = true;
+    //duraciones
     let s_duraciones = document.querySelector("#duracion-select");
     s_duraciones.value = s_duraciones.firstChild.value;
     s_duraciones.disabled =true;
-    // let descripcion_text = tinymce.get("descripcion-txt");
-    let descripcion_text = document.querySelector('#descripcion-txt');
-    descripcion_text.disabled = true;
-    // descripcion_text.setContent('');
-    // descripcion_text.setAttribute('realonly');
+    //descripcion
+    let descripcion_text = tinymce.get("descripcion-txt-porfiao");
+    descripcion_text.setContent("");
+    //tinymce.activeEditor.setMode('readonly');
+    descripcion_text.mode.set('readonly');
+    //let descripcion_text = document.querySelector('#descripcion-txt');
+    //descripcion_text.disabled = true;
+    //fecha_fin
+    let fecha_fin = document.querySelector("#fecha-fin-date");
+    fecha_fin.value = "";
+    fecha_fin.disabled = true;
+    
     
     
 }
@@ -289,6 +289,7 @@ const limpiarUpdate = ()=>{
 const cargarSelectZonas = (zonas,id_zona)=>{
     //cargar select de zonas
     let select = document.querySelector(id_zona);
+    select.innerHTML = "";
     for(let i=0;i<zonas.length;i++){
           let option = document.createElement("option");
           option.value = zonas[i].id;
@@ -300,6 +301,7 @@ const cargarSelectZonas = (zonas,id_zona)=>{
 const cargarSelectRubros = (rubros,id)=>{
     //cargar el select correspondiente a rubros
     let select = document.querySelector(id);
+    select.innerHTML = "";
     for(let i=0;i<rubros.length;i++){
         let option = document.createElement("option");
         option.value = rubros[i].id;
@@ -311,6 +313,7 @@ const cargarSelectRubros = (rubros,id)=>{
 const cargarSelectDurac = (durac,id)=>{
     //carga el select de duracion
     let select = document.querySelector(id);
+    select.innerHTML = "";
     for(let i=0;i<durac.length;i++){
         let option = document.createElement("option");
         option.value = durac[i].id;
@@ -390,18 +393,24 @@ const cargarContPostPorPublicacion = async(publicacion)=>{
         if (postulaciones.length == 0) {
             contenido_dos = 
             `<strong>No hay Postulaciones</strong></br>
-            <code>Esta publicacion no tiene postulaciones</code>`;
+            <code>Esta publicación no tiene postulaciones</code>`;
         }else{
             
             for (let j = 0; j < postulaciones.length; j++) {
                 let postul = postulaciones[j];
                 let aceptacion = "";
+                let style_body = "";
+                let style_head = "";
                 if (postul.aceptacion == null) {
                     aceptacion = "Aun sin respuesta";
                 }else if(postul.aceptacion == 0){
                     aceptacion = "Rechazado";
+                    style_body = "border-color: #ffb0a8;background: #fff0ee";
+                    style_head = "background: #ffd2cd;border-color: #ffb0a8";
                 }else{
                     aceptacion = "Aceptado";
+                    style_body = "border-color: #ffb0a8;background: #fff0ee";
+                    style_head = "background: #ffd2cd;border-color: #ffb0a8";
                 }
                 let user = await getUsuarioPorId(postul.cod_usuario);
                 let botones = ``;
@@ -411,7 +420,7 @@ const cargarContPostPorPublicacion = async(publicacion)=>{
                     botones=`<p>Ya respondido <code>${aceptacion}</code></p>`
                 }
                 contenido_dos += 
-                    `<div class="card mb-3">
+                    `<div class="card mb-3" style="${style_head}">
                     <div class="card-header row">
                       <div class="col-12 col-md-8 col-lg-8">
                         Postulación
@@ -420,7 +429,7 @@ const cargarContPostPorPublicacion = async(publicacion)=>{
                         <button id="ver_perfil_postulante_${p.id}_${postul.id}" name="${postul.cod_usuario}" class="btn btn-primary badge">Ver Perfil del usuario</button>
                       </div>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" style="${style_body}">
                       <h5 class="card-title">Código de usuario: ${postul.cod_usuario} ~~~ ${user.name} ~~~ ${user.email}</h5>
                       <p class="card-text">${postul.fecha_postulacion}  ~~~  ${aceptacion}</p>
                       `+botones+`
@@ -510,7 +519,7 @@ const cargarSinPostulPorPub = ()=>{
                             <h5 class="card-title">No Tienes Publicaciones Creadas</h5>
                             <h6 class="card-subtitle mb-2 text-muted">😕🛠📒</h6>
                             <p class="card-text">Al no tener ninguna publicación ningun usuario puede postular, crea publicaciones interesantes para que otros usuarios postulen a tus ofertas de trabajos</p>
-                            <p>Para crear publicaciones vaya a <a href="crear_publicacion" class="card-link"><code>creación de publicaciones</code></a></p>
+                            <p>Para crear publicaciones vaya a <a href="crear_publicacion" class="card-link"><code>Creación de publicaciones</code></a></p>
                         </div>
                     </div>
                 </div>
@@ -679,7 +688,7 @@ document.querySelector("#guardar-cambios-btn").addEventListener("click",async fu
     //validaciones
     errores = [];
     if (fecha <= get.fecha_publicada){
-        errores.push("Fecha de inicio mal ingresada, debe ser un dia en el futuro");
+        errores.push("Fecha de inicio mal ingresada, debe ser un día en el futuro");
     }
     if(dias_totales<0){
     errores.push("La fecha de fin no puede ser anterior a la fecha en que comienze el trabajo");
@@ -694,20 +703,20 @@ document.querySelector("#guardar-cambios-btn").addEventListener("click",async fu
     errores.push("Ingrese una fecha estimada de fin de trabajo");
     }
     if (s_zonas == 0) {
-        errores.push("Debe Tener un título");
+        errores.push("Debe seleccionar una zona");
     }
     if (s_rubros == 0) {
-        errores.push("Debe Tener un título");
+        errores.push("Debe seleccionar un rubro");
     }
     if (s_duraciones == 0) {
-        errores.push("Debe Tener un título");
+        errores.push("Debe seleccionar una duración");
     }
     if (descripcion_text == 0) {
         errores.push("Debe Tener una descripción");
     }
     if (errores.length != 0) {
         Swal.fire({
-            title: "Errores de validacion",
+            title: "Errores de validación",
             icon: "error",
             html:errores.join("<br />")
           });
@@ -781,7 +790,7 @@ document.querySelector("#actualizar-usuario").addEventListener("click", async fu
     }
     if(errores.length != 0){
         Swal.fire({
-            title: "Errores de validacion",
+            title: "Errores de validación",
             icon: "error",
             html:errores.join("<br />")
           });
@@ -842,7 +851,7 @@ document.querySelector("#ingresar-reclamo-btn").addEventListener('click', async(
     }
     if (errores.length != 0) {
       Swal.fire({
-        title: "Errores de validacion",
+        title: "Errores de validación",
         icon: "error",
         html:errores.join("<br />")
       });
@@ -920,7 +929,7 @@ document.querySelector('#elim-cuenta-btn').addEventListener('click',async()=>{
             await Swal.fire({
                 title: "Algo salió mal",
                 icon: "error",
-                text: "Eliminacion fallida",
+                text: "Eliminación fallida",
               });
         }else{
             //window.location.href = "/kosb/public/crear_perfil";
@@ -931,7 +940,7 @@ document.querySelector('#elim-cuenta-btn').addEventListener('click',async()=>{
         await Swal.fire({
             title: "Acción cancelada",
             icon: "warning",
-            text: "Eliminacion cancelada",
+            text: "Eliminación cancelada",
           });
     }
     
@@ -1001,7 +1010,7 @@ document.addEventListener("DOMContentLoaded",async()=>{
                                     <td><a style="font-size: 1.5em; padding-right: 2px ;"><ion-icon name="star-half-outline"></ion-icon></b></a></td>
                                 </tr>
                                 <tr>
-                                    <td><a><b>Puntuacion Total Trabajador:</b> ${datos.puntuacion_trabajador}<a></td>
+                                    <td><a><b>Puntuación Total Trabajador:</b> ${datos.puntuacion_trabajador}<a></td>
                                 </tr>
 
                                 <tr>
@@ -1031,27 +1040,37 @@ document.addEventListener("DOMContentLoaded",async()=>{
                     );
                     
                     document.querySelector(`#final_etapa_postul_${pub.id}`).addEventListener("click", async function(){
-                        console.log('Estoy dentro ou yes');//aun no terminado
                         let publicacion = {};
                         publicacion.id = this.name;
                         publicacion.estado = 'FPP';
+                        let post_aceptadas = await getPostulAceptadasPorPublicacion(this.name);
+                        
                         let resp = await Swal.fire({title:"¿Seguro que desea finalizar la etapa de postulación de la publicacion con código "+this.name+"?", icon:"question", showCancelButton:true});
                         if (resp.isConfirmed) {
-                            let respuesta = await cambiarEstadoPublic(publicacion);
-                            console.log(respuesta);
-                            if (respuesta == 'No Puedes cambiar de proceso si no hay postulaciones') {
-                                await Swal.fire({
-                                    title: "Cambio de estado fallido",
+                            if (post_aceptadas.length == 0){
+                                Swal.fire({
+                                    title: "Finalización de proceso fallido",
                                     icon: "warning",
-                                    text: 'No se puede finalizar el proceso de postulación',
+                                    text: 'No se puede cambiar el estado de la publicación si no tiene al menos una postulacion aceptada',
                                 });
                             }else{
-                                await Swal.fire({
-                                    title: "Proceso Finalizado",
-                                    icon: "info",
-                                    text: 'Proceso de postulación',
-                                });
+                                let respuesta = await cambiarEstadoPublic(publicacion);
+                                console.log(respuesta);
+                                if (respuesta == 'No Puedes cambiar de proceso si no hay postulaciones') {
+                                    await Swal.fire({
+                                        title: "Cambio de estado fallido",
+                                        icon: "warning",
+                                        text: 'No se puede finalizar el proceso de postulación',
+                                    });
+                                }else{
+                                    await Swal.fire({
+                                        title: "Proceso Finalizado",
+                                        icon: "info",
+                                        text: 'Proceso de postulación',
+                                    });
+                                }
                             }
+                            
                         }
                         
                         
