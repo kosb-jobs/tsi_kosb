@@ -151,7 +151,7 @@
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a  href="{{route('welcome')}}">Home</a></li>              
-              <li class="breadcrumb-item active" aria-current="page" id="bc_id_active"></li>
+              <li class="breadcrumb-item active" aria-current="page" id="bc_id_active"><a id="id_active_a"  href="#"></a></li>
               <li class="breadcrumb-item active" aria-current="page" id="bc_perfil"></li>
               
             </ol>

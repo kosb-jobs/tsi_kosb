@@ -16,9 +16,9 @@
                             <label class="label_fecha">Ingrese Fecha de Inicio</label>
                             <input class="fecha_inicio" type="date" name="input_fecha_ini" id="input_fecha_ini" min='1899-01-01' ></br>
                             <label class="label_fecha">Ingrese Fecha de Finalizacion</label>
-                            <input class="fecha_inicio" type="date" name="input_fecha_fin" id="input_fecha_fin" min='1899-01-01' max='2022-12-12'></br>
+                            <input class="fecha_inicio" type="date" name="input_fecha_fin" id="input_fecha_fin" min='1899-01-01' ></br>
                             <label class="label_fecha">Descripcion</label>
-                            <textarea name="" class="form-control" rows="3" cols="50" id="input_descrip_sus">Descripcion</textarea>
+                            <textarea  id="descripcion-txt" class=""></textarea>
                         </div>
             
                         <td>
