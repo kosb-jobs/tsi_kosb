@@ -105,7 +105,7 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/dpkngav2093j8s4a3owfofma6v2dpw7cs6tuw3kr4lq6tvei/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <script>tinymce.init({selector:'textarea'});</script>
     <!-- Scripts para el menu toggle -->
     <script>

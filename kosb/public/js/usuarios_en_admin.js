@@ -1,6 +1,25 @@
+tinymce.init({
+    selector: '#descripcion-txt',
+    height: 200,
+    menubar: false,
+    language: 'es',
+    plugins: [
+      'advlist autolink lists link image charmap print preview anchor',
+      'searchreplace visualblocks code fullscreen',
+      'insertdatetime media table paste code help wordcount'
+    ],
+    toolbar: 'undo redo | formatselect | ' +
+    'bold italic backcolor | alignleft aligncenter ' +
+    'alignright alignjustify | bullist numlist outdent indent | ' +
+    'removeformat | help',
+    content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+  });
+
 //Aqui colocar el hidden del boton
 
 //Eliminar usuario como administrador
+
+
 
 const BtnEliminarAdmin = async function(){
     let id_usuario = this.idUser;
@@ -118,7 +137,7 @@ document.getElementById("Btn_Susp_Sanc").addEventListener("click", async functio
     let input_admin = document.querySelector("#cod_admin_log").name;
     let input_fecha_ini = document.getElementById('input_fecha_ini');
     let input_fecha_fin = document.getElementById('input_fecha_fin');
-    let input_descr = tinymce.get("input_descrip_sus").getContent();
+    let input_descr = tinymce.get("descripcion-txt").getContent();
     usuario.id = id_usuario;
     usuario.estado = 1;
     suspension.cod_usuario = id_usuario;
@@ -323,7 +342,7 @@ const cargarFechaMin = ()=>{
         
     today = yyyy + '-' + mm + '-' + dd;
     document.getElementById("input_fecha_ini").setAttribute("min", today);
-    document.getElementById("input_fecha_fin").setAttribute("min", today);
+    
 }
 
 const cargarFechaMax = ()=>{
@@ -331,7 +350,14 @@ const cargarFechaMax = ()=>{
     var dd = today.getDate();
     var mm = today.getMonth() + 1; //January is 0!
     var yyyy = today.getFullYear();
-    dd=dd+7;    
+    dd=dd+7;
+    
+    if (dd>31 && (mm==1 || mm==3 || mm==6 || mm==8 || mm==10 || mm==12 )){
+        let suma = dd - 31;
+        mm=mm+1;
+        dd= suma;
+    }
+
     if (dd < 10) {
        dd = '0' + dd;
     }
@@ -341,7 +367,7 @@ const cargarFechaMax = ()=>{
     } 
         
     today = yyyy + '-' + mm + '-' + dd;
-    document.getElementById("input_fecha_fin").setAttribute("max", today);
+    document.getElementById("input_fecha_fin").setAttribute("min", today);
 }
 
 
@@ -349,7 +375,7 @@ document.addEventListener("DOMContentLoaded", async ()=>{
     await cargarTabla();
     await cargarTablaAdmin();
     cargarFechaMin();
-    cargarFechaMax();
+    cargarFechaMax(); /*la fecha maxima en realidad es el minimo de la ficha de fin*/ 
 
 });
 

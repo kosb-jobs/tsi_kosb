@@ -42,11 +42,12 @@
 
         <div class="mb-3" id="f">
             <label for="fecha-trabajo" class="form-label">Fecha Inicio Del Trabajo</label>
-            <input  type="date" class="form-control" id="fecha-trabajo" >
+            <input  type="date" class="form-control" id="fecha-trabajo" min='1899-01-01' max='2022-12-12'>
         </div>
         <div class="mb-3" id="f">
           <label for="total-pedido" class="form-label">Fecha Fin Del Trabajo</label>
-          <input  type="date" class="form-control" id="fecha-fin-trabajo" >
+          <input  type="date" class="form-control" id="fecha-fin-trabajo" min='1899-01-01' max='2022-12-12'>
+
         </div>
         <div class="mb-3">
             <label for="" class="form-label">Descripción</label>

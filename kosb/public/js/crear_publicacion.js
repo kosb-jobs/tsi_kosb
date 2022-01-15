@@ -1,6 +1,7 @@
 
 tinymce.init({
   selector: '#descripcion-txt',
+  language: 'es',
   height: 200,
   menubar: false,
   plugins: [
@@ -13,6 +14,7 @@ tinymce.init({
   'alignright alignjustify | bullist numlist outdent indent | ' +
   'removeformat | help',
   content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+  
 });
 
 const cargarSelectZonas = (zonas,id_zona)=>{

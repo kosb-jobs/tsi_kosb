@@ -2,6 +2,7 @@ tinymce.init({
   selector: '#descripcion-txt',
   height: 200,
   menubar: false,
+  language: 'es',
   plugins: [
     'advlist autolink lists link image charmap print preview anchor',
     'searchreplace visualblocks code fullscreen',
@@ -13,6 +14,7 @@ tinymce.init({
   'removeformat | help',
   content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
 });
+
 //Funciones otras
 const ver_pub = async function(){
   let id = this.idPub;
