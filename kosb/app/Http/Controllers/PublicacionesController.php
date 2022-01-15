@@ -14,6 +14,10 @@ class PublicacionesController extends Controller
         $publicaciones = Publicacion::all();
         return $publicaciones;
     }
+    public function getPublicacionesNull(){
+        $publicaciones = Publicacion::where("estado",null)->get();
+        return $publicaciones;
+    }
     public function crearPublicacion(Request $request){
         $input = $request->all();
         $publicacion = new Publicacion();
@@ -36,6 +40,13 @@ class PublicacionesController extends Controller
         $input = $request->all();
         $filtro = $input["filtro"];
         $publicacion = Publicacion::where("cod_usuario",$filtro)->get();
+        return $publicacion;
+    }
+    public function filtroPublicacionUserAcep(Request $request){
+        $input = $request->all();
+        $filtro = $input["filtro"];
+
+        $publicacion = Publicacion::where("cod_usuario",$filtro)->where("estado","!=",null)->get();
         return $publicacion;
     }
     public function filtroPublicacionId(Request $request){

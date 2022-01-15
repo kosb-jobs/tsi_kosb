@@ -42,9 +42,45 @@
                             </div>
                             <div class="tab-pane fade show" id="mi-puntuacion" role="tabpanel" aria-labelledby="dashboard-nav">
                                 <h4>Mi puntuación</h4>
-                                <p>
-                                    Acá se podrá ver la puntuación total del usuario, tanto en calidad de trabajador como ofertante.
-                                </p>
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                      <blockquote class="blockquote mb-0">
+                                        <p class="text-sm">Puntuación total del usuario</p>
+                                        <h2 class="card-title" id="puntuacion-total">8.0</h2>
+                                        <code class="text-sm" style="text-align: right !important;" id="cod-usuario">codigo de usuario: </code></br>
+                                        <code class="text-sm" style="text-align: right !important;" id="correo-txt">correo: </code>
+                                        {{-- <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer> --}}
+                                      </blockquote>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-md-6 col-lg-6">
+                                        <div class="card">
+                                            <div class="card-body">
+                                              <blockquote class="blockquote mb-0">
+                                                <p class="text-sm">Puntuación como trabajador</p>
+                                                <h3 class="card-title" id="puntuacion-trabajador">8.0</h3>
+                                                <p id="post-activas">Postulaciones activas: </p>
+                                                <p id="total-post">Total de postulaciones realizadas: </p>
+                                                {{-- <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer> --}}
+                                              </blockquote>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md -col-lg">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <blockquote class="blockquote mb-0">
+                                                    <p class="text-sm">Puntuación como Ofertante</p>
+                                                    <h3 class="card-title" id="puntiacion-ofertante">8.0</h3>
+                                                    <p id="pub-activas">Publicaciones activa: </p>
+                                                    <p id="pub-totales">Total de publicaciones creadas: </p>
+                                                    {{-- <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer> --}}
+                                                </blockquote>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="tab-pane fade show" id="reclamos-tab" role="tabpanel" aria-labelledby="dashboard-nav">
                                 <button class="btn btn-dark mb-3 d-none" id="btn-back-reclamos"><i class="fas fa-long-arrow-alt-left" style="size: 10x"></i></button>
@@ -269,7 +305,7 @@
                                         </div>
                                     </div>
                                 </form> --}}
-                                <h4>Elimine si cuenta</h4>
+                                {{-- <h4>Elimine si cuenta</h4>
                                 <form action="{{ route('password.update') }}" method="POST">
                                     @csrf
                                     
@@ -285,7 +321,7 @@
                                         </div>
                                         
                                     </div>
-                                </form>
+                                </form> --}}
                             </div>
                         </div>
                     </div>

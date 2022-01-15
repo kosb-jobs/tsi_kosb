@@ -428,7 +428,7 @@ document.querySelector('#t-largo-plazo').addEventListener('click',async()=>{
 
 //DOMContentLoaded
 document.addEventListener("DOMContentLoaded",async()=>{
-  let publicaciones = await getPublicaciones();
+  let publicaciones = await getPublicacionesNull();
   let zonas = await getZonas();
   let rubros = await getRubros();
   let duraciones = await getDuraciones();

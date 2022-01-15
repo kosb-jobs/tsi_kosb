@@ -42,11 +42,11 @@
 
         <div class="mb-3" id="f">
             <label for="fecha-trabajo" class="form-label">Fecha Inicio Del Trabajo</label>
-            <input  type="date" class="form-control flatpickr flatpickr-input" readonly="readonly" id="fecha-trabajo" >
+            <input  type="date" class="form-control" id="fecha-trabajo" >
         </div>
         <div class="mb-3" id="f">
           <label for="total-pedido" class="form-label">Fecha Fin Del Trabajo</label>
-          <input  type="date" class="form-control flatpickr flatpickr-input" readonly="readonly" id="fecha-fin-trabajo" >
+          <input  type="date" class="form-control" id="fecha-fin-trabajo" >
         </div>
         <div class="mb-3">
             <label for="" class="form-label">Descripción</label>

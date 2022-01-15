@@ -48,7 +48,7 @@ class UsersController extends Controller
             "puntuacion_ofertante"=>$ofertante['puntuacion_ofertante'],
             "cod_ofertante" => $trabajador['id'],
             "postulaciones_activas" => $trabajador['postulaciones_activas'],
-            "postulaciones_realizadas_tot" => $trabajador['postulaciones_realizadas_tot '],
+            "postulaciones_realizadas_tot" => $trabajador['postulaciones_realizadas_tot'],
             "puntuacion_trabajador" => $trabajador['puntuacion_trabajador']
         ];
         

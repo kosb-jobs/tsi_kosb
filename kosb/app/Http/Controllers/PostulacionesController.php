@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Builder;
 //FALTANTE
 use App\Models\Postulacion;
 use App\Models\Publicacion;
+use App\Models\Trabajador;
 use Illuminate\Http\Request;
 
 class PostulacionesController extends Controller
@@ -31,12 +32,15 @@ class PostulacionesController extends Controller
         }
 
         if ($encontrado == false && $pertenece == false) {
+            $trabajador = Trabajador::where("cod_usuario", $input['cod_usuario'])->get()->first();
+            $trabajador->postulaciones_realizadas_tot += 1;
             $postulacion = new Postulacion();
             $postulacion->cod_publicacion=$input["cod_publicacion"];
             $postulacion->cod_usuario=$input["cod_usuario"];
             $postulacion->aceptacion=$input["aceptacion"];
             $postulacion->fecha_postulacion=$input["fecha_postulacion"];
             $postulacion->save();
+            $trabajador->save();
             return $postulacion;
         }
         if ($pertenece == true) {

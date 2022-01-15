@@ -621,7 +621,25 @@ const cargarDivPostulacion = ()=>{
     elemento.innerHTML = contenido;
 }
 
-
+const cargarDatosUsuario = (datos)=>{
+    console.log(datos);
+    let input_cod = document.querySelector("#cod-usuario");
+    input_cod.innerHTML += datos.cod_usuario;
+    let input_correo = document.querySelector("#correo-txt");
+    input_correo.innerHTML += datos.email;
+    let text_punt_trabaj = document.querySelector("#puntuacion-trabajador");
+    text_punt_trabaj.innerHTML = datos.puntuacion_trabajador;
+    let text_post_activas = document.querySelector("#post-activas");
+    text_post_activas.innerHTML += datos.postulaciones_activas;
+    let text_post_totales = document.querySelector("#total-post");
+    text_post_totales.innerHTML += datos.postulaciones_realizadas_tot;
+    let text_punt_ofertante = document.querySelector("#puntiacion-ofertante");
+    text_punt_ofertante.innerHTML = datos.puntuacion_ofertante;
+    let text_pub_act = document.querySelector("#pub-activas");
+    text_pub_act.innerHTML += datos.publicaciones_activas;
+    let text_pub_totales = document.querySelector("#pub-totales");
+    text_pub_totales.innerHTML += datos.ofertas_total_publ;
+}
 
 const cargarDivReclamo = ()=>{
     //funcion que muestra un mensaje de inexistencia de publicaciones y te guia a pagina crear publicación
@@ -908,43 +926,43 @@ document.querySelector("#ingresar-reclamo-btn").addEventListener('click', async(
 // </div>
 // </div>`;
 
-document.querySelector('#check-for-delete').addEventListener('click',()=>{
-    let boton = document.querySelector('#elim-cuenta-btn');
-    if(document.querySelector('#check-for-delete').checked){
-        boton.disabled = false;
-    }else{
-        boton.disabled = true;
-    }
-});
+// document.querySelector('#check-for-delete').addEventListener('click',()=>{
+//     let boton = document.querySelector('#elim-cuenta-btn');
+//     if(document.querySelector('#check-for-delete').checked){
+//         boton.disabled = false;
+//     }else{
+//         boton.disabled = true;
+//     }
+// });
 
 
 //Esto es caca hay que sacarlo 
 
-document.querySelector('#elim-cuenta-btn').addEventListener('click',async()=>{
-    let id_usuario = document.querySelector('#id_usuario').name;
-    let resp = await Swal.fire({title:"¿Seguro que quiere crear un reclamo?", icon:"question", showCancelButton:true});
-    if (resp.isConfirmed) {
-        let respuesta = await eliminarUsuario(id_usuario);
-        if(respuesta == false){
-            await Swal.fire({
-                title: "Algo salió mal",
-                icon: "error",
-                text: "Eliminación fallida",
-              });
-        }else{
-            //window.location.href = "/kosb/public/crear_perfil";
-            //console.log(respuesta);
-        }
+// document.querySelector('#elim-cuenta-btn').addEventListener('click',async()=>{
+//     let id_usuario = document.querySelector('#id_usuario').name;
+//     let resp = await Swal.fire({title:"¿Seguro que quiere crear un reclamo?", icon:"question", showCancelButton:true});
+//     if (resp.isConfirmed) {
+//         let respuesta = await eliminarUsuario(id_usuario);
+//         if(respuesta == false){
+//             await Swal.fire({
+//                 title: "Algo salió mal",
+//                 icon: "error",
+//                 text: "Eliminación fallida",
+//               });
+//         }else{
+//             //window.location.href = "/kosb/public/crear_perfil";
+//             //console.log(respuesta);
+//         }
         
-    } else {
-        await Swal.fire({
-            title: "Acción cancelada",
-            icon: "warning",
-            text: "Eliminación cancelada",
-          });
-    }
+//     } else {
+//         await Swal.fire({
+//             title: "Acción cancelada",
+//             icon: "warning",
+//             text: "Eliminación cancelada",
+//           });
+//     }
     
-});
+// });
 
 document.querySelector('#admin-nav').addEventListener('click', async()=>{
     let codigo = document.querySelector('#id_usuario').name;
@@ -967,7 +985,8 @@ document.addEventListener("DOMContentLoaded",async()=>{
     let id = document.querySelector("#id_usuario");
     let publicaciones = await getPublicacionesUsuario(id.name);
     await cargarContPostPorPublicacion(publicaciones);
-        
+    let datos_usuario = await getDatosCompletosPorUser(id.name);
+    cargarDatosUsuario(datos_usuario);
     let zonas = await getZonas();
     let rubros = await getRubros();
     let duraciones = await getDuraciones();

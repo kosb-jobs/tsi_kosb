@@ -109,10 +109,10 @@ const cargar_lista_vacia = ()=>{
     let elemento = `
 <div class="card text-center">
     <div class="card-body">
-        <h5 class="card-title">No Tienes Publicaciones Creadas</h5>
+        <h5 class="card-title">No Tienes Publicaciones en proceso de trabajo</h5>
         <h6 class="card-subtitle mb-2 text-muted">🧐👌</h6>
-        <p class="card-text">Puedes crear alguna entrando a Crear Publicación</p>
-        <a href="crear_publicacion" class="card-link">Ir a Crear Publicación</a>
+        <p class="card-text">Si tienes publicaciones que tienen postulantes aceptados debes finalizar el proceso de postulación para poder verlas en esta página</p>
+        <a href="perfil#postulaciones-mis-publicaciones" class="card-link">Ir a Crear Publicación</a>
     </div>
 </div>
 `;
@@ -122,14 +122,16 @@ const cargar_lista_vacia = ()=>{
 
 document.addEventListener('DOMContentLoaded',async()=>{
     let id_usuario = document.querySelector('#id_usuario').name;
-    let publicaciones = await getPublicacionesUsuario(id_usuario);
-    let zonas = await getZonas();
-    let duraciones = await getDuraciones();
-    let rubros = await getRubros();
+    let publicaciones = await getPublicacionCodAcep(id_usuario);
     let contenido_pub = document.querySelector('#contenido-de-publicacion');
     if(publicaciones.length == 0){
         cargar_lista_vacia();
         contenido_pub.innerHTML = `<code class="">No tienes Publicaciones</code>`;
+        Swal.fire({
+            title: "No tienes publicaciones en proceso",
+            icon: "info",
+            text: "Puedes esperar a que personas postulen a tu publicación o puedes crear una publicación nueva"
+        });
     }else{
         contenido_pub.innerHTML = `<code class="">Seleccione una publicación</code>`;
         cargar_lista_pub(publicaciones);

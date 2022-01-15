@@ -31,32 +31,42 @@ document.getElementById("Btn_Zona").addEventListener("click", async function() {
     zona.fecha_edicion = cargarFechaActual();
 
     //suitalert
-
-    let resp = await Swal.fire({title:"¿Estas seguro de Crear una nueva Zona?", text:"Esta operacion se vera reflejada al aceptar", icon:"info", showCancelButton:true});
-    if(resp.isConfirmed){
-        nom_zona = input_zona.value; 
-        let zonas = await getZonaPorNombre(nom_zona);
-        if(zonas.length !=0){
-            await Swal.fire("UPS!, Error", "Zona ya existente", "error");
-
-        }else{
-            if (await crearZona(zona) != false){
-                await Swal.fire("Zona Creada","Zona Creada exitosamente", "info");
-                location.reload();
-
-            }else{
-                await Swal.fire("UPS!, Error", "No se pudo atender la solicitud", "error");
-                location.reload();
-            }
-            
-        }
-        
-    }else{
-        await Swal.fire("Cancelado","Cancelacion de petición", "info");
-        location.reload();
+    error = [];
+    if (input_zona == "") {
+        error.push("Debe ingresar una zona");
     }
 
+    if (error.length != 0) {
+        Swal.fire({
+            title: "Error De Validación",
+            icon: "error",
+            html:error.join("<br />")
+          });
+    } else {
+        let resp = await Swal.fire({title:"¿Estás seguro de Crear una nueva Zona?", text:"Esta operación se vera reflejada al aceptar", icon:"info", showCancelButton:true});
+        if(resp.isConfirmed){
+            nom_zona = input_zona.value; 
+            let zonas = await getZonaPorNombre(nom_zona);
+            if(zonas.length !=0){
+                await Swal.fire("UPS!, Error", "Zona ya existente", "error");
 
+            }else{
+                if (await crearZona(zona) != false){
+                    await Swal.fire("Zona Creada","Zona Creada exitosamente", "info");
+                    location.reload();
+
+                }else{
+                    await Swal.fire("UPS!, Error", "No se pudo atender la solicitud", "error");
+                    location.reload();
+                }
+                
+            }
+            
+        }else{
+            await Swal.fire("Cancelado","Cancelacion de petición", "info");
+            location.reload();
+        }
+    }
 
   });
 
@@ -68,32 +78,46 @@ document.getElementById("Btn_Rubro").addEventListener("click", async function() 
     rubro.cod_admin = input_admin;
     rubro.fecha_edicion = cargarFechaActual();
 
+    error = [];
+    if (input_rubro == "") {
+        error.push("Debe ingresar una zona");
+    }
     //suitalert
 
-    let resp = await Swal.fire({title:"¿Estas seguro de Crear un nuevo Rubro?", text:"Esta operacion se vera reflejada al aceptar", icon:"info", showCancelButton:true});
-    if(resp.isConfirmed){
-        nom_rubro = input_rubro.value; 
-        let rubros = await getRubroPorNombre(nom_rubro);
-        if(rubros.length !=0){
-            await Swal.fire("UPS!, Error", "Rubro ya existente", "error");
-            
-        }else{
-            if (await crearRubro(rubro) != false){
-                await Swal.fire("Rubro Creado","Rubro Creado Exitosamente", "info");
-                location.reload();
-
-
+    if (error.length != 0) {
+        Swal.fire({
+            title: "Error De Validación",
+            icon: "error",
+            html:error.join("<br />")
+          });
+    } else {
+        let resp = await Swal.fire({title:"¿Estas seguro de Crear un nuevo Rubro?", text:"Esta operacion se vera reflejada al aceptar", icon:"info", showCancelButton:true});
+        if(resp.isConfirmed){
+            nom_rubro = input_rubro.value; 
+            let rubros = await getRubroPorNombre(nom_rubro);
+            if(rubros.length !=0){
+                await Swal.fire("UPS!, Error", "Rubro ya existente", "error");
+                
             }else{
-                await Swal.fire("UPS!, Error", "No se pudo atender la solicitud", "error");
-                location.reload();
+                if (await crearRubro(rubro) != false){
+                    await Swal.fire("Rubro Creado","Rubro Creado Exitosamente", "info");
+                    location.reload();
+
+
+                }else{
+                    await Swal.fire("UPS!, Error", "No se pudo atender la solicitud", "error");
+                    location.reload();
+                }
+                
             }
             
+        }else{
+            await Swal.fire("Cancelado","Cancelacion de petición", "info");
+            location.reload();
         }
-        
-    }else{
-        await Swal.fire("Cancelado","Cancelacion de petición", "info");
-        location.reload();
     }
+
+    
 });
 
 document.getElementById("Btn_Duracion").addEventListener("click", async function() {
@@ -104,30 +128,43 @@ document.getElementById("Btn_Duracion").addEventListener("click", async function
     duracion.cod_admin = input_admin;
     duracion.fecha_edicion = cargarFechaActual();
 
+    error = [];
+    if (input_duracion == "") {
+        error.push("Debe ingresar una zona");
+    }
     //suitalert
-
-    let resp = await Swal.fire({title:"¿Estas seguro de Crear una nueva Duracion?", text:"Esta operacion se vera reflejada al aceptar", icon:"info", showCancelButton:true});
-    if(resp.isConfirmed){
-        titulo_duracion = input_duracion.value; 
-        let duraciones = await getDuracionPorNombre(titulo_duracion);
-        if(duraciones.length !=0){
-            await Swal.fire("UPS!, Error", "Duracion ya existente", "error");
-            
-        }else{
-            if (await crearDuracion(duracion) != false){
-                await Swal.fire("Duración Creada","Duración Creada Exitosamente", "info");
-                location.reload();
-
-
+    if (error.length) {
+        Swal.fire({
+            title: "Error De Validación",
+            icon: "error",
+            html:error.join("<br />")
+          });
+    } else {
+        let resp = await Swal.fire({title:"¿Estas seguro de Crear una nueva Duracion?", text:"Esta operacion se vera reflejada al aceptar", icon:"info", showCancelButton:true});
+        if(resp.isConfirmed){
+            titulo_duracion = input_duracion.value; 
+            let duraciones = await getDuracionPorNombre(titulo_duracion);
+            if(duraciones.length !=0){
+                await Swal.fire("UPS!, Error", "Duracion ya existente", "error");
+                
             }else{
-                await Swal.fire("UPS!, Error", "No se pudo atender la solicitud", "error");
-                location.reload();
+                if (await crearDuracion(duracion) != false){
+                    await Swal.fire("Duración Creada","Duración Creada Exitosamente", "info");
+                    location.reload();
+
+
+                }else{
+                    await Swal.fire("UPS!, Error", "No se pudo atender la solicitud", "error");
+                    location.reload();
+                }
+                
             }
             
+        }else{
+            await Swal.fire("Cancelado","Cancelación de petición", "info");
+            location.reload();
         }
-        
-    }else{
-        await Swal.fire("Cancelado","Cancelación de petición", "info");
-        location.reload();
     }
+
+    
 });

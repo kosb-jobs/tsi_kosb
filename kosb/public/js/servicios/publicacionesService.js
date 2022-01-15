@@ -3,6 +3,11 @@ const getPublicaciones = async()=>{
     resp = await axios.get("api/publicaciones/get");
     return resp.data;
 };
+const getPublicacionesNull = async()=>{
+    let resp;
+    resp = await axios.get("api/publicaciones/get/null");
+    return resp.data;
+};
 
 const getPublicacionesUsuario = async (filtro)=>{
     let resp;
@@ -22,6 +27,14 @@ const getPublicacionCodigo = async (filtro)=>{
     resp = await axios.get(`api/publicaciones/get/id?filtro=${filtro}`);
     return resp.data;
 };
+
+const getPublicacionCodAcep = async (filtro)=>{
+    let resp;
+
+    resp = await axios.get(`api/publicaciones/get/estado?filtro=${filtro}`);
+    return resp.data;
+};
+
 
 const getPublicacionSearch = async (filtro)=>{
     let resp;

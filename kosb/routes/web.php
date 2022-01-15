@@ -26,7 +26,12 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::get('/perfil', function () {
-    return view('perfil');
+    if(Auth::user()->estado != 1){
+        return view('perfil');
+    }else{
+        return invalidEstado();
+    }
+    
 })->name('perfil');
 
 Route::get('/crear_publicacion', function () {
@@ -73,3 +78,13 @@ Route::get('/postulaciones_pub', function () {
 require __DIR__.'/auth.php';
 
 
+
+function invalidEstado(){
+    if(Auth::user()->estado == 1){
+
+        return view('banned');
+    }else{
+
+        return redirect()->route('welcome');
+    }
+}

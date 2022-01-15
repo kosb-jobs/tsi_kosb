@@ -193,14 +193,14 @@ const cargarTablaReclamosAccioneless = async function(){
             td_tipo.textContent = "No Definido";
         }   
 
-        let string = String(u.contenido_respuesta);
-        let string2 = String(u.descripcion_reclamo);
+        let string = String(u.descripcion_reclamo);
+        let string2 = String(u.contenido_respuesta);
         
         let td_descripcion = document.createElement('td');
-        td_descripcion.textContent = string2.substring(3,string.length-4);
+        td_descripcion.textContent = string.substring(3,string.length-4);
 
         let td_respuesta = document.createElement('td');
-        td_respuesta.textContent =string.substring(3,string.length-4);               
+        td_respuesta.textContent =u.contenido_respuesta==null?"Sin Respuesta":u.contenido_respuesta;               
         
         
         tr.appendChild(td_id);
