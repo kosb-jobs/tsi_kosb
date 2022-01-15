@@ -65,9 +65,9 @@ Route::get('/buscar_trabajo', function () {
 Route::get('/crear_perfil', function () {
     if(Auth::user() == false){
         return view('crear_perfil');
-    }else if(Auth::user()->estado != 1){
-        return view('crear_perfil');
-    }else{
+    }else if(Auth::user()->estado == 0){
+        return view('perfil');
+    }else if(Auth::user()->estado == 1){
         return invalidEstado();
     }
 })->name('crear_perfil');
@@ -147,8 +147,12 @@ Route::get('/postulaciones_pub', function () {
 Route::get('/reclamos_suspendido', function () {
     if(Auth::user() == false){
         return view('crear_perfil');
+    }else if(Auth::user()->estado == 1){
+        return view('reclamos_susp');
+    }else{
+        return view('perfil');
     }
-    return view('reclamos_susp');
+    
 })->name('reclamos_suspendido');
 
 require __DIR__.'/auth.php';

@@ -82,6 +82,11 @@ a.disable-links {
 .badge:empty {
   display: none;
 }
+.absolute-footer{
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
 
 .btn .badge {
   position: relative;

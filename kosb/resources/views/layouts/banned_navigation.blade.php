@@ -141,7 +141,7 @@
 
     <!-- Footer -->
 
-    <footer id="footer-banned">
+    <footer id="footer-banned" class="absolute-footer">
         <div class="footer background-dark bottom-0">
             <div class="container-fluid">
                 <div class="row">
@@ -205,7 +205,6 @@
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{asset('js/breadcrum.js')}}"></script>
     @yield("javascript")
 
     </body>
