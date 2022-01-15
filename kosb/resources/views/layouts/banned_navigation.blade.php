@@ -80,6 +80,9 @@
                         <li class="nav-item">
                             <a class="nav-link active text-light" aria-current="page" href="{{route('welcome')}}">Home</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link active text-light" aria-current="page" href="{{route('reclamos_suspendido')}}">Reclamos</a>
+                        </li>
                     </ul>
                 </ul>
 
@@ -125,19 +128,6 @@
               </div>
             </div>
             
-          </nav>
-          <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a  href="{{route('welcome')}}">Home</a></li>              
-              <li class="breadcrumb-item active" aria-current="page" id="bc_id_active"></li>
-              <li class="breadcrumb-item active" aria-current="page" id="bc_perfil"></li>
-              
-            </ol>
-          </nav>
-
-
-
-
     </header>
 
 
