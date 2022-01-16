@@ -7,8 +7,6 @@ let nueva_url = URLactual.slice(13);
 
  
 
-console.log('Soy el log');
-console.log(nueva_url);
 selector.textContent= nueva_url;
 
 if (nueva_url=="crear_perfil"){
