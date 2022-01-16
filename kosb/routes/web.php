@@ -18,7 +18,13 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 Route::get('/home_admin', function () {
-    return view('home');
+    if(Auth::user() == false){
+        return view('crear_perfil');
+    }else if(Auth::user()->estado != 1){
+        return view('home');
+    }else{
+        return invalidEstado();
+    }
 })->name('home');
 
 Route::get('/dashboard', function () {
@@ -26,7 +32,9 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::get('/perfil', function () {
-    if(Auth::user()->estado != 1){
+    if(Auth::user() == false){
+        return view('crear_perfil');
+    }else if(Auth::user()->estado != 1){
         return view('perfil');
     }else{
         return invalidEstado();
@@ -35,45 +43,117 @@ Route::get('/perfil', function () {
 })->name('perfil');
 
 Route::get('/crear_publicacion', function () {
-    return view('crear_publicacion');
+    if(Auth::user() == false){
+        return view('crear_perfil');
+    }else if(Auth::user()->estado != 1){
+        return view('crear_publicacion');
+    }else{
+        return invalidEstado();
+    }
 })->name('crear_publicacion');
 
 Route::get('/buscar_trabajo', function () {
-    return view('buscar_trabajo');
+    if(Auth::user() == false){
+        return view('buscar_trabajo');
+    }else if(Auth::user()->estado != 1){
+        return view('buscar_trabajo');
+    }else{
+        return invalidEstado();
+    }
 })->name('buscar_trabajo');
 
 Route::get('/crear_perfil', function () {
-    return view('crear_perfil');
+    if(Auth::user() == false){
+        return view('crear_perfil');
+    }else if(Auth::user()->estado == 0){
+        return view('perfil');
+    }else if(Auth::user()->estado == 1){
+        return invalidEstado();
+    }
 })->name('crear_perfil');
 
 Route::get('/admin_home', function () {
-    return view('admin_home');
+    if(Auth::user() == false){
+        return view('crear_perfil');
+    }else if(Auth::user()->estado != 1){
+        return view('admin_home');
+    }else{
+        return invalidEstado();
+    }
 })->name('admin_home');
 
 Route::get('/tabla_usuario_admin', function () {
-    return view('tabla_usuario_admin');
+    if(Auth::user() == false){
+        return view('crear_perfil');
+    }else if(Auth::user()->estado != 1){
+        return view('tabla_usuario_admin');
+    }else{
+        return invalidEstado();
+    }
 })->name('tabla_usuario_admin');
 
 Route::get('/reclamos', function () {
-    return view('reclamos');
+    if(Auth::user() == false){
+        return view('crear_perfil');
+    }else if(Auth::user()->estado != 1){
+        return view('reclamos');
+    }else{
+        return invalidEstado();
+    }
 })->name('reclamos');
 
 Route::get('/zonas', function () {
-    return view('zonas');
+    if(Auth::user() == false){
+        return view('crear_perfil');
+    }else if(Auth::user()->estado != 1){
+        return view('zonas');
+    }else{
+        return invalidEstado();
+    }
+    
 })->name('zonas');
 
 Route::get('/crear_admin', function () {
-    return view('crear_admin');
+    if(Auth::user() == false){
+        return view('crear_perfil');
+    }else if(Auth::user()->estado != 1){
+        return view('crear_admin');
+    }else{
+        return invalidEstado();
+    }
 })->name('crear_admin');
 
 Route::get('/admin_reclamos', function () {
-    return view('admin_reclamos');
+    if(Auth::user() == false){
+        return view('crear_perfil');
+    }else if(Auth::user()->estado != 1){
+        return view('admin_reclamos');
+    }else{
+        return invalidEstado();
+    }
 })->name('admin_reclamos');
 
 
 Route::get('/postulaciones_pub', function () {
-    return view('postulaciones_a_mis_publicaciones');
+    if(Auth::user() == false){
+        return view('crear_perfil');
+    }else if(Auth::user()->estado != 1){
+        return view('postulaciones_a_mis_publicaciones');
+    }else{
+        return invalidEstado();
+    }
 })->name('postulaciones_pub');
+
+Route::get('/reclamos_suspendido', function () {
+    if(Auth::user() == false){
+        return view('crear_perfil');
+    }else if(Auth::user()->estado == 1){
+        return view('reclamos_susp');
+    }else{
+        return view('perfil');
+    }
+    
+})->name('reclamos_suspendido');
 
 require __DIR__.'/auth.php';
 
