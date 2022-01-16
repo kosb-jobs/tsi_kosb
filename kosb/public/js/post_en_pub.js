@@ -60,26 +60,28 @@ const evaluarTrabajador = async function(){
 
     console.log(trabajadores);
     console.log(cantidad);
+    let tabla = document.querySelector("#tabla_trabajadores");
+    tabla.classList.remove("d-none");
+    contenido_pub.classList.add("d-none");
+//     let html = `   
+//     <div class="tabla_trabajadores" id="tabla_trabajadores">
+//        <table class="tabla_puntuacion" id="tabla_puntuacion">
+//            <thead>
+//                <tr>
+//                    <td>ID</td>
+//                    <td>Nombre</td>
+//                    <td>Correo</td>
+//                    <td>Puntuaciones</td>
+//                    <td>Acciones</td>                   
+//                </tr>
+//            </thead>
+//            <tbody> 
 
-    let html = `   
-    <div class="tabla_trabajadores" id="tabla_trabajadores">
-       <table class="tabla_puntuacion" id="tabla_puntuacion">
-           <thead>
-               <tr>
-                   <td>ID</td>
-                   <td>Nombre</td>
-                   <td>Correo</td>
-                   <td>Puntuaciones</td>
-                   <td>Acciones</td>                   
-               </tr>
-           </thead>
-           <tbody> 
-
-           </tbody>
-       </table>
-   </div>
-    ` 
-    contenido_pub.innerHTML=html;
+//            </tbody>
+//        </table>
+//    </div>
+//     ` 
+    // contenido_pub.innerHTML=html;
     let tbody = document.querySelector("#tabla_puntuacion");
 
     trabajadores.forEach(async u => {
@@ -128,43 +130,12 @@ const evaluarTrabajador = async function(){
 
 const BtnPuntuarUsuario = async function(){
     let contenido_pub = document.querySelector('#contenido-de-publicacion');    
-    let cod_usuario=this.cod_usuario 
-    let cod_publicacion = this.cod_publicacion 
-    let cod_puntuacion = this.cod_puntuacion 
-
-    let html = `
-    <div class="puntuar_container">
-        <div class="container_star">
-            <div class="star-widget" id="star-widget">
-
-                <input type="radio" name="rate" id="rate-5">
-                <label for="rate-5" class="fas fa-star"></label>
-
-                <input type="radio" name="rate" id="rate-4">
-                <label for="rate-4" class="fas fa-star"></label>
-
-                <input type="radio" name="rate" id="rate-3">
-                <label for="rate-3" class="fas fa-star"></label>
-
-                <input type="radio" name="rate" id="rate-2">
-                <label for="rate-2" class="fas fa-star"></label>
-
-                <input type="radio" name="rate" id="rate-1">
-                <label for="rate-1" class="fas fa-star"></label>
-
-            </div>
-        </div>
-    
-        <div class="texto_puntuacion">
-            <h3>Ingrese Descripcion</h3>
-            <textarea  id="descripcion-txt" class=""></textarea>
-        </div>
-
-        <a class="btn" id="btn_crear_puntuacion">Puntuar</a>
-    </div>
-    `
-    contenido_pub.innerHTML=html;
-    
+    let cod_usuario=this.cod_usuario;
+    let cod_publicacion = this.cod_publicacion;
+    let cod_puntuacion = this.cod_puntuacion;
+    let tabla = document.querySelector("#tabla_trabajadores");
+    tabla.classList.add("d-none");
+    document.querySelector("#puntuar_container").classList.remove("d-none");
 
 
     /* ola */

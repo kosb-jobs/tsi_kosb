@@ -1830,10 +1830,11 @@ table{
 	
 	/* IMPORTANTE */
 	text-align: center;
+
 	place-items: center;
+    padding-top: 5px;
     padding-right: 80px;
-    border: 1px solid #8f8f8f;
-    height: 100px;
+    height: 40px;
     width: 500px;
     margin-left: 200px;
     
@@ -1939,7 +1940,7 @@ table td{ /* el th es el tamannio de del body */
 
 .texto_puntuacion{
     padding: 50px;
-    margin-left: 200px;
+    /* margin-left: 200px; */
 }
 
 
