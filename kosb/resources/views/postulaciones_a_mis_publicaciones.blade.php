@@ -4,6 +4,8 @@
     
 <!-- Registrar Menu  -->
 <input type="text" class="form-control d-none" id="id_usuario" name="{{Auth::user()->id}}" value="{{Auth::user()->sexo}}">
+<input type="text" class="form-control d-none" id="prueba_input" >
+
 {{--background: #f2efea;--}}
 <div class="mb-5 mt-3">
   <div class="row g-0 p-3" style="height: 500px">

@@ -162,25 +162,7 @@ const cargarFechaActual = ()=>{
   return today;
 }
 
-const cargarFechaMin = ()=>{
-  var today = new Date();
-  var dd = today.getDate();
-  var mm = today.getMonth() + 1; //January is 0!
-  var yyyy = today.getFullYear();
-  
-  if (dd < 10) {
-     dd = '0' + dd;
-  }
-  
-  if (mm < 10) {
-     mm = '0' + mm;
-  } 
-      
-  today = yyyy + '-' + mm + '-' + dd;
-  document.getElementById("fecha-trabajo").setAttribute("min", today);
-  document.getElementById("fecha-fin-trabajo").setAttribute("min", today);
-  
-}
+
 
 // ID BTN Y ELEMENTOS
 
@@ -456,12 +438,13 @@ document.addEventListener("DOMContentLoaded",async()=>{
   let duraciones = await getDuraciones();
   
   publicaciones = cambio_de_variables(publicaciones,zonas,rubros,duraciones);
+
   if (publicaciones.length == 0) {
     cargarContenedorSinPub();
   } else {
     cargarContenedor(publicaciones);
   }
-  cargarFechaMin();
+  
 });
 
 
