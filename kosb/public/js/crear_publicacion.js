@@ -80,6 +80,7 @@ const cargarFechaMin = ()=>{
   today = yyyy + '-' + mm + '-' + dd;
   document.getElementById("fecha-trabajo").setAttribute("min", today);
   document.getElementById("fecha-fin-trabajo").setAttribute("min", today);
+}
   
 const reajusteDeFecha = (fecha)=>{
   let date = new Date(fecha);
@@ -246,4 +247,6 @@ document.addEventListener("DOMContentLoaded",async()=>{
   cargarSelectRubros(rubros,"#select-tipo-trabajo");
   cargarSelectDurac(duraciones,"#duracion-select");
 });
+
+
 
