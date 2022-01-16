@@ -493,11 +493,16 @@ document.addEventListener("DOMContentLoaded",async()=>{
   let duraciones = await getDuraciones();
   
   publicaciones = cambio_de_variables(publicaciones,zonas,rubros,duraciones);
+
   if (publicaciones.length == 0) {
     cargarContenedorSinPub();
   } else {
     cargarContenedor(publicaciones);
   }
+<<<<<<< HEAD
+  
+=======
+>>>>>>> origin/master
 });
 
 

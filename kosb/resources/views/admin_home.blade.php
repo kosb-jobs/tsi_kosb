@@ -13,6 +13,8 @@
     <link rel="stylesheet" type="text/css" href="{{asset('css/admin_home.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/app.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/components_style.css')}}">
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
     
 
      <!-- Pagina de estilos css -->

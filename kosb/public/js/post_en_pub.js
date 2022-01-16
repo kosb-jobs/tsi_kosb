@@ -1,3 +1,5 @@
+
+
 const cargar_publicacion = async function(){
     let id_pub = this.idPub
     let pub = await getPublicacionCodigo(id_pub);
@@ -41,6 +43,7 @@ const cargar_publicacion = async function(){
 </div>
 `;
     contenido_pub.innerHTML = elemento;
+
     let btn_evaluar=document.querySelector("#evaluar_trabajador");
     btn_evaluar.addEventListener("click",evaluarTrabajador);
     btn_evaluar.id_pub=id_pub;
@@ -49,109 +52,156 @@ const cargar_publicacion = async function(){
     
 }
 
-const evaluarTrabajador = async function(){    
+const evaluarTrabajador = async function(){  
+    let contenido_pub = document.querySelector('#contenido-de-publicacion');
     let id_pub = this.id_pub;
     let trabajadores = await getPostulAceptadasPorPublicacion(id_pub);
-    let cantidad = this.largo;
+    let cantidad = this.largo;   
+
     console.log(trabajadores);
     console.log(cantidad);
+
+    let html = `   
+    <div class="tabla_trabajadores" id="tabla_trabajadores">
+       <table class="tabla_puntuacion" id="tabla_puntuacion">
+           <thead>
+               <tr>
+                   <td>ID</td>
+                   <td>Nombre</td>
+                   <td>Correo</td>
+                   <td>Puntuaciones</td>
+                   <td>Acciones</td>                   
+               </tr>
+           </thead>
+           <tbody> 
+
+           </tbody>
+       </table>
+   </div>
+    ` 
+    contenido_pub.innerHTML=html;
+    let tbody = document.querySelector("#tabla_puntuacion");
+
+    trabajadores.forEach(async u => {
+        let usuario = u.cod_usuario;
+        let datos = await getDatosCompletosPorUser(usuario); 
+        let tr = document.createElement('tr');
+        let td_usuario = document.createElement('td');
+        td_usuario.textContent = u.id;
+        let td_nombre = document.createElement('td');
+        td_nombre.textContent = u.cod_usuario;        
+        let td_correo = document.createElement('td');
+        td_correo.textContent = datos.email; 
+        let td_puntuacion= document.createElement('td');
+        td_puntuacion.textContent = datos.puntuacion_trabajador;  
+           
+                    
+
+        /* td_correo = datos.email; */        
+        
+        let td_acciones = document.createElement('td');
+        let span = document.createElement('span');
+        span.classList.add("btn_editar_datos"); 
+        let btn_evaluar = document.createElement('a');
+        btn_evaluar.classList.add("btn");
+        
+        btn_evaluar.setAttribute('href',"#");
+        btn_evaluar.textContent = 'Puntuar';
+        btn_evaluar.addEventListener("click",BtnPuntuarUsuario);
+        btn_evaluar.cod_usuario = usuario.cod_usuario;
+        btn_evaluar.cod_publicacion = u.cod_publicacion;
+        btn_evaluar.cod_puntuacion = u.id;
+        span.appendChild(btn_evaluar);              
+        
+        td_acciones.appendChild(span);
+        tr.appendChild(td_usuario);
+        tr.appendChild(td_nombre);               
+        tr.appendChild(td_correo); 
+        tr.appendChild(td_puntuacion);       
+        tr.appendChild(td_acciones);        
+        tbody.appendChild(tr);
+  
+    });
+
+
+}
+
+const BtnPuntuarUsuario = async function(){
+    let contenido_pub = document.querySelector('#contenido-de-publicacion');    
+    let cod_usuario=this.cod_usuario 
+    let cod_publicacion = this.cod_publicacion 
+    let cod_puntuacion = this.cod_puntuacion 
+
+    let html = `
+    <div class="puntuar_container">
+        <div class="container_star">
+            <div class="star-widget" id="star-widget">
+
+                <input type="radio" name="rate" id="rate-5">
+                <label for="rate-5" class="fas fa-star"></label>
+
+                <input type="radio" name="rate" id="rate-4">
+                <label for="rate-4" class="fas fa-star"></label>
+
+                <input type="radio" name="rate" id="rate-3">
+                <label for="rate-3" class="fas fa-star"></label>
+
+                <input type="radio" name="rate" id="rate-2">
+                <label for="rate-2" class="fas fa-star"></label>
+
+                <input type="radio" name="rate" id="rate-1">
+                <label for="rate-1" class="fas fa-star"></label>
+
+            </div>
+        </div>
     
-    for (let i=0; i < cantidad; i++){
-        console.log(trabajadores[i]);
-        let usuario = trabajadores[i].cod_usuario;
-        let datos = await getDatosCompletosPorUser(usuario);
-        await Swal.fire({
-            title: `Evaluando Trabajador`,
-            html: ` 
-            <table>
-                <tr>
-                    <td><a style="font-size: 1.5em; padding-right: 2px ;"><b><ion-icon name="person-circle-outline"></ion-icon></b></a></td>
-                </tr>
-                <tr>
-                    <td id="alertas"><a><b>Nombre: </b>${datos.name} ${datos.apellido}</a></td>
-                </tr>
-                
-                <tr>
-                    <td><a style="font-size: 1.5em; padding-right: 2px ;"><b><ion-icon name="mail-outline"></ion-icon></b></a></td>
-                </tr>
-                <tr>
-                    <td><a><b>Email: </b>${datos.email} </a></td>
-                </tr>
-        
-                <tr>
-                    <td><a style="font-size: 1.5em; padding-right: 2px ;"><ion-icon name="star-half-outline"></ion-icon></b></a></td>
-                </tr>
-                <tr>
-                    <td><a><b>Puntuación Total Ofertante: </b> ${datos.puntuacion_trabajador}</a></td>
-                </tr>    
+        <div class="texto_puntuacion">
+            <h3>Ingrese Descripcion</h3>
+            <textarea  id="descripcion-txt" class=""></textarea>
+        </div>
 
-                <tr>
-                    <td>
-                    <div class="container_star" >
-                        <div class="star-widget" id="star-widget">
-
-                            <input type="radio" name="rate" id="rate-5">
-                            <label for="rate-5" class="fas fa-star"></label>
-
-                            <input type="radio" name="rate" id="rate-4">
-                            <label for="rate-4" class="fas fa-star"></label>
-
-                            <input type="radio" name="rate" id="rate-3">
-                            <label for="rate-3" class="fas fa-star"></label>
-
-                            <input type="radio" name="rate" id="rate-2">
-                            <label for="rate-2" class="fas fa-star"></label>
-
-                            <input type="radio" name="rate" id="rate-1">
-                            <label for="rate-1" class="fas fa-star"></label>
-
-                        </div>
-                    </div>
-                    </td>
-                </tr>
-            
+        <a class="btn" id="btn_crear_puntuacion">Puntuar</a>
+    </div>
+    `
+    contenido_pub.innerHTML=html;
+    
 
 
-            
-            
-            </table>
-        
-            `,
-            confirmButtonText: "Evaluar",
-            width: 600,
-            
-            padding: '1em',
-            color: '#5089C3',
-            
-            backdrop: `
-            rgba(0,0,123,0.4)                            
-            left top
-            no-repeat
-            `
-        }) .then  
-        let opcion5 = document.querySelector('#rate-5');
-        let opcion4 = document.querySelector('#rate-4');
-        let opcion3 = document.querySelector('#rate-3');
-        let opcion2 = document.querySelector('#rate-2');
-        let opcion1 = document.querySelector('#rate-1');
-        
-        document.querySelector('#star-widget').addEventListener('change',()=>{
-            if (opcion1.checked){
-                console.log('La opcion seleccionada es 1');
-            }else if(opcion2.checked){
-                console.log('La opcion seleccionada es 2');
-            }else if(opcion3.checked){
-                console.log('La opcion seleccionada es 3');
-            }else if(opcion4.checked){
-                console.log('La opcion seleccionada es 4');
-            }
-            else if(opcion5.checked){
-                console.log('La opcion seleccionada es 5');
-            }else{
-                console.log('No se ha seleccionado nada');
-            }
-        })
-    }
+    /* ola */
+
+
+    let opcion5 = document.querySelector('#rate-5');
+    let opcion4 = document.querySelector('#rate-4');
+    let opcion3 = document.querySelector('#rate-3');
+    let opcion2 = document.querySelector('#rate-2');
+    let opcion1 = document.querySelector('#rate-1');
+   
+    
+    document.querySelector('#star-widget').addEventListener('change',()=>{
+        console.log("ENTRA EN QUERY SELECTOR")
+        if (opcion1.checked){
+            console.log('La opcion seleccionada es 1');
+            numero = 1;
+        }else if(opcion2.checked){
+            console.log('La opcion seleccionada es 2');
+            numero = 2;
+        }else if(opcion3.checked){
+            console.log('La opcion seleccionada es 3');
+            numero = 3;
+        }else if(opcion4.checked){
+            console.log('La opcion seleccionada es 4');
+            numero = 4;
+        }
+        else if(opcion5.checked){
+            console.log('La opcion seleccionada es 5');
+            numero = 5;
+        }else{
+            console.log('No se ha seleccionado nada');
+            numero = 0;
+        }  
+
+    })  
+
 }
 
 
@@ -251,4 +301,21 @@ document.addEventListener('DOMContentLoaded',async()=>{
         contenido_pub.innerHTML = `<code class="">Seleccione una publicación</code>`;
         cargar_lista_pub(publicaciones);
     }
+    tinymce.init({
+        selector: '#descripcion-txt',
+        height: 200,
+        menubar: false,
+        language: 'es',
+        plugins: [
+          'advlist autolink lists link image charmap print preview anchor',
+          'searchreplace visualblocks code fullscreen',
+          'insertdatetime media table paste code help wordcount'
+        ],
+        toolbar: 'undo redo | formatselect | ' +
+        'bold italic backcolor | alignleft aligncenter ' +
+        'alignright alignjustify | bullist numlist outdent indent | ' +
+        'removeformat | help',
+        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+      });
+    
 });

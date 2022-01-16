@@ -63,6 +63,24 @@ const cargarFechaActual = ()=>{
   return today;
 }
 
+const cargarFechaMin = ()=>{
+  var today = new Date();
+  var dd = today.getDate();
+  var mm = today.getMonth() + 1; //January is 0!
+  var yyyy = today.getFullYear();
+  
+  if (dd < 10) {
+     dd = '0' + dd;
+  }
+  
+  if (mm < 10) {
+     mm = '0' + mm;
+  } 
+      
+  today = yyyy + '-' + mm + '-' + dd;
+  document.getElementById("fecha-trabajo").setAttribute("min", today);
+  document.getElementById("fecha-fin-trabajo").setAttribute("min", today);
+  
 const reajusteDeFecha = (fecha)=>{
   let date = new Date(fecha);
   let dd = date.getDate();
@@ -217,6 +235,7 @@ document.querySelector("#btn-vista-previa").addEventListener("click", async()=>{
 document.addEventListener("DOMContentLoaded",async()=>{
 
   today = cargarFechaActual();
+  cargarFechaMin();
 
   let fecha = document.querySelector("#fecha-trabajo");
   fecha.value = today;

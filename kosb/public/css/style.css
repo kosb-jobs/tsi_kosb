@@ -1832,6 +1832,10 @@ table{
 	text-align: center;
 	place-items: center;
     padding-right: 80px;
+    border: 1px solid #8f8f8f;
+    height: 100px;
+    width: 500px;
+    margin-left: 200px;
     
 }
 
@@ -1926,8 +1930,17 @@ table td{ /* el th es el tamannio de del body */
 
 }
 
-/* prueba sweet*/
+/* TABLA TRABAJADORES PUNTIACION*/
 
-#alertas{
-    height: 50px;
+.puntuar_container{
+    padding: 30px;
+    place-items: center;
 }
+
+.texto_puntuacion{
+    padding: 50px;
+    margin-left: 200px;
+}
+
+
+
