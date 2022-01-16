@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Models\Postulacion;
 use App\Models\Publicacion;
 use App\Models\Trabajador;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PostulacionesController extends Controller
@@ -60,6 +61,23 @@ class PostulacionesController extends Controller
         $cod = $input["cod_usuario"];
         $postulaciones = Postulacion::where("cod_usuario",$cod)->get();
         return $postulaciones;
+    }
+
+    public function getPostulAceptPorUser(Request $request){
+        $input = $request->all();
+        $cod = $input["cod_usuario"];
+        $postulaciones = Postulacion::where("cod_usuario",$cod)->where("aceptacion",1)->get();
+        return $postulaciones;
+    }
+
+    public function getPostulPorIdConUser(Request $request){
+        $input = $request->all();
+        $id = $input["id"];
+        $postulacion = Postulacion::findOrFail($id);
+        $publicacion = Publicacion::findOrFail($postulacion->cod_publicacion);
+        $usuario = User::findOrFail($publicacion->cod_usuario);
+        $lista = ["postulacion"=>$postulacion,"publicacion"=>$publicacion,"usuario_creador"=>$usuario];
+        return $lista;
     }
 
     public function getPostulAceptPorPub(Request $request){
