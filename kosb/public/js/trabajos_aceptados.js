@@ -6,7 +6,27 @@ const cargar_postulacion = async function(){
     
     
     let descripcion = string.substring(3,string.length-4);
+    let sexo_user = post["usuario_creador"].sexo;
+    if(post["usuario_creador"].sexo == "F"){
+        sexo_user = "Femenino";
+    }else if(post["usuario_creador"].sexo == "M"){
+        sexo_user = "Masculino";
+    }else if(post["usuario_creador"].sexo == null){
+        sexo_user = "No asignado";
+    }else{
+        sexo_user = "Otro";
+    }
 
+    let tipo_oferta;
+    if(post["publicacion"].tipo_oferta == "C"){
+        tipo_oferta = "Corto plazo";
+    }else if(post["usuario_creador"].sexo == "M"){
+        tipo_oferta = "Masculino";
+    }else if(post["usuario_creador"].sexo == null){
+        tipo_oferta = "No asignado";
+    }else{
+        tipo_oferta = "Otro";
+    }
 
     let contenido_pub = document.querySelector('#contenido-de-publicacion');
     //contenido_pub.innerText = pub.id;
@@ -30,16 +50,13 @@ const cargar_postulacion = async function(){
                 <h5 class="card-title mb-4">${post["publicacion"].titulo_publicacion}</h5>
                 <p class="">Fechas: desde ${post["publicacion"].fecha_ini} hasta ${post["publicacion"].fecha_fin}</p>
                 <p >Descripción: ${descripcion}</p>
-                <p>Duración: ${post["publicacion"].cod_duracion}</p>
-                <p class="">Tipo de Oferta: ${post["postulacion"].tipo_oferta}</p>
+                <p class="">Tipo de Oferta: ${post["publicacion"].tipo_oferta}</p>
             </div>
             
             <div class="col-12 col-md col-lg border border-secondary p-3" style="border-radius: 5px">
                 <h5 class="card-title mb-4">Nombre: ${post["usuario_creador"].name} ${post["usuario_creador"].apellido == null? "": post["usuario_creador"].apellido}</h5>
                 <p class="">Correo: ${post["usuario_creador"].email}</p>
-                <p >Descripción: ${descripcion}</p>
-                <p>Duración: ${post["usuario_creador"].cod_duracion}</p>
-                <p class="">Tipo de Oferta: ${post["usuario_creador"].tipo_oferta}</p>
+                <p >Sexo: ${sexo_user}</p>
             </div>
             
         </div>
