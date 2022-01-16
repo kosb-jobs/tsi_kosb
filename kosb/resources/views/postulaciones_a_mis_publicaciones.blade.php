@@ -39,5 +39,6 @@
 <script src="{{asset('js/servicios/zonasService.js')}}"></script>
 <script src="{{asset('js/servicios/rubrosService.js')}}"></script>
 <script src="{{asset('js/servicios/duracionesService.js')}}"></script>
+<script src="{{asset('js/servicios/usuariosService.js')}}"></script>
 <script src="{{asset('js/post_en_pub.js')}}"></script>
 @endsection

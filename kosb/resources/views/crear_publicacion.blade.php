@@ -45,7 +45,7 @@
             <input  type="date" class="form-control" id="fecha-trabajo" min='1899-01-01' max='2022-12-12'>
         </div>
         <div class="mb-3" id="f">
-          <label for="total-pedido" class="form-label">Fecha Fin Del Trabajo</label>
+          <label for="fecha-fin-trabajo" class="form-label">Fecha Fin Del Trabajo</label>
           <input  type="date" class="form-control" id="fecha-fin-trabajo" min='1899-01-01' max='2022-12-12'>
 
         </div>
@@ -57,7 +57,7 @@
 
       <div class="card-footer" id="fondo-btn-agregar">
         <div class="text-center" style="color: white;" >
-          <button type="button" class="btn " style="background: #eec4c4" id="btn-vista-previa"><b>Vea la vista Previa</b></button>
+          <button type="button" class="btn " style="background: #eec4c4" id="btn-vista-previa"><b>Vista Previa</b></button>
         </div>
       </div>
     </div>
@@ -70,7 +70,7 @@
             <h3 class="text-start ms-3"><u id="tit-pub">Título de la publicación</u></h3>
           </div>
           
-          <p class="text-end pe-5" ><u>Rubro de la publicación:</u><i id="tip-emp">tipo de empleo!</i></p>
+          <p class="text-end pe-5" ><u>Rubro de la publicación:</u><i id="tip-emp">Tipo de empleo!</i></p>
           <section class="ps-3 pe-5">
             <p class="h6"><strong>Descripción</strong></p>
             <div class="contenedor ps-2" id="desc-vista" style="border: solid #cecece .1px;border-radius: 2px; max-height: 200px; width: auto;">

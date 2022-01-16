@@ -12,7 +12,7 @@ const cargar_publicacion = async function(){
             <button class="btn">Finalizar la publicación</button>
         </div>
         <div class="col-12 col-md col-lg text-end mb-3">
-            <button class="btn btn-info">Evaluar Trabajador(es)</button>
+            <button class="btn btn-info" id="evaluar_trabajador">Evaluar Trabajador(es)</button>
         </div>
     </div>
 
@@ -41,7 +41,119 @@ const cargar_publicacion = async function(){
 </div>
 `;
     contenido_pub.innerHTML = elemento;
+    let btn_evaluar=document.querySelector("#evaluar_trabajador");
+    btn_evaluar.addEventListener("click",evaluarTrabajador);
+    btn_evaluar.id_pub=id_pub;
+    btn_evaluar.largo = cant_trab;
+    
+    
 }
+
+const evaluarTrabajador = async function(){    
+    let id_pub = this.id_pub;
+    let trabajadores = await getPostulAceptadasPorPublicacion(id_pub);
+    let cantidad = this.largo;
+    console.log(trabajadores);
+    console.log(cantidad);
+    
+    for (let i=0; i < cantidad; i++){
+        console.log(trabajadores[i]);
+        let usuario = trabajadores[i].cod_usuario;
+        let datos = await getDatosCompletosPorUser(usuario);
+        await Swal.fire({
+            title: `Evaluando Trabajador`,
+            html: ` 
+            <table>
+                <tr>
+                    <td><a style="font-size: 1.5em; padding-right: 2px ;"><b><ion-icon name="person-circle-outline"></ion-icon></b></a></td>
+                </tr>
+                <tr>
+                    <td id="alertas"><a><b>Nombre: </b>${datos.name} ${datos.apellido}</a></td>
+                </tr>
+                
+                <tr>
+                    <td><a style="font-size: 1.5em; padding-right: 2px ;"><b><ion-icon name="mail-outline"></ion-icon></b></a></td>
+                </tr>
+                <tr>
+                    <td><a><b>Email: </b>${datos.email} </a></td>
+                </tr>
+        
+                <tr>
+                    <td><a style="font-size: 1.5em; padding-right: 2px ;"><ion-icon name="star-half-outline"></ion-icon></b></a></td>
+                </tr>
+                <tr>
+                    <td><a><b>Puntuación Total Ofertante: </b> ${datos.puntuacion_trabajador}</a></td>
+                </tr>    
+
+                <tr>
+                    <td>
+                    <div class="container_star" >
+                        <div class="star-widget" id="star-widget">
+
+                            <input type="radio" name="rate" id="rate-5">
+                            <label for="rate-5" class="fas fa-star"></label>
+
+                            <input type="radio" name="rate" id="rate-4">
+                            <label for="rate-4" class="fas fa-star"></label>
+
+                            <input type="radio" name="rate" id="rate-3">
+                            <label for="rate-3" class="fas fa-star"></label>
+
+                            <input type="radio" name="rate" id="rate-2">
+                            <label for="rate-2" class="fas fa-star"></label>
+
+                            <input type="radio" name="rate" id="rate-1">
+                            <label for="rate-1" class="fas fa-star"></label>
+
+                        </div>
+                    </div>
+                    </td>
+                </tr>
+            
+
+
+            
+            
+            </table>
+        
+            `,
+            confirmButtonText: "Evaluar",
+            width: 600,
+            
+            padding: '1em',
+            color: '#5089C3',
+            
+            backdrop: `
+            rgba(0,0,123,0.4)                            
+            left top
+            no-repeat
+            `
+        }) .then  
+        let opcion5 = document.querySelector('#rate-5');
+        let opcion4 = document.querySelector('#rate-4');
+        let opcion3 = document.querySelector('#rate-3');
+        let opcion2 = document.querySelector('#rate-2');
+        let opcion1 = document.querySelector('#rate-1');
+        
+        document.querySelector('#star-widget').addEventListener('change',()=>{
+            if (opcion1.checked){
+                console.log('La opcion seleccionada es 1');
+            }else if(opcion2.checked){
+                console.log('La opcion seleccionada es 2');
+            }else if(opcion3.checked){
+                console.log('La opcion seleccionada es 3');
+            }else if(opcion4.checked){
+                console.log('La opcion seleccionada es 4');
+            }
+            else if(opcion5.checked){
+                console.log('La opcion seleccionada es 5');
+            }else{
+                console.log('No se ha seleccionado nada');
+            }
+        })
+    }
+}
+
 
 const reajusteDeContenidoPubs = async (publicaciones)=>{
     //INTENTA CAMBIAR EL CONTENIDO DE ALGUNOS ATRIBUTOS DE PUBLICACION
@@ -118,6 +230,9 @@ const cargar_lista_vacia = ()=>{
 `;
     lista_group.innerHTML = elemento;
 }
+
+//Boton Evaluar Usuario
+
 
 
 document.addEventListener('DOMContentLoaded',async()=>{
