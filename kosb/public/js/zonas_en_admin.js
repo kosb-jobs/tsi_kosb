@@ -21,6 +21,25 @@ const cargarFechaActual = ()=>{
     return today;
 }
 
+const reajusteDeFecha = (fecha)=>{
+    let date = new Date(fecha);
+    let dd = date.getDate();
+    let mm = date.getMonth() + 1; //January is 0!
+    let yyyy = date.getFullYear();
+  
+    if (dd < 10) {
+      dd = '0' + dd;
+    }
+  
+    if (mm < 10) {
+      mm = '0' + mm;
+    }
+  
+    date = dd + '-' + mm + '-' + yyyy ;
+    return date;
+  }
+  
+
 //Fin Cargar Fecha Actual//
 
 
@@ -135,7 +154,7 @@ zonas.forEach(z => {
     let td_cod_admin=document.createElement('td');
     td_cod_admin.textContent  = z.cod_admin;
     let td_fecha=document.createElement('td');
-    td_fecha.textContent  = z.fecha_edicion;
+    td_fecha.textContent  = reajusteDeFecha(z.fecha_edicion);
     //Botones
     let td_acciones = document.createElement('td');
     td_acciones.setAttribute('id',"atributo");
@@ -273,7 +292,7 @@ rubro.forEach(r => {
     let td_cod_admin=document.createElement('td');
     td_cod_admin.textContent  = r.cod_admin;
     let td_fecha=document.createElement('td');
-    td_fecha.textContent  = r.fecha_edicion;
+    td_fecha.textContent  = reajusteDeFecha(r.fecha_edicion);
     //Botones
     let td_acciones = document.createElement('td');
     td_acciones.setAttribute('class',"atributo");
@@ -408,7 +427,7 @@ duracion.forEach(d => {
     let td_cod_admin=document.createElement('td');
     td_cod_admin.textContent  = d.cod_admin;
     let td_fecha=document.createElement('td');
-    td_fecha.textContent  = d.fecha_edicion;
+    td_fecha.textContent  = reajusteDeFecha(d.fecha_edicion);
     //Botones
     let td_acciones = document.createElement('td');
     let span = document.createElement('span');

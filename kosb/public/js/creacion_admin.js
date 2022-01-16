@@ -32,10 +32,11 @@ document.getElementById("Btn_Zona").addEventListener("click", async function() {
 
     //suitalert
     error = [];
-    if (input_zona == "") {
+    if (input_zona.value == "") {
         error.push("Debe ingresar una zona");
     }
 
+    console.log(error);
     if (error.length != 0) {
         Swal.fire({
             title: "Error De Validación",
@@ -79,8 +80,8 @@ document.getElementById("Btn_Rubro").addEventListener("click", async function() 
     rubro.fecha_edicion = cargarFechaActual();
 
     error = [];
-    if (input_rubro == "") {
-        error.push("Debe ingresar una zona");
+    if (input_rubro.value == "") {
+        error.push("Debe ingresar un rubro");
     }
     //suitalert
 
@@ -129,8 +130,8 @@ document.getElementById("Btn_Duracion").addEventListener("click", async function
     duracion.fecha_edicion = cargarFechaActual();
 
     error = [];
-    if (input_duracion == "") {
-        error.push("Debe ingresar una zona");
+    if (input_duracion.value == "") {
+        error.push("Debe ingresar una duración");
     }
     //suitalert
     if (error.length) {

@@ -25,22 +25,26 @@ const BtnEliminarAdmin = async function(){
     let id_usuario = this.idUser;
     let id_admin = this.idAdmin;
     let input_admin = document.querySelector("#cod_admin_log").name;    
-    
-    let resp = await Swal.fire({title:"¿Estás seguro de eliminar?", html:`<div class="row">El usuario a borrar tiene código administrador ${id_admin}, y código de usuario ${id_usuario} .</div> <div class="row">Recuerde que esta operación es irreversible</row>`, icon:"question", showCancelButton:true});
-    if(resp.isConfirmed){
-        if (await eliminarAdministrador(id_admin) != false){
+    if (input_admin == id_admin){
+        Swal.fire("Error","Un administrador no puede eliminar su propia cuenta", "error");
+    }else{
+        let resp = await Swal.fire({title:"¿Estás seguro de eliminar?", html:`<div class="row">El usuario a borrar tiene código administrador ${id_admin}, y código de usuario ${id_usuario} .</div> <div class="row">Recuerde que esta operación es irreversible</row>`, icon:"question", showCancelButton:true});
+        if(resp.isConfirmed){
+            if (await eliminarAdministrador(id_admin) != false){
 
-            Swal.fire("Administrador Revocado","Se han eliminado permisos de adminsitrador", "info");
-            if (input_admin == id_admin) {
-                window.location.href = "/kosb/public/perfil";
-            } else {
+                Swal.fire("Administrador Revocado","Se han eliminado permisos de adminsitrador", "info");
+                if (input_admin == id_admin) {
+                    window.location.href = "/kosb/public/perfil";
+                } else {
+                    location.reload();
+                }
+            }else{
+                Swal.fire("UPS!, Error", "No se pudo atender la solicitud", "error");
                 location.reload();
             }
-        }else{
-            Swal.fire("UPS!, Error", "No se pudo atender la solicitud", "error");
-            location.reload();
         }
     }
+    
 }
 
 //POBLAR TABLA CON ADMINISTRADORES
@@ -268,6 +272,12 @@ const cargarTabla = async function(){
             btn_suspender.idUser = u.id;
             btn_suspender.nameUser = u.name;
             btn_suspender.addEventListener('click',suspenderUsuarioBTN);
+            for(let j= 0;j < admins.length ; j++){
+                if(u.id == admins[j].cod_usuario){
+                    btn_suspender.classList.add('disable-links');
+                    console.log(u.name);
+                }
+            }
             span.appendChild(btn_suspender);
 
         }if (u.estado == 1){
@@ -309,6 +319,12 @@ const cargarTabla = async function(){
             btn_admin.idUser = u.id;
             btn_admin.correoUser = u.email;
             btn_admin.nameUser = u.name;
+            for(let j= 0;j < admins.length ; j++){
+                if(u.id == admins[j].cod_usuario){
+                    btn_admin.classList.add('disable-links');
+                    console.log(u.name);
+                }
+            }
             btn_admin.addEventListener('click',adminUsuarioBTN);
         
 

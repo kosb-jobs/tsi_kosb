@@ -54,7 +54,7 @@ Route::get('/crear_publicacion', function () {
 
 Route::get('/buscar_trabajo', function () {
     if(Auth::user() == false){
-        return redirect()->route('buscar_trabajo');
+        return view('buscar_trabajo');
     }else if(Auth::user()->estado != 1){
         return view('buscar_trabajo');
     }else{
