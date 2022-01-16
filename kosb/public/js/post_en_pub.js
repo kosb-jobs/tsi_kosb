@@ -319,7 +319,8 @@ document.addEventListener('DOMContentLoaded',async()=>{
     }
     tinymce.init({
         selector: '#descripcion-txt',
-        height: 150,
+        height: "150",
+        width : "640",
         menubar: false,
         language: 'es',
         plugins: [
