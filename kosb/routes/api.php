@@ -71,6 +71,8 @@ Route::post("postulaciones/create",[PostulacionesController::class,"crearPostula
 Route::post("postulaciones/delete",[PostulacionesController::class,"eliminarPostulacion"]);
 Route::post("postulaciones/responder",[PostulacionesController::class,"editarPostulacion"]);
 Route::get("postulaciones/get/user",[PostulacionesController::class,"getPostulacionPorUser"]);
+Route::get("postulaciones/get/user/aceptadas",[PostulacionesController::class,"getPostulAceptPorUser"]);
+Route::get("postulaciones/get/user/completa",[PostulacionesController::class,"getPostulPorIdConUser"]);
 Route::get("postulaciones/get/pub",[PostulacionesController::class,"getPostPorPublicacion"]);
 Route::get("postulaciones/get/aceptadas",[PostulacionesController::class,"getPostulAceptPorPub"]);
 

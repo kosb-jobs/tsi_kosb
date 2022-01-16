@@ -42,6 +42,20 @@ const getPostulacionesUser = async (cod_usuario)=>{
     return resp.data;
 };
 
+const getPostulacionInfoCompleta = async (cod_postulacion)=>{
+    let resp;
+
+    resp = await axios.get(`api/postulaciones/get/user/completa?id=${cod_postulacion}`);
+    return resp.data;
+};
+
+const getPostulacionesAceptUser = async (cod_usuario)=>{
+    let resp;
+
+    resp = await axios.get(`api/postulaciones/get/user/aceptadas?cod_usuario=${cod_usuario}`);
+    return resp.data;
+};
+
 const getPostulPorPublicacion = async (cod_publicacion)=>{
     let resp;
 

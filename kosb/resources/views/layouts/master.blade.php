@@ -103,7 +103,11 @@
                             <li class="nav-item">
                                 <a class="nav-link text-light"  href="{{route('postulaciones_pub')}}">Publicaciones en proceso</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light"  href="{{route('trabajos_aceptados')}}">Trabajos en proceso</a>
+                            </li>
                         @endauth
+                        
                         </ul>
                 </ul>
 

@@ -144,6 +144,16 @@ Route::get('/postulaciones_pub', function () {
     }
 })->name('postulaciones_pub');
 
+Route::get('/trabajos_aceptados', function () {
+    if(Auth::user() == false){
+        return redirect()->route('crear_perfil');
+    }else if(Auth::user()->estado != 1){
+        return view('trabajos_aceptados');
+    }else{
+        return invalidEstado();
+    }
+})->name('trabajos_aceptados');
+
 Route::get('/reclamos_suspendido', function () {
     if(Auth::user() == false){
         return redirect()->route('crear_perfil');
