@@ -87,13 +87,20 @@ const evaluarTrabajador = async function(){
         let datos = await getDatosCompletosPorUser(usuario); 
         let tr = document.createElement('tr');
         let td_usuario = document.createElement('td');
-        td_usuario.textContent = u.id;
+        td_usuario.textContent = usuario;
         let td_nombre = document.createElement('td');
-        td_nombre.textContent = u.cod_usuario;        
+        td_nombre.textContent = datos.name;        
         let td_correo = document.createElement('td');
         td_correo.textContent = datos.email; 
         let td_puntuacion= document.createElement('td');
         td_puntuacion.textContent = datos.puntuacion_trabajador;  
+        console.log("U.ID");
+        console.log(u.id);
+        console.log("DATOS");
+        console.log(datos);
+        console.log("u");
+        console.log(u);
+
            
                     
 
@@ -108,9 +115,9 @@ const evaluarTrabajador = async function(){
         btn_evaluar.setAttribute('href',"#");
         btn_evaluar.textContent = 'Puntuar';
         btn_evaluar.addEventListener("click",BtnPuntuarUsuario);
-        btn_evaluar.cod_usuario = usuario.cod_usuario;
+        btn_evaluar.cod_usuario = u.cod_usuario;
         btn_evaluar.cod_publicacion = u.cod_publicacion;
-        btn_evaluar.cod_puntuacion = u.id;
+        btn_evaluar.cod_postulacion = u.id;;
         span.appendChild(btn_evaluar);              
         
         td_acciones.appendChild(span);
@@ -161,14 +168,12 @@ const BtnPuntuarUsuario = async function(){
         </div>
 
         <a class="btn" id="btn_crear_puntuacion">Puntuar</a>
+        <a class="btn" id="btn_regresar">Regresar</a>
     </div>
     `
-    contenido_pub.innerHTML=html;
-    
-
+    contenido_pub.innerHTML=html;  
 
     /* ola */
-
 
     let opcion5 = document.querySelector('#rate-5');
     let opcion4 = document.querySelector('#rate-4');
@@ -178,7 +183,7 @@ const BtnPuntuarUsuario = async function(){
    
     
     document.querySelector('#star-widget').addEventListener('change',()=>{
-        console.log("ENTRA EN QUERY SELECTOR")
+        console.log("ENTRA EN QUERY SELECTOR");
         if (opcion1.checked){
             console.log('La opcion seleccionada es 1');
             numero = 1;
@@ -200,9 +205,32 @@ const BtnPuntuarUsuario = async function(){
             numero = 0;
         }  
 
-    })  
+    });  
+
+    document.querySelector('#btn_crear_puntuacion').addEventListener('click',()=>{
+        if (numero!=0){
+            let puntuacion ={}; 
+            puntuacion.id_user=cod_usuario;
+            puntuacion.id_publicaciones=cod_publicacion;
+            puntuacion.id_postulaciones=cod_puntuacion;
+            puntuacion.puntuacion=numero;
+            puntuacion.descripcion="poto";
+            console.log(puntuacion);
+
+        }else{
+            console.log("No se creo nada");
+
+        }        
+
+
+
+
+    });
 
 }
+
+
+
 
 
 const reajusteDeContenidoPubs = async (publicaciones)=>{
