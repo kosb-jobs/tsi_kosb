@@ -136,13 +136,15 @@ const evaluarTrabajador = async function(){
 }
 
 const BtnPuntuarUsuario = async function(){
+
     let contenido_pub = document.querySelector('#contenido-de-publicacion');    
     let cod_usuario=this.cod_usuario;
     let cod_publicacion = this.cod_publicacion;
-    let cod_puntuacion = this.cod_puntuacion;
+    let cod_postulacion = this.cod_postulacion;
     let tabla = document.querySelector("#tabla_trabajadores");
     tabla.classList.add("d-none");
     document.querySelector("#puntuar_container").classList.remove("d-none");
+
 
     /* ola */
 
@@ -151,6 +153,7 @@ const BtnPuntuarUsuario = async function(){
     let opcion3 = document.querySelector('#rate-3');
     let opcion2 = document.querySelector('#rate-2');
     let opcion1 = document.querySelector('#rate-1');
+    let numero = 0;
    
     
     document.querySelector('#star-widget').addEventListener('change',()=>{
@@ -178,15 +181,29 @@ const BtnPuntuarUsuario = async function(){
 
     });  
 
-    document.querySelector('#btn_crear_puntuacion').addEventListener('click',()=>{
+    document.querySelector('#btn_crear_puntuacion').addEventListener('click',async function(){
         if (numero!=0){
+            let input_descr = tinymce.get("descripcion-txt").getContent();
             let puntuacion ={}; 
             puntuacion.id_user=cod_usuario;
             puntuacion.id_publicaciones=cod_publicacion;
-            puntuacion.id_postulaciones=cod_puntuacion;
+            puntuacion.id_postulaciones=cod_postulacion;
             puntuacion.puntuacion=numero;
-            puntuacion.descripcion="poto";
+            puntuacion.comentario=input_descr; 
             console.log(puntuacion);
+            let resp = await Swal.fire({title:"Puntuacion A Asignar", text:`Se va a puntuar al usuario con ${numero} estrellas`, icon:"question", showCancelButton:true});
+            if(resp.isConfirmed){
+                if (await crearPuntuacion(puntuacion) != false){
+                    
+                    Swal.fire("Usuario Puntuado","Se han dado las estrellas exitosamente", "info");
+                    location.reload();
+                    
+                }else{
+                    Swal.fire("UPS!, Error", "No se pudo atender la solicitud", "error");
+                    location.reload();
+                }
+            }
+            
 
         }else{
             console.log("No se creo nada");
@@ -302,7 +319,7 @@ document.addEventListener('DOMContentLoaded',async()=>{
     }
     tinymce.init({
         selector: '#descripcion-txt',
-        height: 200,
+        height: 150,
         menubar: false,
         language: 'es',
         plugins: [

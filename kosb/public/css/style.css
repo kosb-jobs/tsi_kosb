@@ -1830,13 +1830,12 @@ table{
 	
 	/* IMPORTANTE */
 	text-align: center;
-
 	place-items: center;
     padding-top: 5px;
     padding-right: 80px;
     height: 40px;
     width: 500px;
-    margin-left: 200px;
+    
     background-color: #A8ECE7;
     border-radius: 5px;
     box-shadow: #FFFEB7 0px 0px 0px 3px;
