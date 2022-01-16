@@ -137,53 +137,12 @@ const evaluarTrabajador = async function(){
 
 const BtnPuntuarUsuario = async function(){
     let contenido_pub = document.querySelector('#contenido-de-publicacion');    
-<<<<<<< HEAD
-    let cod_usuario=this.cod_usuario 
-    let cod_publicacion = this.cod_publicacion 
-    let cod_puntuacion = this.cod_puntuacion 
-
-    let html = `
-    <div class="puntuar_container">
-        <div class="container_star">
-            <div class="star-widget" id="star-widget">
-
-                <input type="radio" name="rate" id="rate-5">
-                <label for="rate-5" class="fas fa-star"></label>
-
-                <input type="radio" name="rate" id="rate-4">
-                <label for="rate-4" class="fas fa-star"></label>
-
-                <input type="radio" name="rate" id="rate-3">
-                <label for="rate-3" class="fas fa-star"></label>
-
-                <input type="radio" name="rate" id="rate-2">
-                <label for="rate-2" class="fas fa-star"></label>
-
-                <input type="radio" name="rate" id="rate-1">
-                <label for="rate-1" class="fas fa-star"></label>
-
-            </div>
-        </div>
-    
-        <div class="texto_puntuacion">
-            <h3>Ingrese Descripcion</h3>
-            <textarea  id="descripcion-txt" class=""></textarea>
-        </div>
-
-        <a class="btn" id="btn_crear_puntuacion">Puntuar</a>
-        <a class="btn" id="btn_regresar">Regresar</a>
-    </div>
-    `
-    contenido_pub.innerHTML=html;  
-=======
     let cod_usuario=this.cod_usuario;
     let cod_publicacion = this.cod_publicacion;
     let cod_puntuacion = this.cod_puntuacion;
     let tabla = document.querySelector("#tabla_trabajadores");
     tabla.classList.add("d-none");
     document.querySelector("#puntuar_container").classList.remove("d-none");
-
->>>>>>> origin/master
 
     /* ola */
 
