@@ -10,5 +10,6 @@ class Puntuacion extends Model
 {
     use HasFactory;
     use softDeletes;
+    protected $table = 'puntuaciones';
     protected $dates = ['deleted_at']; //para el soft deletes
 }

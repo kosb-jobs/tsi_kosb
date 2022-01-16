@@ -13,6 +13,7 @@ use App\Http\Controllers\ReclamosController;
 use App\Http\Controllers\TrabajadoresController;
 use App\Http\Controllers\OfertantesController;
 use App\Http\Controllers\AdministradoresController;
+use App\Http\Controllers\PuntuacionesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -117,3 +118,7 @@ Route::get("reclamos/get/sinRespuesta",[ReclamosController::class,"getReclamoSin
 // SUSPENSIONESCONTROLLERS
 
 Route::post("suspensiones/create",[SuspensionesController::class,"crearSuspension"]);
+
+//PUNTUACIONESCONTROLLERS
+
+Route::post("puntuaciones/create",[PuntuacionesController::class,"crearPuntuacion"]);
