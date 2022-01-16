@@ -1832,6 +1832,10 @@ table{
 	text-align: center;
 	place-items: center;
     padding-right: 80px;
+    border: 1px solid #8f8f8f;
+    height: 100px;
+    width: 500px;
+    margin-left: 200px;
     
 }
 
@@ -1928,15 +1932,15 @@ table td{ /* el th es el tamannio de del body */
 
 /* TABLA TRABAJADORES PUNTIACION*/
 
-#tr_estrellas{
-    justify-content: center;
-
+.puntuar_container{
+    padding: 30px;
+    place-items: center;
 }
-#td_estrellas{
-    justify-content: center;
-    width: 560px;
-    margin-left: 30px;
-    
 
+.texto_puntuacion{
+    padding: 50px;
+    margin-left: 200px;
 }
+
+
 

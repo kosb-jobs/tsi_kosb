@@ -1,3 +1,5 @@
+
+
 const cargar_publicacion = async function(){
     let id_pub = this.idPub
     let pub = await getPublicacionCodigo(id_pub);
@@ -91,38 +93,9 @@ const evaluarTrabajador = async function(){
         let td_correo = document.createElement('td');
         td_correo.textContent = datos.email; 
         let td_puntuacion= document.createElement('td');
-        td_puntuacion.textContent = datos.puntuacion_trabajador;
-        
-        let td_dos_estrellas = document.createElement('div');
-        
-        td_dos_estrellas.setAttribute('id',"td_estrellas");
-        td_dos_estrellas.innerHTML=`
-        <div class="container_star" >
-                        <div class="star-widget" id="star-widget">
-
-                            <input type="radio" name="rate" id="rate-5">
-                            <label for="rate-5" class="fas fa-star"></label>
-
-                            <input type="radio" name="rate" id="rate-4">
-                            <label for="rate-4" class="fas fa-star"></label>
-
-                            <input type="radio" name="rate" id="rate-3">
-                            <label for="rate-3" class="fas fa-star"></label>
-
-                            <input type="radio" name="rate" id="rate-2">
-                            <label for="rate-2" class="fas fa-star"></label>
-
-                            <input type="radio" name="rate" id="rate-1">
-                            <label for="rate-1" class="fas fa-star"></label>
-
-                        </div>
-                    </div>
-        `
-        td_dos_estrellas.setAttribute('id',"tr_estrellas");
-        td_dos_estrellas.style.display = "none";
-        
-        
-        
+        td_puntuacion.textContent = datos.puntuacion_trabajador;  
+           
+                    
 
         /* td_correo = datos.email; */        
         
@@ -147,17 +120,55 @@ const evaluarTrabajador = async function(){
         tr.appendChild(td_puntuacion);       
         tr.appendChild(td_acciones);        
         tbody.appendChild(tr);
-        tbody.appendChild(td_dos_estrellas);
+  
     });
 
 
 }
 
 const BtnPuntuarUsuario = async function(){
-    let contenido_estrellas = document.querySelector('#tr_estrellas');
-    contenido_estrellas.style.display = "block"; 
-    console.log("SOY EL CLICK DEL BOTON");
-    console.log("ENTRA EN RESULT");
+    let contenido_pub = document.querySelector('#contenido-de-publicacion');    
+    let cod_usuario=this.cod_usuario 
+    let cod_publicacion = this.cod_publicacion 
+    let cod_puntuacion = this.cod_puntuacion 
+
+    let html = `
+    <div class="puntuar_container">
+        <div class="container_star">
+            <div class="star-widget" id="star-widget">
+
+                <input type="radio" name="rate" id="rate-5">
+                <label for="rate-5" class="fas fa-star"></label>
+
+                <input type="radio" name="rate" id="rate-4">
+                <label for="rate-4" class="fas fa-star"></label>
+
+                <input type="radio" name="rate" id="rate-3">
+                <label for="rate-3" class="fas fa-star"></label>
+
+                <input type="radio" name="rate" id="rate-2">
+                <label for="rate-2" class="fas fa-star"></label>
+
+                <input type="radio" name="rate" id="rate-1">
+                <label for="rate-1" class="fas fa-star"></label>
+
+            </div>
+        </div>
+    
+        <div class="texto_puntuacion">
+            <h3>Ingrese Descripcion</h3>
+            <textarea  id="descripcion-txt" class=""></textarea>
+        </div>
+
+        <a class="btn" id="btn_crear_puntuacion">Puntuar</a>
+    </div>
+    `
+    contenido_pub.innerHTML=html;
+    
+
+
+    /* ola */
+
 
     let opcion5 = document.querySelector('#rate-5');
     let opcion4 = document.querySelector('#rate-4');
@@ -290,4 +301,21 @@ document.addEventListener('DOMContentLoaded',async()=>{
         contenido_pub.innerHTML = `<code class="">Seleccione una publicación</code>`;
         cargar_lista_pub(publicaciones);
     }
+    tinymce.init({
+        selector: '#descripcion-txt',
+        height: 200,
+        menubar: false,
+        language: 'es',
+        plugins: [
+          'advlist autolink lists link image charmap print preview anchor',
+          'searchreplace visualblocks code fullscreen',
+          'insertdatetime media table paste code help wordcount'
+        ],
+        toolbar: 'undo redo | formatselect | ' +
+        'bold italic backcolor | alignleft aligncenter ' +
+        'alignright alignjustify | bullist numlist outdent indent | ' +
+        'removeformat | help',
+        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+      });
+    
 });

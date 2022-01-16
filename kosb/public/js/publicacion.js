@@ -180,9 +180,6 @@ const cargarFechaActual = ()=>{
   return today;
 }
 
-<<<<<<< HEAD
-
-=======
 // const cargarFechaMin = ()=>{
 //   var today = new Date();
 //   var dd = today.getDate();
@@ -202,7 +199,6 @@ const cargarFechaActual = ()=>{
 //   document.getElementById("fecha-fin-trabajo").setAttribute("min", today);
   
 // }
->>>>>>> origin/master
 
 // ID BTN Y ELEMENTOS
 
