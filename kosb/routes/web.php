@@ -19,7 +19,7 @@ Route::get('/', function () {
 })->name('welcome');
 Route::get('/home_admin', function () {
     if(Auth::user() == false){
-        return view('crear_perfil');
+        return redirect()->route('crear_perfil');
     }else if(Auth::user()->estado != 1){
         return view('home');
     }else{
@@ -27,14 +27,14 @@ Route::get('/home_admin', function () {
     }
 })->name('home');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth'])->name('dashboard');
 
 Route::get('/perfil', function () {
     if(Auth::user() == false){
-        return view('crear_perfil');
-    }else if(Auth::user()->estado != 1){
+        return redirect()->route('crear_perfil');
+    }else if(Auth::user()->estado == 0){
         return view('perfil');
     }else{
         return invalidEstado();
@@ -44,7 +44,7 @@ Route::get('/perfil', function () {
 
 Route::get('/crear_publicacion', function () {
     if(Auth::user() == false){
-        return view('crear_perfil');
+        return redirect()->route('crear_perfil');
     }else if(Auth::user()->estado != 1){
         return view('crear_publicacion');
     }else{
@@ -74,7 +74,7 @@ Route::get('/crear_perfil', function () {
 
 Route::get('/admin_home', function () {
     if(Auth::user() == false){
-        return view('crear_perfil');
+        return redirect()->route('crear_perfil');
     }else if(Auth::user()->estado != 1){
         return view('admin_home');
     }else{
@@ -84,7 +84,7 @@ Route::get('/admin_home', function () {
 
 Route::get('/tabla_usuario_admin', function () {
     if(Auth::user() == false){
-        return view('crear_perfil');
+        return redirect()->route('crear_perfil');
     }else if(Auth::user()->estado != 1){
         return view('tabla_usuario_admin');
     }else{
@@ -94,7 +94,7 @@ Route::get('/tabla_usuario_admin', function () {
 
 Route::get('/reclamos', function () {
     if(Auth::user() == false){
-        return view('crear_perfil');
+        return redirect()->route('crear_perfil');
     }else if(Auth::user()->estado != 1){
         return view('reclamos');
     }else{
@@ -104,7 +104,7 @@ Route::get('/reclamos', function () {
 
 Route::get('/zonas', function () {
     if(Auth::user() == false){
-        return view('crear_perfil');
+        return redirect()->route('crear_perfil');
     }else if(Auth::user()->estado != 1){
         return view('zonas');
     }else{
@@ -115,7 +115,7 @@ Route::get('/zonas', function () {
 
 Route::get('/crear_admin', function () {
     if(Auth::user() == false){
-        return view('crear_perfil');
+        return redirect()->route('crear_perfil');
     }else if(Auth::user()->estado != 1){
         return view('crear_admin');
     }else{
@@ -125,7 +125,7 @@ Route::get('/crear_admin', function () {
 
 Route::get('/admin_reclamos', function () {
     if(Auth::user() == false){
-        return view('crear_perfil');
+        return redirect()->route('crear_perfil');
     }else if(Auth::user()->estado != 1){
         return view('admin_reclamos');
     }else{
@@ -136,7 +136,7 @@ Route::get('/admin_reclamos', function () {
 
 Route::get('/postulaciones_pub', function () {
     if(Auth::user() == false){
-        return view('crear_perfil');
+        return redirect()->route('crear_perfil');
     }else if(Auth::user()->estado != 1){
         return view('postulaciones_a_mis_publicaciones');
     }else{
@@ -146,7 +146,7 @@ Route::get('/postulaciones_pub', function () {
 
 Route::get('/reclamos_suspendido', function () {
     if(Auth::user() == false){
-        return view('crear_perfil');
+        return redirect()->route('crear_perfil');
     }else if(Auth::user()->estado == 1){
         return view('reclamos_susp');
     }else{

@@ -81,6 +81,22 @@ const cargarFechaMin = ()=>{
   document.getElementById("fecha-trabajo").setAttribute("min", today);
   document.getElementById("fecha-fin-trabajo").setAttribute("min", today);
   
+const reajusteDeFecha = (fecha)=>{
+  let date = new Date(fecha);
+  let dd = date.getDate();
+  let mm = date.getMonth() + 1; //January is 0!
+  let yyyy = date.getFullYear();
+
+  if (dd < 10) {
+    dd = '0' + dd;
+  }
+
+  if (mm < 10) {
+    mm = '0' + mm;
+  }
+
+  date = dd + '-' + mm + '-' + yyyy ;
+  return date;
 }
 
 
@@ -160,7 +176,7 @@ document.querySelector("#btn-vista-previa").addEventListener("click", async()=>{
     desc_formulario.innerHTML = descripcion;
     titul_pub.innerHTML = titulo_publicacion;
     tipo_trabajo.innerHTML = rubro.options[rubro.selectedIndex].text;
-    fecha_div.innerHTML = "Desde " + fecha_ini + " hasta " + fecha_fin;
+    fecha_div.innerHTML = "Desde " + reajusteDeFecha(fecha_ini) + " hasta " + reajusteDeFecha(fecha_fin);
     horario_txt.innerHTML = duracion.options[duracion.selectedIndex].text;
     if (Math.trunc(dias_totales/31)==0){
       texto_duracion = "Durará menos de un mes el trabajo";

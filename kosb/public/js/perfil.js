@@ -1,3 +1,5 @@
+
+
  tinymce.init({
     selector: '#descripcion-txt',
     height: 200,
@@ -224,6 +226,8 @@ const reajusteDeContenidoPubs = (publicaciones, zonas, rubros, duraciones)=>{
     //INTENTA CAMBIAR EL CONTENIDO DE ALGUNOS ATRIBUTOS DE PUBLICACION
     
     publicaciones.forEach(p => {
+        p.fecha_ini = reajusteDeFecha(p.fecha_ini);
+        p.fecha_fin = reajusteDeFecha(p.fecha_fin);
         zonas.forEach(z => {
             if(p.cod_zona == z.id){
                 p.cod_zona = z.nom_zona;
@@ -431,7 +435,7 @@ const cargarContPostPorPublicacion = async(publicacion)=>{
                     </div>
                     <div class="card-body" style="${style_body}">
                       <h5 class="card-title">Código de usuario: ${postul.cod_usuario} ~~~ ${user.name} ~~~ ${user.email}</h5>
-                      <p class="card-text">${postul.fecha_postulacion}  ~~~  ${aceptacion}</p>
+                      <p class="card-text">${reajusteDeFecha(postul.fecha_postulacion)}  ~~~  ${aceptacion}</p>
                       `+botones+`
                     </div>
                   </div>`;
@@ -482,7 +486,7 @@ const cargarTablaPostulaciones = (postulaciones)=>{
         }
         
         let td3 = document.createElement("td");
-        td3.innerHTML += p.fecha_postulacion;
+        td3.innerHTML += reajusteDeFecha(p.fecha_postulacion);
         let td4 = document.createElement("td");
         let btn_eliminar = document.createElement("button");
         let btn_ver = document.createElement("button");
@@ -684,6 +688,24 @@ const cargarFechaActual = ()=>{
   
     today = yyyy + '-' + mm + '-' + dd ;
     return today;
+}
+
+const reajusteDeFecha = (fecha)=>{
+    let date = new Date(fecha);
+    let dd = date.getDate();
+    let mm = date.getMonth() + 1; //January is 0!
+    let yyyy = date.getFullYear();
+  
+    if (dd < 10) {
+      dd = '0' + dd;
+    }
+  
+    if (mm < 10) {
+      mm = '0' + mm;
+    }
+  
+    date = dd + '-' + mm + '-' + yyyy ;
+    return date;
 }
 
 
@@ -1175,6 +1197,7 @@ document.addEventListener("DOMContentLoaded",async()=>{
     if(publicaciones.length != 0){
         
         lista = reajusteDeContenidoPubs(publicaciones,zonas, rubros,duraciones);
+        console.log(lista);
         cargarTabla(lista);
         
     }else{

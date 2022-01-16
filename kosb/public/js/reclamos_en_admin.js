@@ -200,7 +200,7 @@ const cargarTablaReclamosAccioneless = async function(){
         td_descripcion.textContent = string.substring(3,string.length-4);
 
         let td_respuesta = document.createElement('td');
-        td_respuesta.textContent =u.contenido_respuesta==null?"Sin Respuesta":u.contenido_respuesta;               
+        td_respuesta.textContent =u.contenido_respuesta==null?"Sin Respuesta":string2.substring(3,string2.length-4);               
         
         
         tr.appendChild(td_id);

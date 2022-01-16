@@ -70,7 +70,7 @@ const ver_pub = async function(){
   let descripcion_txt = document.querySelector("#desc-vista");
   descripcion_txt.innerHTML = publicacion.descripcion;
   let fecha_txt = document.querySelector("#fecha-change-txt");
-  fecha_txt.innerText = "Desde "+publicacion.fecha_ini + " hasta "+publicacion.fecha_fin;
+  fecha_txt.innerText = "Desde "+reajusteDeFecha(publicacion.fecha_ini) + " hasta "+ reajusteDeFecha(publicacion.fecha_fin);
   let horario_txt = document.querySelector("#horario-txt");
   horario_txt.innerText = publicacion.cod_duracion;
   let direccion_txt = document.querySelector("#direccion-zona-txt");
@@ -144,6 +144,24 @@ const cambio_de_variables = (publicaciones,zonas,rubros,duraciones)=>{
   return publicaciones;
 }
 
+const reajusteDeFecha = (fecha)=>{
+  let date = new Date(fecha);
+  let dd = date.getDate();
+  let mm = date.getMonth() + 1; //January is 0!
+  let yyyy = date.getFullYear();
+
+  if (dd < 10) {
+    dd = '0' + dd;
+  }
+
+  if (mm < 10) {
+    mm = '0' + mm;
+  }
+
+  date = dd + '-' + mm + '-' + yyyy ;
+  return date;
+}
+
 const cargarFechaActual = ()=>{
   let today = new Date();
   let dd = today.getDate();
@@ -162,7 +180,29 @@ const cargarFechaActual = ()=>{
   return today;
 }
 
+<<<<<<< HEAD
 
+=======
+// const cargarFechaMin = ()=>{
+//   var today = new Date();
+//   var dd = today.getDate();
+//   var mm = today.getMonth() + 1; //January is 0!
+//   var yyyy = today.getFullYear();
+  
+//   if (dd < 10) {
+//      dd = '0' + dd;
+//   }
+  
+//   if (mm < 10) {
+//      mm = '0' + mm;
+//   } 
+      
+//   today = yyyy + '-' + mm + '-' + dd;
+//   document.getElementById("fecha-trabajo").setAttribute("min", today);
+//   document.getElementById("fecha-fin-trabajo").setAttribute("min", today);
+  
+// }
+>>>>>>> origin/master
 
 // ID BTN Y ELEMENTOS
 
@@ -396,6 +436,13 @@ document.querySelector('#t-esporadicos').addEventListener('click', async ()=>{
   let zonas = await getZonas();
   let rubros = await getRubros();
   let duraciones = await getDuraciones();
+  let contenido_pub = document.querySelector('#container-publicacion');
+  let contenedor_vista = document.querySelector('#contenedor-vista');
+  if(!contenido_pub.classList.contains('d-none')){
+    contenido_pub.classList.add('d-none');
+    contenedor_vista.classList.remove('d-none');
+  }
+  
   publicaciones = cambio_de_variables(resp,zonas,rubros,duraciones);
   if (publicaciones.length == 0) {
     cargarContenedorSinPub();
@@ -409,6 +456,12 @@ document.querySelector('#t-corto-plazo').addEventListener('click',async()=>{
   let zonas = await getZonas();
   let rubros = await getRubros();
   let duraciones = await getDuraciones();
+  let contenido_pub = document.querySelector('#container-publicacion');
+  let contenedor_vista = document.querySelector('#contenedor-vista');
+  if(!contenido_pub.classList.contains('d-none')){
+    contenido_pub.classList.add('d-none');
+    contenedor_vista.classList.remove('d-none');
+  }
   publicaciones = cambio_de_variables(resp,zonas,rubros,duraciones);
   if (publicaciones.length == 0) {
     cargarContenedorSinPub();
@@ -422,6 +475,12 @@ document.querySelector('#t-largo-plazo').addEventListener('click',async()=>{
   let zonas = await getZonas();
   let rubros = await getRubros();
   let duraciones = await getDuraciones();
+  let contenido_pub = document.querySelector('#container-publicacion');
+  let contenedor_vista = document.querySelector('#contenedor-vista');
+  if(!contenido_pub.classList.contains('d-none')){
+    contenido_pub.classList.add('d-none');
+    contenedor_vista.classList.remove('d-none');
+  }
   publicaciones = cambio_de_variables(resp,zonas,rubros,duraciones);
   if (publicaciones.length == 0) {
     cargarContenedorSinPub();
@@ -444,7 +503,10 @@ document.addEventListener("DOMContentLoaded",async()=>{
   } else {
     cargarContenedor(publicaciones);
   }
+<<<<<<< HEAD
   
+=======
+>>>>>>> origin/master
 });
 
 
