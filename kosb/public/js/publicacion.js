@@ -499,10 +499,6 @@ document.addEventListener("DOMContentLoaded",async()=>{
   } else {
     cargarContenedor(publicaciones);
   }
-<<<<<<< HEAD
-  
-=======
->>>>>>> origin/master
 });
 
 
