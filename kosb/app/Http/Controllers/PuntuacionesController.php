@@ -34,8 +34,8 @@ class PuntuacionesController extends Controller
 
     public function getPuntuacionPorPublicacion(Request $request){
         $input = $request->all();
-        $cod_publicacion = $input["cod_publicacion"];
-        $puntuacion = Puntuacion::where("cod_publicacion",$cod_publicacion)->get();
+        $id_publicaciones = $input["id_publicaciones"];
+        $puntuacion = Puntuacion::where("id_publicaciones",$id_publicaciones)->get();
         return $puntuacion;
     }
 

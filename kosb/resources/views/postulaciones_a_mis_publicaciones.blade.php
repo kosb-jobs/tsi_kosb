@@ -11,22 +11,22 @@
   <div class="row g-0 p-3" style="height: 500px">
     <div class="col-12 col-md-4 col-lg-3 pt-4" style="background-color: white; border-radius: 5px">
       <div class="card mb-3">
-        <div class="card-body text-center" style="background: #ffd2cd;border-color: #ffb0a8">
+        <div class="card-body text-center" style="background: #ffd2cd; border-color: #ffb0a8; border: 1px solid #FFA1C5; border-radius: 5px;">
           <h4 class="card-title" style="height: 15px">Publicaciones</h4>
         </div>
       </div>
-      <div class="list-group" id="lista-publicaciones">
-        
+        <div class="list-group" id="lista-publicaciones">
+          
+        </div>
       </div>
-    </div>
     
-    <div class="col-12 col-md col-lg ms-5" style="background-color: white; border-radius: 5px">
+    <div class="col-12 col-md col-lg ms-5" style="background-color: white; border-radius: 5px; border: 1px solid #FFA1C5;">
       <div class="card-body">
         <div class="" id="contenido-de-publicacion">
           
         </div>
-        <div class="tabla_trabajadores d-none" id="tabla_trabajadores">
-          <table class="tabla_puntuacion" id="tabla_puntuacion">
+        <div class="tabla_trabajadores d-none" id="tabla_trabajadores" style="border: 1px solid #FFA1C5;">
+          <table class="tabla_puntuacion" id="tabla_puntuacion" style="border: 1px solid #FFA1C5; border-radius: 5px;">
               <thead>
                   <tr>
                       <td>ID</td>
@@ -42,8 +42,7 @@
           </table>
         </div>
         <div class="d-none card text-center" id="puntuar_container">
-          <div class="card-body text-center">
-            <h4 class="card-title">Puntuación</h4>
+          <div class="card-body text-center">            
             <div class="container_star">
               <div class="star-widget" id="star-widget">
   
@@ -64,13 +63,14 @@
                 </div>
             </div>
       
-            <div class="texto_puntuacion text-start">
-                <h5 class="card-title">Ingrese Descripcion</h5>
-                <textarea  id="descripcion-txt" class=""></textarea>
-            </div>
+            
+                
+            <textarea  id="descripcion-txt" class=""></textarea>
+            
     
             <a class="btn" id="btn_crear_puntuacion">Puntuar</a>
             <input class="btn" value="Volver" onClick="history.go(-1);">
+
           </div>
         </div>
       </div>
