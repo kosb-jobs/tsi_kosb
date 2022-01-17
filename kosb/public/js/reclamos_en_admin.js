@@ -26,12 +26,13 @@ const ResponderReclamo = async function(){
     let input_admin = document.querySelector("#cod_admin_log").name;
     let id_reclamo = this.idReclamo;
     let respuesta_txt = tinymce.get("input_descrip_rec").getContent();
+    let admin = await getAdminPorUsuario(input_admin);
     
     let respuesta ={};
     respuesta.id = id_reclamo;
     respuesta.fecha_respuesta = cargarFechaActual(); 
     respuesta.contenido_respuesta = respuesta_txt;
-    respuesta.cod_admin = input_admin;    
+    respuesta.cod_admin = admin[0].id;    
 
     let resp = await Swal.fire({title:"¿Estás seguro de Editar?", text:"Esta operación se verá reflejada al aceptar", icon:"info", showCancelButton:true});
     if(resp.isConfirmed){
