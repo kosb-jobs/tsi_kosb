@@ -11,7 +11,7 @@ const cargar_publicacion = async function(){
     let elemento = `
     <div class="row">
         <div class="col-12 col-md-6 col-lg-6 mb-3">
-            <button class="btn">Finalizar la publicación</button>
+            <button class="btn" id="finalizar_publicacion">Finalizar la publicación</button>
         </div>
         <div class="col-12 col-md col-lg text-end mb-3">
             <button class="btn btn-info" id="evaluar_trabajador">Evaluar Trabajador(es)</button>
@@ -48,8 +48,64 @@ const cargar_publicacion = async function(){
     btn_evaluar.addEventListener("click",evaluarTrabajador);
     btn_evaluar.id_pub=id_pub;
     btn_evaluar.largo = cant_trab;
+    let btn_fin_pub = document.querySelector("#finalizar_publicacion");
+    btn_fin_pub.addEventListener("click",finalizarPublicacion);
+    btn_fin_pub.id_pub = id_pub;
+    console.log(id_pub);
+    btn_fin_pub.largo = cant_trab;
     
-    
+}
+
+const finalizarPublicacion = async function(){
+    let publicacion = await getPublicacionCodigo(this.id_pub);
+    console.log(publicacion.fecha_fin > cargarFechaActual());
+
+    if (publicacion.fecha_fin > cargarFechaActual()){
+        Swal.fire({
+            title: "No se puede finalizar la publicación antes de la fecha esperada",
+            icon: "error",
+            text: "Publicación no finalizada",
+        });
+    }else if(publicacion.fecha_fin == cargarFechaActual() || publicacion.fecha_fin < cargarFechaActual()){
+        let publicacion = {};
+        publicacion.id = publicacion.id;
+        publicacion.estado = 'FPT';
+        let cambio_estado_respuesta = await cambiarEstadoPublic(publicacion);
+
+        let respuesta = await cambiarEstadoPublic(publicacion);
+        console.log(respuesta);
+        if (respuesta == 'Proceso de trabajo finalizado con exito') {
+            await Swal.fire({
+                title: "Cambio de estado exitoso",
+                icon: "warning",
+                text: 'Se ha cambiado el estado de la publicación con éxito',
+            });
+        }else{
+            await Swal.fire({
+                title: "Proceso no finalizado",
+                icon: "error",
+                text: 'Hubo un error externo y no se finalizó el proceso de trabajo',
+            });
+        }
+    }
+}
+
+const cargarFechaActual = ()=>{
+    let today = new Date();
+    let dd = today.getDate();
+    let mm = today.getMonth() + 1; //January is 0!
+    let yyyy = today.getFullYear();
+  
+    if (dd < 10) {
+      dd = '0' + dd;
+    }
+  
+    if (mm < 10) {
+      mm = '0' + mm;
+    }
+  
+    today = yyyy + '-' + mm + '-' + dd ;
+    return today;
 }
 
 const evaluarTrabajador = async function(){  
@@ -229,9 +285,6 @@ const BtnPuntuarUsuario = async function(){
     });
 
 }
-
-
-
 
 
 const reajusteDeContenidoPubs = async (publicaciones)=>{
