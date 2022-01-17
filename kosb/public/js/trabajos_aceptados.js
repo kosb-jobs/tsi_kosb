@@ -96,9 +96,7 @@ const cargar_postulacion = async function(){
 }
 
 const evaluarTrabajador = async function(){    
-    let cod_usuario=this.cod_usuario;
-    let cod_publicacion = this.cod_publicacion;
-    let cod_postulacion = this.cod_postulacion;
+
     let tabla = document.querySelector("#contenido-de-publicacion");
     tabla.classList.add("d-none");
     document.querySelector("#puntuar_container").classList.remove("d-none");
@@ -152,8 +150,13 @@ const evaluarTrabajador = async function(){
             console.log(puntuacion);
 
             respuesta.forEach(async u => {
-                if (u.id_user==id_usuario_creador){
+                if (u.id_user==id_usuario_creador && u.id_postulaciones==id_post){
                     validador=1;
+                    console.log(u.id_user);
+                    console.log(id_usuario_creador);
+                    console.log(u.id_postulaciones);
+                    console.log(id_post);
+
                 }
     
             });
@@ -172,7 +175,7 @@ const evaluarTrabajador = async function(){
                     text: "Debe Ingresar una descripción",
                 });
             }else{
-                if (respuesta !=false && validador==1 ) {
+                if (respuesta !=false && validador==1) {
                     await Swal.fire({
                         title: "Error al Puntuar",
                         icon: "error",
