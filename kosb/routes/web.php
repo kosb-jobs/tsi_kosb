@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ZonasController;
 use App\Models\Zona;
+use App\Models\Duracion;
+use App\Models\Rubro;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -53,10 +55,21 @@ Route::get('/crear_publicacion', function () {
 })->name('crear_publicacion');
 
 Route::get('/buscar_trabajo', function () {
+    $duraciones = Duracion::all();
+    $rubros = Rubro::all();
+    $zonas = Zona::all();
     if(Auth::user() == false){
-        return view('buscar_trabajo');
+        return view('buscar_trabajo',[
+            'zonas' => $zonas,
+            'duraciones' => $duraciones,
+            'rubros' => $rubros
+    ]);
     }else if(Auth::user()->estado != 1){
-        return view('buscar_trabajo');
+        return view('buscar_trabajo',[
+            'zonas' => $zonas,
+            'duraciones' => $duraciones,
+            'rubros' => $rubros
+    ]);
     }else{
         return invalidEstado();
     }
