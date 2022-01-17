@@ -629,6 +629,9 @@ const cargarDivPostulacion = ()=>{
 const cargarDatosUsuario = (datos)=>{
     console.log(datos);
     let input_cod = document.querySelector("#cod-usuario");
+    let input_puntuacion = document.querySelector("#puntuacion-total");
+    let prom = (datos.puntuacion_trabajador / 2 ) + (datos.puntuacion_ofertante / 2);
+    input_puntuacion.innerHTML = prom;
     input_cod.innerHTML += datos.cod_usuario;
     let input_correo = document.querySelector("#correo-txt");
     input_correo.innerHTML += datos.email;
