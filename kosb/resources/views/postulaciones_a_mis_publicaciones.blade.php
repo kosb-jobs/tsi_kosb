@@ -69,7 +69,7 @@
             
     
             <a class="btn" id="btn_crear_puntuacion">Puntuar</a>
-            <input class="btn" value="Volver" onClick="location.reload();">
+            <input class="btn" value="Volver" onClick="location.reload(); ">
 
           </div>
         </div>
@@ -91,5 +91,6 @@
 <script src="{{asset('js/servicios/duracionesService.js')}}"></script>
 <script src="{{asset('js/servicios/usuariosService.js')}}"></script>
 <script src="{{asset('js/servicios/puntuacionesService.js')}}"></script>
+<script src="{{asset('js/servicios/trabajadoresService.js')}}"></script>
 <script src="{{asset('js/post_en_pub.js')}}"></script>
 @endsection

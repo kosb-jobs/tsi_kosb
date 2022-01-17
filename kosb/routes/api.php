@@ -80,7 +80,13 @@ Route::get("postulaciones/get/aceptadas",[PostulacionesController::class,"getPos
 // TRABAJADORCONTROLLERS
 Route::post("trabajador/agregarpost",[TrabajadoresController::class,"agregarPostTotales"]);
 Route::post("trabajador/eliminarpost",[TrabajadoresController::class,"eliminarPostAct"]);
-Route::get("trabajador/get/user",[TrabajadoresController::class,"verTrabajador"]);
+Route::post("trabajador/get/user",[TrabajadoresController::class,"verTrabajador"]);
+Route::post("trabajador/actualizar/puntuacion",[TrabajadoresController::class,"actualizarPuntuacionTrabajador"]);
+Route::get("/trabajador/get/cod_usuario",[TrabajadoresController::class,"getPuntuacionTrabajador"]);
+
+
+
+
 
 //OFERTANTESCONTROLLERS
 Route::post("ofertante/agregarpub",[OfertantesController::class,"agregarPubTotales"]);
@@ -122,4 +128,5 @@ Route::post("suspensiones/create",[SuspensionesController::class,"crearSuspensio
 //PUNTUACIONESCONTROLLERS
 
 Route::post("puntuaciones/create",[PuntuacionesController::class,"crearPuntuacion"]);
+Route::get("puntuaciones/get/id_user",[PuntuacionesController::class,"getPuntuacionPorUsuario"]);
 Route::get("puntuaciones/get/id_publicaciones",[PuntuacionesController::class,"getPuntuacionPorPublicacion"]);

@@ -275,6 +275,29 @@ const BtnPuntuarUsuario = async function(){
                     if (await crearPuntuacion(puntuacion) != false){
                         
                         Swal.fire("Usuario Puntuado","Se han dado las estrellas exitosamente", "info");
+                        /*AQUI SE ACTUALIZARA PUNTUACION DE UNA PUBLICACION*/
+                        let puntuaciones_user=await getPuntuacionPorUsuario(cod_usuario); /*Todas las puntuaciones del usuario*/        
+                        console.log("SOY EL PUNTUACIONES USER LARGO");                                        
+                        let puntuacion_total = puntuaciones_user.length;   /*Se guarda el largo*/
+                        console.log(puntuacion_total); 
+                        console.log("DATOS EDL TRABAJADOR"); 
+                        let trabajador_datos = await getPuntuacionTrabajador(cod_usuario); 
+                        console.log(trabajador_datos);   
+                        console.log("PUNTUACION ACTUAL");
+                        let puntuacion_actual = trabajador_datos.puntuacion_trabajador;
+                        console.log(puntuacion_actual);
+
+                        let nueva_puntuacion = (puntuacion_actual+numero)/puntuacion_total;
+                        console.log("SOY EL TOTAL DE LA NUEVA PUNTUACION");
+                        console.log(nueva_puntuacion);
+
+
+
+                        /*Actualiza la puntuacion*/
+                        let obj_puntuacion ={};
+                        obj_puntuacion.cod_usuario=cod_usuario;
+                        obj_puntuacion.puntuacion=nueva_puntuacion;
+                        await actualizarPuntuacionTrabajador(obj_puntuacion);
                         
                         
                     }else{

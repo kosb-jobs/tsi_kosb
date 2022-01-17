@@ -386,6 +386,7 @@ const cargarTablaReclamos = async(reclamos)=>{
         t_body.innerHTML += contenido;
     });
 }
+
 const cargarContPostPorPublicacion = async(publicacion)=>{
     let acordion = document.querySelector('#accordionPostulaciones');
     //console.log('ta entrando ,, así que no entiendo');
@@ -1001,6 +1002,10 @@ document.querySelector('#admin-nav').addEventListener('click', async()=>{
     console.log(resp);
 });
 
+
+
+
+
 document.addEventListener("DOMContentLoaded",async()=>{
     //document.getElementById('descripcion-txt').disabled = true;
     //cuando el documento se carga tambien se cargan en las distintas partes de la pagina los get de las cosas del usuario
@@ -1237,6 +1242,7 @@ document.addEventListener("DOMContentLoaded",async()=>{
             });
         }
     }
+    //Cargar Puntuaciones Por el usuario
     
     
 });

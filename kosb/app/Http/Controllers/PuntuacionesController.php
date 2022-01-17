@@ -45,4 +45,11 @@ class PuntuacionesController extends Controller
         $puntuacion->delete();
         return "ok";
     }
+
+    public function getPuntuacionPorUsuario(Request $request){
+        $input = $request->all();
+        $id_user = $input["id_user"];
+        $puntuacion = Puntuacion::where("id_user",$id_user)->get();
+        return $puntuacion;
+    }
 }

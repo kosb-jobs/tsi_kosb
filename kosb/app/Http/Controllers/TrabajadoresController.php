@@ -19,6 +19,16 @@ class TrabajadoresController extends Controller
         return $trabajador;
     }
 
+    public function actualizarPuntuacionTrabajador(Request $request){
+        $input = $request->all();
+        $trabajador = Trabajador::findOrFail($input["cod_usuario"]);       
+        $trabajador->puntuacion_trabajador = $input["puntuacion"];
+        $trabajador->save();  
+        return $trabajador;
+    }
+
+
+
     public function crearTrabajador(Request $request){
         $input = $request->all();
         $trabajador = new Trabajador();
@@ -44,6 +54,14 @@ class TrabajadoresController extends Controller
         $trabajador = Trabajador::findOrFail($input['id']);
         $postul_activas = $trabajador->postulaciones_activas;
         $trabajador->postulaciones_activas = $postul_activas - 1;
+        return $trabajador;
+    }
+
+    public function getPuntuacionTrabajador(Request $request){
+        $input = $request->all();
+        $cod_usuario = $input["cod_usuario"];
+        $trabajador = Trabajador::where("cod_usuario",$cod_usuario)->get()->first();        
+
         return $trabajador;
     }
 
