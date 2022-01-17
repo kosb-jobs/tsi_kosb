@@ -66,7 +66,9 @@ class PostulacionesController extends Controller
     public function getPostulAceptPorUser(Request $request){
         $input = $request->all();
         $cod = $input["cod_usuario"];
+        
         $postulaciones = Postulacion::where("cod_usuario",$cod)->where("aceptacion",1)->get();
+        //$puntuacion = Puntuacion::where();
         return $postulaciones;
     }
 
