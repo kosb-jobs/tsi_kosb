@@ -49,12 +49,14 @@ const guardarZ = async function(){
     var input_zona = document.getElementById('nombre_zona');
     input_zona.style.display = "none";
     let input_admin = document.querySelector("#cod_admin_log").name;
+    let admin = await getAdminPorUsuario(input_admin);
+    console.log(admin[0].id);
     let id_zona = this.idZona;
     let zona = {};
     zona.id = id_zona;
     zona.nom_zona = input_zona.value;
     zona.fecha_edicion = cargarFechaActual();
-    zona.cod_admin = input_admin;
+    zona.cod_admin = admin[0].id;
     let resp = await Swal.fire({title:"¿Estás seguro de Editar?", text:"Esta operación se verá reflejada al aceptar", icon:"info", showCancelButton:true});
     if(resp.isConfirmed){
         console.log(zona);
@@ -206,12 +208,13 @@ const guardarR = async function(){
     var input_rubro = document.getElementById('nombre_zona');
     input_rubro.style.display = "none";
     let input_admin = document.querySelector("#cod_admin_log").name;
+    let admin = await getAdminPorUsuario(input_admin);
     let id_rubro = this.idRubro;
     let rubro = {};
     rubro.id = id_rubro;
     rubro.nom_rubro = input_rubro.value;
     rubro.fecha_edicion = cargarFechaActual();
-    rubro.cod_admin = input_admin;
+    rubro.cod_admin = admin[0].id;
     let resp = await Swal.fire({title:"¿Estás seguro de Editar?", text:"Esta operación se verá reflejada al aceptar", icon:"info", showCancelButton:true});
     if(resp.isConfirmed){
         console.log(rubro);
@@ -338,12 +341,13 @@ const guardarD = async function () {
     input_duracion.style.display = "none";
     let input_admin = document.querySelector("#cod_admin_log").name;
     let id_duracion = this.idDuracion;
+    let admin = await getAdminPorUsuario(input_admin);
 
     let duracion = {};
     duracion.id = id_duracion;
     duracion.titulo_duracion = input_duracion.value;
     duracion.fecha_edicion = cargarFechaActual();
-    duracion.cod_admin = input_admin;
+    duracion.cod_admin = admin[0].id;
     let resp = await Swal.fire({title:"¿Estás seguro de Editar?", text:"Esta operación se verá reflejada al aceptar", icon:"info", showCancelButton:true});
     if(resp.isConfirmed){
         console.log(duracion)

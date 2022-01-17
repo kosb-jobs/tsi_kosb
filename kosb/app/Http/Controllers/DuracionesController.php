@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 //DURACIONES FINALIZADOS
 use Illuminate\Http\Request;
 use App\Models\Duracion;
+use App\Models\Administrador;
 
 class DuracionesController extends Controller
 {
@@ -14,9 +15,10 @@ class DuracionesController extends Controller
     }
     public function crearDuracion(Request $request){
         $input = $request->all();
+        $admin = Administrador::where("cod_usuario", $input["cod_admin"])->get()->first();
         $duracion = new Duracion();
         $duracion->titulo_duracion=$input["titulo_duracion"];
-        $duracion->cod_admin=$input["cod_admin"];
+        $duracion->cod_admin=$admin->id;
         $duracion->fecha_edicion=$input["fecha_edicion"];
 
         $duracion->save();

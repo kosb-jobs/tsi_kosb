@@ -181,13 +181,13 @@ const cargarTablaReclamosAccioneless = async function(){
         td_id_user.textContent = u.cod_usuario;
         let td_tipo = document.createElement('td');
 
-        if(u.tipo_reclamo ="R") {
+        if(u.tipo_reclamo =="R") {
             td_tipo.textContent = "Reclamo";
-        }if(u.tipo_reclamo ="S"){
+        }if(u.tipo_reclamo =="S"){
             td_tipo.textContent = "Sugerencia";
-        }if(u.tipo_reclamo ="P"){
+        }if(u.tipo_reclamo =="P"){
             td_tipo.textContent = "Denuncia Publicación";
-        }if(u.tipo_reclamo ="U"){
+        }if(u.tipo_reclamo =="U"){
             td_tipo.textContent = "Denuncia Usuario";
         }else{
             td_tipo.textContent = "No Definido";

@@ -812,6 +812,8 @@ document.querySelector("#actualizar-usuario").addEventListener("click", async fu
     let otros = document.querySelector("#otros-rd");
     errores = [];
     let sexo = "";
+    let date = new Date(fecha_nac);
+    let fecha_actual = new Date(cargarFechaActual());
     if (nombre == "") {
         errores.push("Debe ingresar un nombre");
     }
@@ -820,7 +822,12 @@ document.querySelector("#actualizar-usuario").addEventListener("click", async fu
     }
     if (fecha_nac == 0) {
         errores.push("Debe ingresar la fecha de nacimiento");
+    }else if (fecha_nac > cargarFechaActual()) {
+        errores.push("La Fecha de nacimiento no puede ser en futuro");
+    }else if (date.getFullYear() > fecha_actual.getFullYear()-17) {
+        errores.push("Fecha de nacimiento invalida, el usuario no puede ser menos de 17 años");
     }
+     
     if (!femenino.checked && !masculino.checked && !otros.checked ) {
         errores.push("Debe seleccionar un sexo");
     }else{

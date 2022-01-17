@@ -38,6 +38,7 @@
     </div>
     <div class="bg-white m-4 p-8 rounded shadow w-full">
         <span class="text-2xl font-semibold">Registro</span>
+        {{-- <x-auth-validation-errors class="mb-4" :errors="$errors" /> --}}
         <form method="POST" class="mt-3" action="{{ route('register') }}">
             @csrf
             <!-- Name -->

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 //A REVISAR 
 use Illuminate\Http\Request;
 use App\Models\Rubro;
+use App\Models\Administrador;
 
 class RubrosController extends Controller
 {
@@ -15,9 +16,10 @@ class RubrosController extends Controller
     
     public function crearRubro(Request $request){
         $input = $request->all();
+        $admin = Administrador::where("cod_usuario", $input["cod_admin"])->get()->first();
         $rubro = new Rubro();
         $rubro->nom_rubro=$input["nom_rubro"];
-        $rubro->cod_admin=$input["cod_admin"];
+        $rubro->cod_admin=$admin->id;
         $rubro->fecha_edicion=$input["fecha_edicion"];
 
         $rubro->save();

@@ -386,20 +386,32 @@ document.querySelector('#zona-select').addEventListener('change', async()=>{
     let publicaciones = await getPublicacionZona(zona);
     let contenido_pub = document.querySelector('#container-publicacion');
     let contenedor_vista = document.querySelector('#contenedor-vista');
-  if(!contenido_pub.classList.contains('d-none')){
-    contenido_pub.classList.add('d-none');
-    contenedor_vista.classList.remove('d-none');
-  }
-  
-  if (publicaciones.length == 0) {
-    cargarContenedorSinPub();
-  } else {
+    if(!contenido_pub.classList.contains('d-none')){
+      contenido_pub.classList.add('d-none');
+      contenedor_vista.classList.remove('d-none');
+    }
+    
+    if (publicaciones.length == 0) {
+      cargarContenedorSinPub();
+    } else {
+      let zonas = await getZonas();
+      let rubros = await getRubros();
+      let duraciones = await getDuraciones();
+      publicaciones = cambio_de_variables(publicaciones,zonas,rubros,duraciones);
+      cargarContenedor(publicaciones);
+    }
+  }else if(zona == -1){
     let zonas = await getZonas();
     let rubros = await getRubros();
     let duraciones = await getDuraciones();
+    let publicaciones = await getPublicacionesNull();
     publicaciones = cambio_de_variables(publicaciones,zonas,rubros,duraciones);
-    cargarContenedor(publicaciones);
-  }
+
+    if (publicaciones.length == 0) {
+      cargarContenedorSinPub();
+    } else {
+      cargarContenedor(publicaciones);
+    }
   }
   
 });
@@ -412,20 +424,32 @@ document.querySelector('#rubro-select').addEventListener('change', async()=>{
     let publicaciones = await getPublicacionRubro(rubro);
     let contenido_pub = document.querySelector('#container-publicacion');
     let contenedor_vista = document.querySelector('#contenedor-vista');
-  if(!contenido_pub.classList.contains('d-none')){
-    contenido_pub.classList.add('d-none');
-    contenedor_vista.classList.remove('d-none');
-  }
-  
-  if (publicaciones.length == 0) {
-    cargarContenedorSinPub();
-  } else {
+    if(!contenido_pub.classList.contains('d-none')){
+      contenido_pub.classList.add('d-none');
+      contenedor_vista.classList.remove('d-none');
+    }
+    
+    if (publicaciones.length == 0) {
+      cargarContenedorSinPub();
+    } else {
+      let zonas = await getZonas();
+      let rubros = await getRubros();
+      let duraciones = await getDuraciones();
+      publicaciones = cambio_de_variables(publicaciones,zonas,rubros,duraciones);
+      cargarContenedor(publicaciones);
+    }
+  }else if(rubro == -1){
     let zonas = await getZonas();
     let rubros = await getRubros();
     let duraciones = await getDuraciones();
+    let publicaciones = await getPublicacionesNull();
     publicaciones = cambio_de_variables(publicaciones,zonas,rubros,duraciones);
-    cargarContenedor(publicaciones);
-  }
+
+    if (publicaciones.length == 0) {
+      cargarContenedorSinPub();
+    } else {
+      cargarContenedor(publicaciones);
+    }
   }
   
 });
@@ -438,20 +462,32 @@ document.querySelector('#duracion-select').addEventListener('change', async()=>{
     let publicaciones = await getPublicacionRubro(duracion);
     let contenido_pub = document.querySelector('#container-publicacion');
     let contenedor_vista = document.querySelector('#contenedor-vista');
-  if(!contenido_pub.classList.contains('d-none')){
-    contenido_pub.classList.add('d-none');
-    contenedor_vista.classList.remove('d-none');
-  }
-  
-  if (publicaciones.length == 0) {
-    cargarContenedorSinPub();
-  } else {
+    if(!contenido_pub.classList.contains('d-none')){
+      contenido_pub.classList.add('d-none');
+      contenedor_vista.classList.remove('d-none');
+    }
+    
+    if (publicaciones.length == 0) {
+      cargarContenedorSinPub();
+    } else {
+      let zonas = await getZonas();
+      let rubros = await getRubros();
+      let duraciones = await getDuraciones();
+      publicaciones = cambio_de_variables(publicaciones,zonas,rubros,duraciones);
+      cargarContenedor(publicaciones);
+    }
+  }else if(duracion == -1){
     let zonas = await getZonas();
     let rubros = await getRubros();
     let duraciones = await getDuraciones();
+    let publicaciones = await getPublicacionesNull();
     publicaciones = cambio_de_variables(publicaciones,zonas,rubros,duraciones);
-    cargarContenedor(publicaciones);
-  }
+
+    if (publicaciones.length == 0) {
+      cargarContenedorSinPub();
+    } else {
+      cargarContenedor(publicaciones);
+    }
   }
   
 });

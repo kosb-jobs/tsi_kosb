@@ -18,7 +18,7 @@
                             <a class="nav-link" href="{{route('buscar_trabajo')}}" role="tab"><ion-icon name="search-outline"></ion-icon>Búsqueda de Publicaciones</a>
                             <a class="nav-link" id="postulaciones_id" data-toggle="pill" href="#address-tab" role="tab"><ion-icon name="telescope-outline"></ion-icon>Mis Postulaciones</a>
                             <a class="nav-link" id="detalles_id" data-toggle="pill" href="#account-tab" role="tab"><ion-icon name="settings-outline"></ion-icon>Detalles De Cuenta</a>
-                            <a class="nav-link" id="reclamos_id" data-toggle="pill" href="#reclamos-tab" role="tab"><ion-icon name="alert"></ion-icon>Mis Reclamo</a>
+                            <a class="nav-link" id="reclamos_id" data-toggle="pill" href="#reclamos-tab" role="tab"><ion-icon name="alert"></ion-icon>Mis Reclamos</a>
                             <a class="nav-link" id="admin-nav" href="#"><ion-icon name="person"></ion-icon>Administrador</a>
                             {{-- <a class="nav-link" :href="route('logout')" onclick="event.preventDefault();this.closest('form').submit();">
                                         <i class="fa fa-sign-out-alt"></i>Cerrar Sesion</a>

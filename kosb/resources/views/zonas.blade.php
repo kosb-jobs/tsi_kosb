@@ -116,7 +116,8 @@
 @section('js')
     <script src="{{asset('js/servicios/zonasService.js')}}"></script>
     <script src="{{asset('js/servicios/rubrosService.js')}}"></script>
-    <script src="{{asset('js/servicios/duracionesService.js')}}"></script>    
+    <script src="{{asset('js/servicios/duracionesService.js')}}"></script>
+    <script src="{{asset('js/servicios/administradoresService.js')}}"></script>
     <script src="{{asset('js/zonas_en_admin.js')}}"></script>  
 
 @endsection

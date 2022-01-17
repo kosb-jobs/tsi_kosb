@@ -25,7 +25,7 @@ const BtnEliminarAdmin = async function(){
     let id_usuario = this.idUser;
     let id_admin = this.idAdmin;
     let input_admin = document.querySelector("#cod_admin_log").name;    
-    if (input_admin == id_admin){
+    if (input_admin == id_usuario){
         Swal.fire("Error","Un administrador no puede eliminar su propia cuenta", "error");
     }else{
         let resp = await Swal.fire({title:"¿Estás seguro de eliminar?", html:`<div class="row">El usuario a borrar tiene código administrador ${id_admin}, y código de usuario ${id_usuario} .</div> <div class="row">Recuerde que esta operación es irreversible</row>`, icon:"question", showCancelButton:true});
@@ -113,12 +113,12 @@ const eliminarUsuarioBTN = async function(){
                 location.reload();
             }
 
-        }else if (respuesta == false){
-            await Swal.fire("Usuario Administrador","No tiene permisos para eliminar este usuario", "info");
+        }else if (respuesta != false){
+            await Swal.fire("UPS!, Error no se pudo atender la solicitud", respuesta, "error");
             
         }else{
-            await Swal.fire("UPS!, Error", "No se pudo atender la solicitud", "error");
-            //location.reload();
+            
+            await Swal.fire("Usuario Administrador","No tiene permisos para eliminar este usuario", "info");
         }
     }
 }
