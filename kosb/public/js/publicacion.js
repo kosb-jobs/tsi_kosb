@@ -351,9 +351,15 @@ cargarContenedorSinPub = ()=>{
 }
 document.querySelector('#search-btn').addEventListener('click', async()=>{
   let texto_busq = document.querySelector('#search-txt').value.trim();
-  let publicaciones = await getPublicacionSearch(texto_busq);
+  document.querySelector('#rubro-select').value = -1;
+  document.querySelector("#duracion-select").value = -1;
+  document.querySelector("#zona-select").value = -1;
+  let zona = document.querySelector('#zona-select').value;
+  let rubro = document.querySelector("#rubro-select").value;
+  let duracion = document.querySelector("#duracion-select").value;
   let contenido_pub = document.querySelector('#container-publicacion');
   let contenedor_vista = document.querySelector('#contenedor-vista');
+  let publicaciones = await getPublicacionSearch(texto_busq);
   if(!contenido_pub.classList.contains('d-none')){
     contenido_pub.classList.add('d-none');
     contenedor_vista.classList.remove('d-none');
@@ -371,6 +377,84 @@ document.querySelector('#search-btn').addEventListener('click', async()=>{
   console.log();
 });
 
+
+document.querySelector('#zona-select').addEventListener('change', async()=>{
+  let zona = document.querySelector('#zona-select').value;
+  document.querySelector('#rubro-select').value = -1;
+  document.querySelector("#duracion-select").value = -1;
+  if (zona != -1){
+    let publicaciones = await getPublicacionZona(zona);
+    let contenido_pub = document.querySelector('#container-publicacion');
+    let contenedor_vista = document.querySelector('#contenedor-vista');
+  if(!contenido_pub.classList.contains('d-none')){
+    contenido_pub.classList.add('d-none');
+    contenedor_vista.classList.remove('d-none');
+  }
+  
+  if (publicaciones.length == 0) {
+    cargarContenedorSinPub();
+  } else {
+    let zonas = await getZonas();
+    let rubros = await getRubros();
+    let duraciones = await getDuraciones();
+    publicaciones = cambio_de_variables(publicaciones,zonas,rubros,duraciones);
+    cargarContenedor(publicaciones);
+  }
+  }
+  
+});
+
+document.querySelector('#rubro-select').addEventListener('change', async()=>{
+  let rubro = document.querySelector('#rubro-select').value;
+  document.querySelector('#duracion-select').value = -1;
+  document.querySelector("#zona-select").value = -1;
+  if (rubro != -1){
+    let publicaciones = await getPublicacionRubro(rubro);
+    let contenido_pub = document.querySelector('#container-publicacion');
+    let contenedor_vista = document.querySelector('#contenedor-vista');
+  if(!contenido_pub.classList.contains('d-none')){
+    contenido_pub.classList.add('d-none');
+    contenedor_vista.classList.remove('d-none');
+  }
+  
+  if (publicaciones.length == 0) {
+    cargarContenedorSinPub();
+  } else {
+    let zonas = await getZonas();
+    let rubros = await getRubros();
+    let duraciones = await getDuraciones();
+    publicaciones = cambio_de_variables(publicaciones,zonas,rubros,duraciones);
+    cargarContenedor(publicaciones);
+  }
+  }
+  
+});
+
+document.querySelector('#duracion-select').addEventListener('change', async()=>{
+  let duracion = document.querySelector('#duracion-select').value;
+  document.querySelector('#rubro-select').value = -1;
+  document.querySelector("#zona-select").value = -1;
+  if (duracion != -1){
+    let publicaciones = await getPublicacionRubro(duracion);
+    let contenido_pub = document.querySelector('#container-publicacion');
+    let contenedor_vista = document.querySelector('#contenedor-vista');
+  if(!contenido_pub.classList.contains('d-none')){
+    contenido_pub.classList.add('d-none');
+    contenedor_vista.classList.remove('d-none');
+  }
+  
+  if (publicaciones.length == 0) {
+    cargarContenedorSinPub();
+  } else {
+    let zonas = await getZonas();
+    let rubros = await getRubros();
+    let duraciones = await getDuraciones();
+    publicaciones = cambio_de_variables(publicaciones,zonas,rubros,duraciones);
+    cargarContenedor(publicaciones);
+  }
+  }
+  
+});
 
 document.querySelector("#ingresar-reclamo-btn").addEventListener('click', async()=>{
   let tit_reclamo = document.querySelector("#titulo-reclamo").value;

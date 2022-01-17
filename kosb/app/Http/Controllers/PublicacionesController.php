@@ -60,7 +60,28 @@ class PublicacionesController extends Controller
     public function filtroPublicacionText(Request $request){
         $input = $request->all();
         $filtro = $input["filtro"];
-        $publicaciones = Publicacion::where("titulo_publicacion","LIKE","%".$filtro."%")->orWhere("descripcion","LIKE","%".$filtro."%")->get();
+        $publicaciones = Publicacion::where("titulo_publicacion","LIKE","%".$filtro."%")
+        ->orWhere("descripcion","LIKE","%".$filtro."%")
+        ->get();
+        return $publicaciones;
+    }
+    public function filtroPublicacionSelectZona(Request $request){
+        $input = $request->all();
+        $filtro = $input["filtro"];
+        $publicaciones = Publicacion::where("cod_zona",$filtro)->get();
+        return $publicaciones;
+    }
+
+    public function filtroPublicacionSelectRubro(Request $request){
+        $input = $request->all();
+        $filtro = $input["filtro"];
+        $publicaciones = Publicacion::where("cod_rubro",$filtro)->get();
+        return $publicaciones;
+    }
+    public function filtroPublicacionSelectDuracion(Request $request){
+        $input = $request->all();
+        $filtro = $input["filtro"];
+        $publicaciones = Publicacion::where("cod_rubro",$filtro)->get();
         return $publicaciones;
     }
 
@@ -79,7 +100,7 @@ class PublicacionesController extends Controller
         $publicacion = Publicacion::where("id",$cod_publicacion)->get()->first();
         if (count($postulaciones) == 0 and $publicacion->estado != 'FPP'){
             $ofertante_ = Ofertante::where("cod_usuario",$publicacion->cod_usuario)->get()->first();
-            $ofertante_->publicaciones_activas = $ofertante_->publicaciones_activas - 1;
+            $ofertante_->publicaciones_activas = $ofertante_->publicaciones_activas == 0? 0: $ofertante_->publicaciones_activas - 1;
             $ofertante_->save();
 
             $publicacion->delete();

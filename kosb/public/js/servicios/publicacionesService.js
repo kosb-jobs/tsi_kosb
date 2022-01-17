@@ -42,6 +42,24 @@ const getPublicacionSearch = async (filtro)=>{
     return resp.data;
 };
 
+const getPublicacionZona = async (filtro)=>{
+    let resp;
+    resp = await axios.get(`api/publicaciones/get/zona?filtro=${filtro}`);
+    return resp.data;
+};
+
+const getPublicacionRubro = async (filtro)=>{
+    let resp;
+    resp = await axios.get(`api/publicaciones/get/rubro?filtro=${filtro}`);
+    return resp.data;
+};
+
+const getPublicacionDuracion = async (filtro)=>{
+    let resp;
+    resp = await axios.get(`api/publicaciones/get/duracion?filtro=${filtro}`);
+    return resp.data;
+};
+
 const eliminarPublicacion = async(id)=>{
     try{
         let resp = await axios.post("api/publicaciones/delete",{id},{

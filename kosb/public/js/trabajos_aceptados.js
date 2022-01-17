@@ -151,23 +151,29 @@ const evaluarTrabajador = async function(){
             puntuacion.comentario=input_descr; 
             console.log(puntuacion);
     
-            if (numero==0 || input_descr==" " || input_descr=="" ||input_descr==null ){
+            if (numero==0){
                 await Swal.fire({
                     title: "Error al Puntuar",
-                    icon: "error",
+                    icon: "warning",
                     text: "Debe Ingresar Los Datos Superiores ¡Las Estrellas!",
                 });
                 
+            }else if(input_descr==" " || input_descr=="" ||input_descr==null){
+                await Swal.fire({
+                    title: "Error al Puntuar",
+                    icon: "warning",
+                    text: "Debe Ingresar una descripción",
+                });
             }else{
                 if (respuesta !=false) {
                     await Swal.fire({
                         title: "Error al Puntuar",
                         icon: "error",
-                        text: "Puntuacion Ya Asignada ¡Genial!",
+                        text: "Puntuación Ya Asignada ¡Genial!",
                     });
     
                 }else{
-                    let resp = await Swal.fire({title:"Puntuacion A Asignar", text:`Se va a puntuar al usuario con ${numero} estrellas`, icon:"question", showCancelButton:true});
+                    let resp = await Swal.fire({title:"Puntuación A Asignar", text:`Se va a puntuar al usuario con ${numero} estrellas`, icon:"question", showCancelButton:true});
                     if(resp.isConfirmed){
                         if (await crearPuntuacion(puntuacion) != false){
                             
