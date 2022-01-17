@@ -132,6 +132,8 @@ const evaluarTrabajador = async function(){
   
     });
 
+    
+
 
 }
 
@@ -186,23 +188,31 @@ const BtnPuntuarUsuario = async function(){
         let respuesta = await getPuntuacionPorPublicacion(cod_publicacion);
         console.log("HolaSoyLaRespuesta");
         console.log(respuesta);
-        if (respuesta !=false) {
+        let input_descr = tinymce.get("descripcion-txt").getContent();
+        let puntuacion ={}; 
+        puntuacion.id_user=cod_usuario;
+        puntuacion.id_publicaciones=cod_publicacion;
+        puntuacion.id_postulaciones=cod_postulacion;
+        puntuacion.puntuacion=numero;
+        puntuacion.comentario=input_descr; 
+        console.log(puntuacion);
+
+        if (numero==0 || input_descr==" " || input_descr=="" ||input_descr==null ){
             await Swal.fire({
-                title: "Error al Eliminar",
+                title: "Error al Puntuar",
                 icon: "error",
-                text: "Puntuacion Ya Asignada ¡Genial!",
+                text: "Debe Ingresar Los Datos Superiores ¡Las Estrellas!",
             });
             
-        }else{            
-            if (numero!=0){
-                let input_descr = tinymce.get("descripcion-txt").getContent();
-                let puntuacion ={}; 
-                puntuacion.id_user=cod_usuario;
-                puntuacion.id_publicaciones=cod_publicacion;
-                puntuacion.id_postulaciones=cod_postulacion;
-                puntuacion.puntuacion=numero;
-                puntuacion.comentario=input_descr; 
-                console.log(puntuacion);
+        }else{
+            if (respuesta !=false) {
+                await Swal.fire({
+                    title: "Error al Puntuar",
+                    icon: "error",
+                    text: "Puntuacion Ya Asignada ¡Genial!",
+                });
+
+            }else{
                 let resp = await Swal.fire({title:"Puntuacion A Asignar", text:`Se va a puntuar al usuario con ${numero} estrellas`, icon:"question", showCancelButton:true});
                 if(resp.isConfirmed){
                     if (await crearPuntuacion(puntuacion) != false){
@@ -215,18 +225,17 @@ const BtnPuntuarUsuario = async function(){
                         
                     }
                 }
-                
 
-            }else{
-                console.log("No se creo nada");
-
-            }    
+            }
+                          
+  
         }    
 
 
-        location.reload();
+        
 
     });
+
 
 }
 
