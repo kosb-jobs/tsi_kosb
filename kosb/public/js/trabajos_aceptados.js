@@ -211,6 +211,7 @@ const evaluarTrabajador = async function(){
                             let obj_puntuacion ={};
                             obj_puntuacion.cod_usuario=id_usuario_creador;
                             obj_puntuacion.puntuacion=nueva_puntuacion;
+                            console.log(obj_puntuacion);
                             await actualizarPuntuacionOfertante(obj_puntuacion);
                             
                             
