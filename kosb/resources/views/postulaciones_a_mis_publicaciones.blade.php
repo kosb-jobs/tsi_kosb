@@ -69,7 +69,7 @@
             
     
             <a class="btn" id="btn_crear_puntuacion">Puntuar</a>
-            <input class="btn" value="Volver" onClick="history.go(-1);">
+            <input class="btn" value="Volver" onClick="location.reload();">
 
           </div>
         </div>
