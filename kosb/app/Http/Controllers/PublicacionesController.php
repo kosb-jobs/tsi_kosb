@@ -60,7 +60,28 @@ class PublicacionesController extends Controller
     public function filtroPublicacionText(Request $request){
         $input = $request->all();
         $filtro = $input["filtro"];
-        $publicaciones = Publicacion::where("titulo_publicacion","LIKE","%".$filtro."%")->orWhere("descripcion","LIKE","%".$filtro."%")->get();
+        $publicaciones = Publicacion::where("titulo_publicacion","LIKE","%".$filtro."%")
+        ->orWhere("descripcion","LIKE","%".$filtro."%")
+        ->get();
+        return $publicaciones;
+    }
+    public function filtroPublicacionSelectZona(Request $request){
+        $input = $request->all();
+        $filtro = $input["filtro"];
+        $publicaciones = Publicacion::where("cod_zona",$filtro)->get();
+        return $publicaciones;
+    }
+
+    public function filtroPublicacionSelectRubro(Request $request){
+        $input = $request->all();
+        $filtro = $input["filtro"];
+        $publicaciones = Publicacion::where("cod_rubro",$filtro)->get();
+        return $publicaciones;
+    }
+    public function filtroPublicacionSelectDuracion(Request $request){
+        $input = $request->all();
+        $filtro = $input["filtro"];
+        $publicaciones = Publicacion::where("cod_rubro",$filtro)->get();
         return $publicaciones;
     }
 

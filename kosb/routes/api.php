@@ -100,6 +100,9 @@ Route::post("publicaciones/update",[PublicacionesController::class,"actualizarPu
 Route::post("publicaciones/estado",[PublicacionesController::class,"cambiarEstadoPub"]);
 Route::get("publicaciones/get/estado",[PublicacionesController::class,"filtroPublicacionUserAcep"]);
 Route::get("publicaciones/get",[PublicacionesController::class,"getPublicaciones"]);
+Route::get("publicaciones/get/zona",[PublicacionesController::class,"filtroPublicacionSelectZona"]);
+Route::get("publicaciones/get/rubro",[PublicacionesController::class,"filtroPublicacionSelectRubro"]);
+Route::get("publicaciones/get/duracion",[PublicacionesController::class,"filtroPublicacionSelectDuracion"]);
 Route::get("publicaciones/get/null",[PublicacionesController::class,"getPublicacionesNull"]);
 Route::get("publicaciones/get/text",[PublicacionesController::class,"filtroPublicacionText"]);
 Route::get("publicaciones/get/id",[PublicacionesController::class,"filtroPublicacionId"]);

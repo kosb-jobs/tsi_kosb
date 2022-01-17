@@ -218,37 +218,37 @@
 									<a class="nav-link" id="t-largo-plazo" href="#"><i class="fa fa-largo"></i>Trabajos Largo Plazo</a>
 								</li>
 								<li class="nav-item">
-									<select name="zona" id="zona" class="w-48  p-1 border-transparent bg-gray-200 shadow-inner form-control">
-										<option value="-1">Ninguna</option>
+									<select name="zona" id="zona-select" class="w-48  p-1 border-transparent bg-gray-200 shadow-inner form-control">
+										<option value="-1">Zona</option>
 										@foreach ($zonas as $zona)
 											@if ($zona->nombre == request('zona'))
-												<option value="{{$zona->nom_zona}}">{{$zona->nom_zona}}</option>
+												<option value="{{$zona->id}}">{{$zona->nom_zona}}</option>
 											@else
-												<option value="{{$zona->nom_zona}}">{{$zona->nom_zona}}</option>
+												<option value="{{$zona->id}}">{{$zona->nom_zona}}</option>
 											@endif
 										@endforeach
 									</select>
 								</li>
 								<li class="nav-item">
-									<select name="rubro" id="rubro" class="w-48 form-control p-1 border-transparent bg-gray-200 shadow-inner">
-										<option value="-1">Ninguna</option>
+									<select name="rubro" id="rubro-select" class="w-48 form-control p-1 border-transparent bg-gray-200 shadow-inner">
+										<option value="-1">Rubro</option>
 										@foreach ($rubros as $rubro)
 											@if ($rubro->nombre == request('rubro'))
-												<option value="{{$rubro->nom_rubro}}">{{$rubro->nom_rubro}}</option>
+												<option value="{{$rubro->id}}">{{$rubro->nom_rubro}}</option>
 											@else
-												<option value="{{$rubro->nom_rubro}}">{{$rubro->nom_rubro}}</option>
+												<option value="{{$rubro->id}}">{{$rubro->nom_rubro}}</option>
 											@endif
 										@endforeach
 									</select>
 								</li>
 								<li class="nav-item">
-									<select name="duracion" id="duracion" class="w-48 form-control p-1 border-transparent bg-gray-200 shadow-inner">
-										<option value="-1">Ninguna</option>
+									<select name="duracion" id="duracion-select" class="w-48 form-control p-1 border-transparent bg-gray-200 shadow-inner">
+										<option value="-1">Duración</option>
 										@foreach ($duraciones as $duracion)
 											@if ($duracion->nombre == request('duracion'))
-												<option value="{{$duracion->titulo_duracion}}">{{$duracion->titulo_duracion}}</option>
+												<option value="{{$duracion->id}}">{{$duracion->titulo_duracion}}</option>
 											@else
-												<option value="{{$duracion->titulo_duracion}}">{{$duracion->titulo_duracion}}</option>
+												<option value="{{$duracion->id}}">{{$duracion->titulo_duracion}}</option>
 											@endif
 										@endforeach
 									</select>
