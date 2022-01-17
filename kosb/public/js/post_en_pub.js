@@ -195,6 +195,8 @@ const BtnPuntuarUsuario = async function(){
     let cod_publicacion = this.cod_publicacion;
     let cod_postulacion = this.cod_postulacion;
     let tabla = document.querySelector("#tabla_trabajadores");
+    let postulantes = await getPostulAceptadasPorPublicacion(cod_publicacion);
+    let cantidad_postulantes = postulantes.length;
     tabla.classList.add("d-none");
     document.querySelector("#puntuar_container").classList.remove("d-none");
 
@@ -248,7 +250,12 @@ const BtnPuntuarUsuario = async function(){
         puntuacion.comentario=input_descr; 
         
         respuesta.forEach(async u => {
-            if (u.id_user==cod_usuario){
+            if (u.id_user==cod_usuario && cantidad_postulantes==u.length){
+                console.log("SALIDA DE DATOS DEL FOR EACH");
+                console.log(u.id_user);
+                console.log(cod_usuario);
+                console.log(cantidad_postulantes);
+                console.log(u.length);
                 validador=1;
             }
 
@@ -281,6 +288,7 @@ const BtnPuntuarUsuario = async function(){
                     if (await crearPuntuacion(puntuacion) != false){
                         
                         Swal.fire("Usuario Puntuado","Se han dado las estrellas exitosamente", "info");
+                        location.reload();
                         /*AQUI SE ACTUALIZARA PUNTUACION DE UNA PUBLICACION*/
                         let puntuaciones_user=await getPuntuacionPorUsuario(cod_usuario); /*Todas las puntuaciones del usuario*/        
                         console.log("SOY EL PUNTUACIONES USER LARGO");                                        
