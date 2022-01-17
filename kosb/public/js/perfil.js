@@ -481,9 +481,9 @@ const cargarTablaPostulaciones = (postulaciones)=>{
         if (p.aceptacion == null) {
             td2.innerHTML = "Sin Respuesta";
         }else if(p.aceptacion == 0){
-            td2.innerHTML += 'Solucitud Rechazada';
+            td2.innerHTML += 'Solicitud Rechazada';
         }else if(p.aceptacion == 1){
-            td2.innerHTML += 'Solucitud Aceptada';
+            td2.innerHTML += 'Solicitud Aceptada';
         }
         
         let td3 = document.createElement("td");

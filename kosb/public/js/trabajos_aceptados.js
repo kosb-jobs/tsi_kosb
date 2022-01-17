@@ -321,7 +321,7 @@ document.addEventListener('DOMContentLoaded',async()=>{
             text: "Postula a un trabajo o espera a que una postulación tuya sea aceptada"
         });
     }else{
-        contenido_pub.innerHTML = `<code class="">Seleccione una publicación</code>`;
+        contenido_pub.innerHTML = `<code class="">Seleccione una postulación</code>`;
         cargar_lista_post(postulaciones);
     }
 });
