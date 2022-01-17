@@ -152,12 +152,7 @@ const evaluarTrabajador = async function(){
         td_correo.textContent = datos.email; 
         let td_puntuacion= document.createElement('td');
         td_puntuacion.textContent = datos.puntuacion_trabajador;  
-        console.log("U.ID");
-        console.log(u.id);
-        console.log("DATOS");
-        console.log(datos);
-        console.log("u");
-        console.log(u);
+
 
            
                     
@@ -217,23 +212,23 @@ const BtnPuntuarUsuario = async function(){
     document.querySelector('#star-widget').addEventListener('change',()=>{
         console.log("ENTRA EN QUERY SELECTOR");
         if (opcion1.checked){
-            console.log('La opcion seleccionada es 1');
+            
             numero = 1;
         }else if(opcion2.checked){
-            console.log('La opcion seleccionada es 2');
+            
             numero = 2;
         }else if(opcion3.checked){
-            console.log('La opcion seleccionada es 3');
+            
             numero = 3;
         }else if(opcion4.checked){
-            console.log('La opcion seleccionada es 4');
+            
             numero = 4;
         }
         else if(opcion5.checked){
-            console.log('La opcion seleccionada es 5');
+            
             numero = 5;
         }else{
-            console.log('No se ha seleccionado nada');
+            
             numero = 0;
         }  
 
@@ -241,9 +236,9 @@ const BtnPuntuarUsuario = async function(){
 
     document.querySelector('#btn_crear_puntuacion').addEventListener('click',async function(){
 
-        let respuesta = await getPuntuacionPorPublicacion(cod_publicacion);
-        console.log("HolaSoyLaRespuesta");
-        console.log(respuesta);
+        let respuesta = await getPuntuacionPorPublicacion(cod_publicacion);        
+
+        let validador=0;        
         let input_descr = tinymce.get("descripcion-txt").getContent();
         let puntuacion ={}; 
         puntuacion.id_user=cod_usuario;
@@ -251,7 +246,13 @@ const BtnPuntuarUsuario = async function(){
         puntuacion.id_postulaciones=cod_postulacion;
         puntuacion.puntuacion=numero;
         puntuacion.comentario=input_descr; 
-        console.log(puntuacion);
+        
+        respuesta.forEach(async u => {
+            if (u.id_user==cod_usuario){
+                validador=1;
+            }
+
+        });
 
         if (numero==0 || input_descr==" " || input_descr=="" ||input_descr==null ){
             await Swal.fire({
@@ -261,7 +262,7 @@ const BtnPuntuarUsuario = async function(){
             });
             
         }else{
-            if (respuesta !=false) {
+            if (respuesta !=false && validador==1) {
                 await Swal.fire({
                     title: "Error al Puntuar",
                     icon: "error",
