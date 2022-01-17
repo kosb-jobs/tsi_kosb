@@ -92,7 +92,8 @@
 
 
 @section('js')
-    <script src="{{asset('js/servicios/reclamosService.js')}}"></script>   
+    <script src="{{asset('js/servicios/reclamosService.js')}}"></script>
+    <script src="{{asset('js/servicios/administradoresService.js')}}"></script>  
     <script src="{{asset('js/reclamos_en_admin.js')}}"></script>  
 
 @endsection
