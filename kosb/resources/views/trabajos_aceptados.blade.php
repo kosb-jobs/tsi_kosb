@@ -23,6 +23,38 @@
         <div class="" id="contenido-de-publicacion">
           
         </div>
+        <div class="d-none card text-center" id="puntuar_container">
+          <div class="card-body text-center">
+            <h4 class="card-title">Puntuación</h4>
+            <div class="container_star text-center">
+              <div class="star-widget text-center" id="star-widget">
+  
+                  <input type="radio" name="rate" id="rate-5">
+                  <label for="rate-5" class="fas fa-star"></label>
+  
+                  <input type="radio" name="rate" id="rate-4">
+                  <label for="rate-4" class="fas fa-star"></label>
+  
+                  <input type="radio" name="rate" id="rate-3">
+                  <label for="rate-3" class="fas fa-star"></label>
+  
+                  <input type="radio" name="rate" id="rate-2">
+                  <label for="rate-2" class="fas fa-star"></label>
+  
+                  <input type="radio" name="rate" id="rate-1">
+                  <label for="rate-1" class="fas fa-star"></label>
+                </div>
+            </div>
+      
+            <div class="texto_puntuacion text-start">
+                <h5 class="card-title">Ingrese Descripcion</h5>
+                <textarea  id="descripcion-txt" class=""></textarea>
+            </div>
+    
+            <button class="btn" id="btn_crear_puntuacion">Puntuar</button>
+            <input class="btn" value="Volver" onClick="window.location.href = 'trabajos_aceptados';">
+          </div>
+        </div>
       </div>
     </div>
   </div>

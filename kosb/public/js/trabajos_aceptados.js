@@ -1,12 +1,53 @@
+tinymce.init({
+    selector: '#descripcion-txt',
+    language: 'es',
+    height: 200,
+    menubar: false,
+    plugins: [
+      'advlist autolink lists link image charmap print preview anchor',
+      'searchreplace visualblocks code fullscreen',
+      'insertdatetime media table paste code help wordcount'
+    ],
+    toolbar: 'undo redo | formatselect | ' +
+    'bold italic backcolor | alignleft aligncenter ' +
+    'alignright alignjustify | bullist numlist outdent indent | ' +
+    'removeformat | help',
+    content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+    
+  });
+  
+let id_publicacion = null;
+let id_usuario_creador = null;
+let id_post = null;
 const cargar_postulacion = async function(){
-    let id_post = this.idPost
-    let post = await getPostulacionInfoCompleta(id_post);
-    console.log(post);
+    let id_post_ = this.idPost;
+    let post = await getPostulacionInfoCompleta(id_post_);
+    
     let string = String(post['publicacion'].descripcion);
     
     
     let descripcion = string.substring(3,string.length-4);
+    let sexo_user = post["usuario_creador"].sexo;
+    if(post["usuario_creador"].sexo == "F"){
+        sexo_user = "Femenino";
+    }else if(post["usuario_creador"].sexo == "M"){
+        sexo_user = "Masculino";
+    }else if(post["usuario_creador"].sexo == null){
+        sexo_user = "No asignado";
+    }else{
+        sexo_user = "Otro";
+    }
 
+    let tipo_oferta;
+    if(post["publicacion"].tipo_oferta == "C"){
+        tipo_oferta = "Corto plazo";
+    }else if(post["usuario_creador"].sexo == "E"){
+        tipo_oferta = "Esporádico";
+    }else if(post["usuario_creador"].sexo == "L"){
+        tipo_oferta = "Largo plazo";
+    }else{
+        tipo_oferta = "No asignado";
+    }
 
     let contenido_pub = document.querySelector('#contenido-de-publicacion');
     //contenido_pub.innerText = pub.id;
@@ -25,21 +66,18 @@ const cargar_postulacion = async function(){
             <div class="col-12 col-md-6 col-lg-6">
                 <p class="text-sm">Publicación</p></br>
             </div>
-            <div class="col-12 col-md col-lg"><p class="ms-4">holas</p></div>
+            <div class="col-12 col-md col-lg ms-5"><p class="text-sm">Usuario Ofertante</p></div>
             <div class="col-12 col-md-6 col-lg-6 border border-secondary pt-3 pb-3 ps-3 ms-2 me-5" style="border-radius: 5px">
                 <h5 class="card-title mb-4">${post["publicacion"].titulo_publicacion}</h5>
                 <p class="">Fechas: desde ${post["publicacion"].fecha_ini} hasta ${post["publicacion"].fecha_fin}</p>
                 <p >Descripción: ${descripcion}</p>
-                <p>Duración: ${post["publicacion"].cod_duracion}</p>
-                <p class="">Tipo de Oferta: ${post["postulacion"].tipo_oferta}</p>
+                <p class="">Tipo de Oferta: ${tipo_oferta}</p>
             </div>
             
             <div class="col-12 col-md col-lg border border-secondary p-3" style="border-radius: 5px">
                 <h5 class="card-title mb-4">Nombre: ${post["usuario_creador"].name} ${post["usuario_creador"].apellido == null? "": post["usuario_creador"].apellido}</h5>
                 <p class="">Correo: ${post["usuario_creador"].email}</p>
-                <p >Descripción: ${descripcion}</p>
-                <p>Duración: ${post["usuario_creador"].cod_duracion}</p>
-                <p class="">Tipo de Oferta: ${post["usuario_creador"].tipo_oferta}</p>
+                <p >Sexo: ${sexo_user}</p>
             </div>
             
         </div>
@@ -47,119 +85,91 @@ const cargar_postulacion = async function(){
 </div>
 `;
     contenido_pub.innerHTML = elemento;
-    let btn_evaluar=document.querySelector("#evaluar_ofertante");
-    btn_evaluar.addEventListener("click",evaluarTrabajador);
-    //btn_evaluar.id_pub=id_pub;
+    let btn_evaluar = document.querySelector("#evaluar_ofertante");
+    btn_evaluar.addEventListener("click", evaluarTrabajador);
+    id_usuario_creador = post["usuario_creador"].id;
+    id_post = post["postulacion"].id;
+    id_publicacion = post["publicacion"].id;
     //btn_evaluar.largo = cant_trab;
     
     
 }
 
 const evaluarTrabajador = async function(){    
-    let id_pub = this.id_pub;
-    let trabajadores = await getPostulAceptadasPorPublicacion(id_pub);
-    let cantidad = this.largo;
+    let usuario_ofertante = await getPostulAceptadasPorPublicacion(id_usuario_creador);
     console.log(trabajadores);
-    console.log(cantidad);
-    
-    for (let i=0; i < cantidad; i++){
-        console.log(trabajadores[i]);
-        let usuario = trabajadores[i].cod_usuario;
-        let datos = await getDatosCompletosPorUser(usuario);
-        await Swal.fire({
-            title: `Evaluando Trabajador`,
-            html: ` 
-            <table>
-                <tr>
-                    <td><a style="font-size: 1.5em; padding-right: 2px ;"><b><ion-icon name="person-circle-outline"></ion-icon></b></a></td>
-                </tr>
-                <tr>
-                    <td id="alertas"><a><b>Nombre: </b>${datos.name} ${datos.apellido}</a></td>
-                </tr>
-                
-                <tr>
-                    <td><a style="font-size: 1.5em; padding-right: 2px ;"><b><ion-icon name="mail-outline"></ion-icon></b></a></td>
-                </tr>
-                <tr>
-                    <td><a><b>Email: </b>${datos.email} </a></td>
-                </tr>
-        
-                <tr>
-                    <td><a style="font-size: 1.5em; padding-right: 2px ;"><ion-icon name="star-half-outline"></ion-icon></b></a></td>
-                </tr>
-                <tr>
-                    <td><a><b>Puntuación Total Ofertante: </b> ${datos.puntuacion_trabajador}</a></td>
-                </tr>    
-
-                <tr>
-                    <td>
-                    <div class="container_star" >
-                        <div class="star-widget" id="star-widget">
-
-                            <input type="radio" name="rate" id="rate-5">
-                            <label for="rate-5" class="fas fa-star"></label>
-
-                            <input type="radio" name="rate" id="rate-4">
-                            <label for="rate-4" class="fas fa-star"></label>
-
-                            <input type="radio" name="rate" id="rate-3">
-                            <label for="rate-3" class="fas fa-star"></label>
-
-                            <input type="radio" name="rate" id="rate-2">
-                            <label for="rate-2" class="fas fa-star"></label>
-
-                            <input type="radio" name="rate" id="rate-1">
-                            <label for="rate-1" class="fas fa-star"></label>
-
-                        </div>
-                    </div>
-                    </td>
-                </tr>
-            
-
-
-            
-            
-            </table>
-        
-            `,
-            confirmButtonText: "Evaluar",
-            width: 600,
-            
-            padding: '1em',
-            color: '#5089C3',
-            
-            backdrop: `
-            rgba(0,0,123,0.4)                            
-            left top
-            no-repeat
-            `
-        }) .then  
-        let opcion5 = document.querySelector('#rate-5');
-        let opcion4 = document.querySelector('#rate-4');
-        let opcion3 = document.querySelector('#rate-3');
-        let opcion2 = document.querySelector('#rate-2');
-        let opcion1 = document.querySelector('#rate-1');
-        
-        document.querySelector('#star-widget').addEventListener('change',()=>{
-            if (opcion1.checked){
-                console.log('La opcion seleccionada es 1');
-            }else if(opcion2.checked){
-                console.log('La opcion seleccionada es 2');
-            }else if(opcion3.checked){
-                console.log('La opcion seleccionada es 3');
-            }else if(opcion4.checked){
-                console.log('La opcion seleccionada es 4');
-            }
-            else if(opcion5.checked){
-                console.log('La opcion seleccionada es 5');
-            }else{
-                console.log('No se ha seleccionado nada');
-            }
-        })
-    }
+    let tabla = document.querySelector("#contenido-de-publicacion");
+    tabla.classList.add("d-none");
+    document.querySelector("#puntuar_container").classList.remove("d-none");
+    console.log("Holas");
 }
 
+let opcion5 = document.querySelector('#rate-5');
+let opcion4 = document.querySelector('#rate-4');
+let opcion3 = document.querySelector('#rate-3');
+let opcion2 = document.querySelector('#rate-2');
+let opcion1 = document.querySelector('#rate-1');
+let numero = 0;
+
+
+document.querySelector('#star-widget').addEventListener('change',()=>{
+    console.log("ENTRA EN QUERY SELECTOR");
+    if (opcion1.checked){
+        console.log('La opcion seleccionada es 1');
+        numero = 1;
+    }else if(opcion2.checked){
+        console.log('La opcion seleccionada es 2');
+        numero = 2;
+    }else if(opcion3.checked){
+        console.log('La opcion seleccionada es 3');
+        numero = 3;
+    }else if(opcion4.checked){
+        console.log('La opcion seleccionada es 4');
+        numero = 4;
+    }
+    else if(opcion5.checked){
+        console.log('La opcion seleccionada es 5');
+        numero = 5;
+    }else{
+        console.log('No se ha seleccionado nada');
+        numero = 0;
+    }  
+
+});  
+
+document.querySelector('#btn_crear_puntuacion').addEventListener('click',async function(){
+    if (numero!=0){
+        let input_descr = tinymce.get("descripcion-txt").getContent();
+        let puntuacion ={}; 
+        puntuacion.id_user=cod_usuario;
+        puntuacion.id_publicaciones=cod_publicacion;
+        puntuacion.id_postulaciones=cod_postulacion;
+        puntuacion.puntuacion=numero;
+        puntuacion.comentario=input_descr; 
+        console.log(puntuacion);
+        let resp = await Swal.fire({title:"Puntuacion A Asignar", text:`Se va a puntuar al usuario con ${numero} estrellas`, icon:"question", showCancelButton:true});
+        if(resp.isConfirmed){
+            if (await crearPuntuacion(puntuacion) != false){
+                
+                Swal.fire("Usuario Puntuado","Se han dado las estrellas exitosamente", "info");
+                location.reload();
+                
+            }else{
+                Swal.fire("UPS!, Error", "No se pudo atender la solicitud", "error");
+                location.reload();
+            }
+        }
+        
+
+    }else{
+        console.log("No se creo nada");
+
+    }        
+
+
+
+
+});
 
 const reajusteDeContenidoPubs = async (publicaciones)=>{
     //INTENTA CAMBIAR EL CONTENIDO DE ALGUNOS ATRIBUTOS DE PUBLICACION
