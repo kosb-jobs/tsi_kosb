@@ -205,7 +205,7 @@ document.querySelector("#btn-vista-previa").addEventListener("click", async()=>{
         t_oferta = "E";
       }else if (dias_totales >= 122){
         t_oferta = "L";
-      }else if (dias_totales <= 31){
+      }else if (dias_totales > 7 && dias_totales < 122){
         t_oferta = "C";
       }
       publicacion.tipo_oferta = t_oferta;

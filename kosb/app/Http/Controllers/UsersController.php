@@ -97,11 +97,19 @@ class UsersController extends Controller
         $input = $request->all();
         $admin = Administrador::where('cod_usuario',$input['id'])->get();
         if(count($admin) == 0){
-            Postulacion::where("cod_usuario",$input["id"])->delete();
-            Publicacion::where("cod_usuario",$input["id"])->delete();
-            $usuario = User::findOrFail($input["id"]);
-            $usuario->delete();
-            return 'ok';
+            $post_proceso = Postulacion::where("cod_usuario", $input["id"])->where("aceptacion",1)->get();
+            $pub_proceso  = Publicacion::where("cod_usuario", $input["id"])->where("estado", "FPP")->get();
+            if (count($post_proceso) == 0 && count($pub_proceso) == 0){
+                Postulacion::where("cod_usuario",$input["id"])->delete();
+                Publicacion::where("cod_usuario",$input["id"])->delete();
+                $usuario = User::findOrFail($input["id"]);
+                $usuario->delete();
+                return 'ok';
+            }else{
+                return 'No se puede eliminar el administrador cuando tiene postulaciones aceptadas o publicaciones en proceso de trabajo';
+            }
+            
+
         }else{
             return 'Es administrador';
         }

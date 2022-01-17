@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 //A REVISAR
 use Illuminate\Http\Request;
 use App\Models\Zona;
-
+use App\Models\Administrador;
 
 class ZonasController extends Controller
 {
@@ -16,9 +16,10 @@ class ZonasController extends Controller
 
     public function crearZona(Request $request){
         $input = $request->all();
+        $admin = Administrador::where("cod_usuario", $input["cod_admin"])->get()->first();
         $zona = new Zona();
         $zona->nom_zona=$input["nom_zona"];
-        $zona->cod_admin=$input["cod_admin"];
+        $zona->cod_admin=$admin->id;
         $zona->fecha_edicion=$input["fecha_edicion"];
 
         $zona->save();

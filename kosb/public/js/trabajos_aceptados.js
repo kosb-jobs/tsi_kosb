@@ -53,7 +53,7 @@ const cargar_postulacion = async function(){
     //contenido_pub.innerText = pub.id;
     let elemento = `
     <div class="text-end mb-3">
-        <button class="btn btn-info" id="evaluar_ofertante">Evaluar Al Ofertante</button>
+        <button class="btn btn-info text-sm" id="evaluar_ofertante">Evaluar Al Ofertante</button>
     </div>
 
     
