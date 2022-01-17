@@ -188,6 +188,7 @@ const evaluarTrabajador = async function(){
                         if (await crearPuntuacion(puntuacion) != false){
                             
                             Swal.fire("Usuario Puntuado","Se han dado las estrellas exitosamente", "info");
+                            location.reload();
 
                             /* EDITAR OFERTANTE*/
 
