@@ -92,5 +92,6 @@
 <script src="{{asset('js/servicios/usuariosService.js')}}"></script>
 <script src="{{asset('js/servicios/puntuacionesService.js')}}"></script>
 <script src="{{asset('js/servicios/trabajadoresService.js')}}"></script>
+
 <script src="{{asset('js/post_en_pub.js')}}"></script>
 @endsection

@@ -48,4 +48,23 @@ class OfertantesController extends Controller
         $ofertante->publicaciones_activas = $public_activas - 1;
         return $ofertante;
     }
+
+    public function getPuntuacionOfertante(Request $request){
+        $input = $request->all();
+        $cod_usuario = $input["cod_usuario"];
+        $ofertante = Ofertante::where("cod_usuario",$cod_usuario)->get()->first();        
+
+        return $ofertante;
+    }
+    
+    public function actualizarPuntuacionOfertante(Request $request){
+        $input = $request->all();
+        $ofertante = Ofertante::findOrFail($input["cod_usuario"]);       
+        $ofertante->puntuacion_ofertante = $input["puntuacion"];
+        $ofertante->save();  
+        return $ofertante;
+    }
+
+
 }
+

@@ -75,4 +75,5 @@
 <script src="{{asset('js/servicios/puntuacionesService.js')}}"></script>
 <script src="{{asset('js/servicios/usuariosService.js')}}"></script>
 <script src="{{asset('js/trabajos_aceptados.js')}}"></script>
+<script src="{{asset('js/servicios/ofertantesService.js')}}"></script>
 @endsection

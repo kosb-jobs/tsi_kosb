@@ -91,7 +91,10 @@ Route::get("/trabajador/get/cod_usuario",[TrabajadoresController::class,"getPunt
 //OFERTANTESCONTROLLERS
 Route::post("ofertante/agregarpub",[OfertantesController::class,"agregarPubTotales"]);
 Route::post("ofertante/eliminarpub",[OfertantesController::class,"eliminarPostAct"]);
+Route::post("ofertante/actualizar/puntuacion",[OfertantesController::class,"actualizarPuntuacionOfertante"]);
 Route::get("ofertante/get/user",[OfertantesController::class,"verOfertante"]);
+Route::get("ofertante/get/cod_usuario",[OfertantesController::class,"getPuntuacionOfertante"]);
+
 
 //ADMINISTRADORESCONTROLLERS
 Route::post("admin/crear",[AdministradoresController::class,"crearAdmin"]);

@@ -138,7 +138,7 @@ const evaluarTrabajador = async function(){
         });  
 
         document.querySelector('#btn_crear_puntuacion').addEventListener('click',async function(){
-
+            let validador=0;  
             let respuesta = await getPuntuacionPorPublicacion(id_publicacion);
             console.log("HolaSoyLaRespuesta");
             console.log(respuesta);
@@ -150,6 +150,13 @@ const evaluarTrabajador = async function(){
             puntuacion.puntuacion=numero;
             puntuacion.comentario=input_descr; 
             console.log(puntuacion);
+
+            respuesta.forEach(async u => {
+                if (u.id_user==id_usuario_creador){
+                    validador=1;
+                }
+    
+            });
     
             if (numero==0){
                 await Swal.fire({
@@ -165,7 +172,7 @@ const evaluarTrabajador = async function(){
                     text: "Debe Ingresar una descripción",
                 });
             }else{
-                if (respuesta !=false) {
+                if (respuesta !=false && validador==1 ) {
                     await Swal.fire({
                         title: "Error al Puntuar",
                         icon: "error",
@@ -178,6 +185,29 @@ const evaluarTrabajador = async function(){
                         if (await crearPuntuacion(puntuacion) != false){
                             
                             Swal.fire("Usuario Puntuado","Se han dado las estrellas exitosamente", "info");
+
+                            /* EDITAR OFERTANTE*/
+
+                            let puntuaciones_user=await getPuntuacionPorUsuario(id_usuario_creador);
+                            console.log("SOY EL PUNTUACIONES USER LARGO");                                        
+                            let puntuacion_total = puntuaciones_user.length;   /*Se guarda el largo*/
+                            console.log(puntuacion_total); 
+                            console.log("DATOS EDL TRABAJADOR"); 
+                            let ofertante_datos = await getPuntuacionOfertante(id_usuario_creador); 
+                            console.log(ofertante_datos);   
+                            console.log("PUNTUACION ACTUAL");
+                            let puntuacion_actual = ofertante_datos.puntuacion_ofertante;
+                            console.log(puntuacion_actual);
+
+                            let nueva_puntuacion = (puntuacion_actual+numero)/puntuacion_total;
+                            console.log("SOY EL TOTAL DE LA NUEVA PUNTUACION");
+                            console.log(nueva_puntuacion);
+
+                             /*Actualiza la puntuacion*/
+                            let obj_puntuacion ={};
+                            obj_puntuacion.cod_usuario=id_usuario_creador;
+                            obj_puntuacion.puntuacion=nueva_puntuacion;
+                            await actualizarPuntuacionOfertante(obj_puntuacion);
                             
                             
                         }else{
