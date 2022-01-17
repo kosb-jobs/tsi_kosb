@@ -96,8 +96,6 @@ const cargar_postulacion = async function(){
 }
 
 const evaluarTrabajador = async function(){    
-    let usuario_ofertante = await getPostulAceptadasPorPublicacion(id_usuario_creador);
-    console.log(trabajadores);
     let tabla = document.querySelector("#contenido-de-publicacion");
     tabla.classList.add("d-none");
     document.querySelector("#puntuar_container").classList.remove("d-none");
@@ -140,10 +138,10 @@ document.querySelector('#star-widget').addEventListener('change',()=>{
 document.querySelector('#btn_crear_puntuacion').addEventListener('click',async function(){
     if (numero!=0){
         let input_descr = tinymce.get("descripcion-txt").getContent();
-        let puntuacion ={}; 
-        puntuacion.id_user=cod_usuario;
-        puntuacion.id_publicaciones=cod_publicacion;
-        puntuacion.id_postulaciones=cod_postulacion;
+        let puntuacion = {}; 
+        puntuacion.id_user = document.querySelector("#id_usuario").name;
+        puntuacion.id_publicaciones = id_publicacion;
+        puntuacion.id_postulaciones = id_post;
         puntuacion.puntuacion=numero;
         puntuacion.comentario=input_descr; 
         console.log(puntuacion);
@@ -159,16 +157,9 @@ document.querySelector('#btn_crear_puntuacion').addEventListener('click',async f
                 location.reload();
             }
         }
-        
-
     }else{
         console.log("No se creo nada");
-
-    }        
-
-
-
-
+    }
 });
 
 const reajusteDeContenidoPubs = async (publicaciones)=>{

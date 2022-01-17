@@ -71,6 +71,7 @@
 <script src="{{asset('js/servicios/zonasService.js')}}"></script>
 <script src="{{asset('js/servicios/rubrosService.js')}}"></script>
 <script src="{{asset('js/servicios/duracionesService.js')}}"></script>
+<script src="{{asset('js/servicios/puntuacionesService.js')}}"></script>
 <script src="{{asset('js/servicios/usuariosService.js')}}"></script>
 <script src="{{asset('js/trabajos_aceptados.js')}}"></script>
 @endsection
