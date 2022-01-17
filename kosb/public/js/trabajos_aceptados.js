@@ -96,71 +96,98 @@ const cargar_postulacion = async function(){
 }
 
 const evaluarTrabajador = async function(){    
+    let cod_usuario=this.cod_usuario;
+    let cod_publicacion = this.cod_publicacion;
+    let cod_postulacion = this.cod_postulacion;
     let tabla = document.querySelector("#contenido-de-publicacion");
     tabla.classList.add("d-none");
     document.querySelector("#puntuar_container").classList.remove("d-none");
-    console.log("Holas");
-}
+      
 
-let opcion5 = document.querySelector('#rate-5');
-let opcion4 = document.querySelector('#rate-4');
-let opcion3 = document.querySelector('#rate-3');
-let opcion2 = document.querySelector('#rate-2');
-let opcion1 = document.querySelector('#rate-1');
-let numero = 0;
+        let opcion5 = document.querySelector('#rate-5');
+        let opcion4 = document.querySelector('#rate-4');
+        let opcion3 = document.querySelector('#rate-3');
+        let opcion2 = document.querySelector('#rate-2');
+        let opcion1 = document.querySelector('#rate-1');
+        let numero = 0;
 
 
-document.querySelector('#star-widget').addEventListener('change',()=>{
-    console.log("ENTRA EN QUERY SELECTOR");
-    if (opcion1.checked){
-        console.log('La opcion seleccionada es 1');
-        numero = 1;
-    }else if(opcion2.checked){
-        console.log('La opcion seleccionada es 2');
-        numero = 2;
-    }else if(opcion3.checked){
-        console.log('La opcion seleccionada es 3');
-        numero = 3;
-    }else if(opcion4.checked){
-        console.log('La opcion seleccionada es 4');
-        numero = 4;
-    }
-    else if(opcion5.checked){
-        console.log('La opcion seleccionada es 5');
-        numero = 5;
-    }else{
-        console.log('No se ha seleccionado nada');
-        numero = 0;
-    }  
+        document.querySelector('#star-widget').addEventListener('change',()=>{
+            console.log("ENTRA EN QUERY SELECTOR");
+            if (opcion1.checked){
+                console.log('La opcion seleccionada es 1');
+                numero = 1;
+            }else if(opcion2.checked){
+                console.log('La opcion seleccionada es 2');
+                numero = 2;
+            }else if(opcion3.checked){
+                console.log('La opcion seleccionada es 3');
+                numero = 3;
+            }else if(opcion4.checked){
+                console.log('La opcion seleccionada es 4');
+                numero = 4;
+            }
+            else if(opcion5.checked){
+                console.log('La opcion seleccionada es 5');
+                numero = 5;
+            }else{
+                console.log('No se ha seleccionado nada');
+                numero = 0;
+            }  
 
-});  
+        });  
 
-document.querySelector('#btn_crear_puntuacion').addEventListener('click',async function(){
-    if (numero!=0){
-        let input_descr = tinymce.get("descripcion-txt").getContent();
-        let puntuacion = {}; 
-        puntuacion.id_user = document.querySelector("#id_usuario").name;
-        puntuacion.id_publicaciones = id_publicacion;
-        puntuacion.id_postulaciones = id_post;
-        puntuacion.puntuacion=numero;
-        puntuacion.comentario=input_descr; 
-        console.log(puntuacion);
-        let resp = await Swal.fire({title:"Puntuacion A Asignar", text:`Se va a puntuar al usuario con ${numero} estrellas`, icon:"question", showCancelButton:true});
-        if(resp.isConfirmed){
-            if (await crearPuntuacion(puntuacion) != false){
-                
-                Swal.fire("Usuario Puntuado","Se han dado las estrellas exitosamente", "info");
-                location.reload();
+        document.querySelector('#btn_crear_puntuacion').addEventListener('click',async function(){
+
+            let respuesta = await getPuntuacionPorPublicacion(id_publicacion);
+            console.log("HolaSoyLaRespuesta");
+            console.log(respuesta);
+            let input_descr = tinymce.get("descripcion-txt").getContent();
+            let puntuacion ={}; 
+            puntuacion.id_user=id_usuario_creador;
+            puntuacion.id_publicaciones=id_publicacion;
+            puntuacion.id_postulaciones=id_post;
+            puntuacion.puntuacion=numero;
+            puntuacion.comentario=input_descr; 
+            console.log(puntuacion);
+    
+            if (numero==0 || input_descr==" " || input_descr=="" ||input_descr==null ){
+                await Swal.fire({
+                    title: "Error al Puntuar",
+                    icon: "error",
+                    text: "Debe Ingresar Los Datos Superiores ¡Las Estrellas!",
+                });
                 
             }else{
-                Swal.fire("UPS!, Error", "No se pudo atender la solicitud", "error");
-                location.reload();
-            }
-        }
-    }else{
-        console.log("No se creo nada");
-    }
+                if (respuesta !=false) {
+                    await Swal.fire({
+                        title: "Error al Puntuar",
+                        icon: "error",
+                        text: "Puntuacion Ya Asignada ¡Genial!",
+                    });
+    
+                }else{
+                    let resp = await Swal.fire({title:"Puntuacion A Asignar", text:`Se va a puntuar al usuario con ${numero} estrellas`, icon:"question", showCancelButton:true});
+                    if(resp.isConfirmed){
+                        if (await crearPuntuacion(puntuacion) != false){
+                            
+                            Swal.fire("Usuario Puntuado","Se han dado las estrellas exitosamente", "info");
+                            
+                            
+                        }else{
+                            Swal.fire("UPS!, Error", "No se pudo atender la solicitud", "error");
+                            
+                        }
+                    }
+    
+                }
+                              
+      
+            }    
+    
 });
+
+}
 
 const reajusteDeContenidoPubs = async (publicaciones)=>{
     //INTENTA CAMBIAR EL CONTENIDO DE ALGUNOS ATRIBUTOS DE PUBLICACION
