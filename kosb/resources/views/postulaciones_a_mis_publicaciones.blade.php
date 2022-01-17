@@ -63,10 +63,10 @@
                 </div>
             </div>
       
-            <div class="texto_puntuacion text-start">
-                <h6>Ingrese Descripcion</h6>
-                <textarea  id="descripcion-txt" class=""></textarea>
-            </div>
+            
+                
+            <textarea  id="descripcion-txt" class=""></textarea>
+            
     
             <a class="btn" id="btn_crear_puntuacion">Puntuar</a>
             <input class="btn" value="Volver" onClick="history.go(-1);">

@@ -122,3 +122,4 @@ Route::post("suspensiones/create",[SuspensionesController::class,"crearSuspensio
 //PUNTUACIONESCONTROLLERS
 
 Route::post("puntuaciones/create",[PuntuacionesController::class,"crearPuntuacion"]);
+Route::get("puntuaciones/get/id_publicaciones",[PuntuacionesController::class,"getPuntuacionPorPublicacion"]);
