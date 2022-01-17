@@ -35,6 +35,7 @@ class PostulacionesController extends Controller
         if ($encontrado == false && $pertenece == false) {
             $trabajador = Trabajador::where("cod_usuario", $input['cod_usuario'])->get()->first();
             $trabajador->postulaciones_realizadas_tot += 1;
+            $trabajador->postulaciones_activas += 1;
             $postulacion = new Postulacion();
             $postulacion->cod_publicacion=$input["cod_publicacion"];
             $postulacion->cod_usuario=$input["cod_usuario"];
@@ -100,6 +101,14 @@ class PostulacionesController extends Controller
         $input = $request->all();
         $postulacion = Postulacion::findOrFail($input['id']);
         $postulacion->aceptacion=$input["aceptacion"];
+        $trabajador = Trabajador::where("cod_usuario",$postulacion->cod_usuario);
+        if($input["aceptacion"] == 0){
+            if ($trabajador->postulaciones_activas > 0) {
+                $trabajador->postulaciones_activas -=1;
+            }else{
+                $trabajador->postulaciones_activas = 0;
+            }
+        }
         $postulacion->save();
         return $postulacion;
     }

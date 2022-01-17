@@ -100,7 +100,7 @@ class PublicacionesController extends Controller
         $publicacion = Publicacion::where("id",$cod_publicacion)->get()->first();
         if (count($postulaciones) == 0 and $publicacion->estado != 'FPP'){
             $ofertante_ = Ofertante::where("cod_usuario",$publicacion->cod_usuario)->get()->first();
-            $ofertante_->publicaciones_activas = $ofertante_->publicaciones_activas - 1;
+            $ofertante_->publicaciones_activas = $ofertante_->publicaciones_activas == 0? 0: $ofertante_->publicaciones_activas - 1;
             $ofertante_->save();
 
             $publicacion->delete();

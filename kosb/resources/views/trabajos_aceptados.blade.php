@@ -18,7 +18,7 @@
       </div>
     </div>
     
-    <div class="col-12 col-md col-lg ms-5" style="background-color: white; border-radius: 5px">
+    <div class="col-12 card col-md col-lg ms-5" style="background-color: white; border-radius: 5px">
       <div class="card-body">
         <div class="" id="contenido-de-publicacion">
           
@@ -29,26 +29,27 @@
             <div class="container_star text-center">
               <div class="star-widget text-center" id="star-widget">
   
-                  <input type="radio" name="rate" id="rate-5">
-                  <label for="rate-5" class="fas fa-star"></label>
-  
-                  <input type="radio" name="rate" id="rate-4">
-                  <label for="rate-4" class="fas fa-star"></label>
-  
-                  <input type="radio" name="rate" id="rate-3">
-                  <label for="rate-3" class="fas fa-star"></label>
-  
-                  <input type="radio" name="rate" id="rate-2">
-                  <label for="rate-2" class="fas fa-star"></label>
-  
-                  <input type="radio" name="rate" id="rate-1">
-                  <label for="rate-1" class="fas fa-star"></label>
-                </div>
+                <input type="radio" name="rate" id="rate-5">
+                <label for="rate-5" class="fas fa-star"></label>
+
+                <input type="radio" name="rate" id="rate-4">
+                <label for="rate-4" class="fas fa-star"></label>
+
+                <input type="radio" name="rate" id="rate-3">
+                <label for="rate-3" class="fas fa-star"></label>
+
+                <input type="radio" name="rate" id="rate-2">
+                <label for="rate-2" class="fas fa-star"></label>
+
+                <input type="radio" name="rate" id="rate-1">
+                <label for="rate-1" class="fas fa-star"></label>
+                
+              </div>
             </div>
       
             <div class="texto_puntuacion text-start">
-                <h5 class="card-title">Ingrese Descripcion</h5>
-                <textarea  id="descripcion-txt" class=""></textarea>
+              <div class="container-fluid"><h5 class="card-title">Ingrese Descripción</h5></div>
+              <textarea  id="descripcion-txt" class=""></textarea>
             </div>
     
             <button class="btn" id="btn_crear_puntuacion">Puntuar</button>
