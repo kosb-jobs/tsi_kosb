@@ -8,6 +8,16 @@ const cargar_publicacion = async function(){
     let cant_trab = trabajadores.length;
     let contenido_pub = document.querySelector('#contenido-de-publicacion');
     //contenido_pub.innerText = pub.id;
+    let tipo_oferta;
+    if(pub.tipo_oferta == "C"){
+        tipo_oferta = "Corto plazo";
+    }else if(pub.sexo == "E"){
+        tipo_oferta = "Esporádico";
+    }else if(pub.sexo == "L"){
+        tipo_oferta = "Largo plazo";
+    }else{
+        tipo_oferta = "No asignado";
+    }
     let elemento = `
     <div class="row">
         <div class="col-12 col-md-6 col-lg-6 mb-3">
@@ -35,7 +45,7 @@ const cargar_publicacion = async function(){
                 <p>Zonas: ${pub.cod_zona}</p>
                 <p>Rubro: ${pub.cod_rubro}</p>
                 <p>Duración: ${pub.cod_duracion}</p>
-                <p class="">Tipo de Oferta: ${pub.tipo_oferta}</p>
+                <p class="">Tipo de Oferta: ${tipo_oferta}</p>
             </div>
             <p style="color: black" class="ms-2">Descripción ${pub.descripcion}</p>
         </div>
