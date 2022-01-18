@@ -187,17 +187,16 @@ const evaluarTrabajador = async function(){
                     if(resp.isConfirmed){
                         if (await crearPuntuacion(puntuacion) != false){
                             
-                            Swal.fire("Usuario Puntuado","Se han dado las estrellas exitosamente", "info");
-                            location.reload();
+                            
 
                             /* EDITAR OFERTANTE*/
 
-                            let puntuaciones_user=await getPuntuacionPorUsuario(id_usuario_creador);
+                            let puntuaciones_user = await getPuntuacionPorUsuario(id_usuario_creador);
                             console.log("SOY EL PUNTUACIONES USER LARGO");                                        
                             let puntuacion_total = puntuaciones_user.length;   /*Se guarda el largo*/
                             console.log(puntuacion_total); 
                             console.log("DATOS EDL TRABAJADOR"); 
-                            let ofertante_datos = await getPuntuacionOfertante(id_usuario_creador); 
+                            let ofertante_datos = await getPuntuacionOfertante(id_usuario_creador);
                             console.log(ofertante_datos);   
                             console.log("PUNTUACION ACTUAL");
                             let puntuacion_actual = ofertante_datos.puntuacion_ofertante;
@@ -213,7 +212,9 @@ const evaluarTrabajador = async function(){
                             obj_puntuacion.puntuacion=nueva_puntuacion;
                             console.log(obj_puntuacion);
                             await actualizarPuntuacionOfertante(obj_puntuacion);
-                            
+
+                            await Swal.fire("Usuario Puntuado","Se han dado las estrellas exitosamente", "info");
+                            location.reload();
                             
                         }else{
                             Swal.fire("UPS!, Error", "No se pudo atender la solicitud", "error");

@@ -260,7 +260,7 @@ const BtnPuntuarUsuario = async function(){
         puntuacion.comentario=input_descr; 
         
         respuesta.forEach(async u => {
-            if (u.id_user==cod_usuario && cantidad_postulantes==u.length){
+            if (u.id_user==cod_usuario){
                 console.log("SALIDA DE DATOS DEL FOR EACH");
                 console.log(u.id_user);
                 console.log(cod_usuario);

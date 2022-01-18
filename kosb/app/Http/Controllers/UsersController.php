@@ -43,12 +43,12 @@ class UsersController extends Controller
             "email" => $usuario['email'],
             "estado" => $usuario['estado'],
             "cod_trabajador"=>$ofertante['id'],
-            "publicaciones_activas"=>$ofertante['publicaciones_activas'],
-            "ofertas_total_publ"=>$ofertante['ofertas_total_publ'],
-            "puntuacion_ofertante"=>$ofertante['puntuacion_ofertante'],
+            "publicaciones_activas"=>$ofertante->publicaciones_activas,
+            "ofertas_total_publ"=>$ofertante->ofertas_total_publ,
+            "puntuacion_ofertante"=>$ofertante->puntuacion_ofertante,
             "cod_ofertante" => $trabajador['id'],
-            "postulaciones_activas" => $trabajador['postulaciones_activas'],
-            "postulaciones_realizadas_tot" => $trabajador['postulaciones_realizadas_tot'],
+            "postulaciones_activas" => $trabajador->postulaciones_activas,
+            "postulaciones_realizadas_tot" => $trabajador->postulaciones_realizadas_tot,
             "puntuacion_trabajador" => $trabajador['puntuacion_trabajador']
         ];
         
