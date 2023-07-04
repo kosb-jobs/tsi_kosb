@@ -150,7 +150,7 @@ const evaluarTrabajador = async function(){
             console.log(puntuacion);
 
             respuesta.forEach(async u => {
-                if (u.id_user==id_usuario_creador && u.id_postulaciones==id_post){
+                if (u.id_user==id_usuario_creador){
                     validador=1;
                     console.log(u.id_user);
                     console.log(id_usuario_creador);
